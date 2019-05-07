@@ -15,11 +15,13 @@ namespace WindowsFormsApp1
 
         public bool loading;
         public int tNext = 0;
-        private Point MouseDownLocation;
         public int Step, StepCount;
         private bool[] active = new bool[32];
         List<Button> lstBtnCalc;
         public int externalTemp = 1;
+        Form2 form2;
+        public Form3 form3;
+        public List<double>[] numbers;
 
         public Form2()
         {
@@ -36,6 +38,9 @@ namespace WindowsFormsApp1
                 button25, button26, button27, button28, button29, button30, button31, button32
             };
 
+            form2 = this;
+            numbers = new List<double>[32];
+
             for (ushort i = 1; i < 33; i++)
             {
                 active[i-1] = false;
@@ -44,10 +49,18 @@ namespace WindowsFormsApp1
                 {
                     active[i-1] = true;
                     lstBtnCalc[i - 1].Visible = true;
+                    lstBtnCalc[i - 1].Click += new EventHandler(ShowForm3);
                 }
+                numbers[i-1] = new List<double>();
             }
             active[externalTemp - 1] = false;
             lstBtnCalc[externalTemp - 1].Visible = false;
+        }
+
+        private void ShowForm3(object sender, EventArgs e)
+        {
+            form3 = new Form3(form2);
+            form3.Show();
         }
 
         private void Count(object sender, EventArgs e)
@@ -56,14 +69,18 @@ namespace WindowsFormsApp1
             {
                 if (active[i - 1] == true)
                 {
-                    lstBtnCalc[i - 1].Text = i.ToString() + ": " + (MODRead(1, i)[0] / 10.0).ToString() + " C";
-                } else
-                if (i == externalTemp)
-                {
-                    labelExtTemp.Text = "Температура окружающей среды: " + (MODRead(1, i)[0] / 10.0).ToString() + " C";
+                    numbers[i-1].Add((MODRead(1, i)[0] / 10.0));
+                    lstBtnCalc[i - 1].Text = i.ToString() + ": " + numbers[i-1].Last().ToString() + " C";
                 }
-                
-                         
+                else if (i == externalTemp)
+                {
+                    numbers[i-1].Add((MODRead(1, i)[0] / 10.0));
+                    labelExtTemp.Text = "Температура окружающей среды: " + numbers[i-1].Last().ToString() + " C";
+                }                        
+            }
+            if (form3 != null)
+            {
+                form3.Refresher();
             }
         }
 
