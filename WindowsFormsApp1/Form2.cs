@@ -10,18 +10,32 @@ using System.Windows.Forms;
 
 namespace WindowsFormsApp1
 {
+
+    
     public partial class Form2 : Form
     {
 
         public bool loading;
         public int tNext = 0;
         public int Step, StepCount;
-        private bool[] active = new bool[32];
+        public bool[] active = new bool[32];
         List<Button> lstBtnCalc;
         public int externalTemp = 1;
         Form2 form2;
-        public Form3 form3;
-        public List<double>[] numbers;
+
+        public struct Point
+        {
+            public double temp;
+            public DateTime time;
+
+            public Point(double temp, DateTime time)
+            {
+                this.temp = temp;
+                this.time = time;
+            }
+        }
+
+        public List<Point>[] numbers;
 
         public Form2()
         {
@@ -39,7 +53,7 @@ namespace WindowsFormsApp1
             };
 
             form2 = this;
-            numbers = new List<double>[32];
+            numbers = new List<Point>[32];
 
             for (ushort i = 1; i < 33; i++)
             {
@@ -50,17 +64,21 @@ namespace WindowsFormsApp1
                     active[i-1] = true;
                     lstBtnCalc[i - 1].Visible = true;
                     lstBtnCalc[i - 1].Click += new EventHandler(ShowForm3);
-                }
-                numbers[i-1] = new List<double>();
+                } 
+                numbers[i-1] = new List<Point>();
             }
             active[externalTemp - 1] = false;
             lstBtnCalc[externalTemp - 1].Visible = false;
+            WindowState = FormWindowState.Maximized;
         }
 
         private void ShowForm3(object sender, EventArgs e)
         {
-            form3 = new Form3(form2);
+            int lastClick = Convert.ToInt32(((Button)sender).Name.ToString().Replace("button", ""));
+
+            Form3 form3 = new Form3(form2, lastClick);
             form3.Show();
+            form3.Text = "Датчик №" + lastClick;
         }
 
         private void Count(object sender, EventArgs e)
@@ -68,19 +86,15 @@ namespace WindowsFormsApp1
             for (ushort i = 1; i < 33; i++)
             {
                 if (active[i - 1] == true)
-                {
-                    numbers[i-1].Add((MODRead(1, i)[0] / 10.0));
-                    lstBtnCalc[i - 1].Text = i.ToString() + ": " + numbers[i-1].Last().ToString() + " C";
+                {                    
+                    numbers[i - 1].Add(new Point( MODRead(1, i)[0] / 10.0, DateTime.Now));
+                    lstBtnCalc[i - 1].Text = i.ToString() + ": " + numbers[i-1].Last().temp.ToString() + " C";
                 }
                 else if (i == externalTemp)
                 {
-                    numbers[i-1].Add((MODRead(1, i)[0] / 10.0));
-                    labelExtTemp.Text = "Температура окружающей среды: " + numbers[i-1].Last().ToString() + " C";
+                    numbers[i - 1].Add(new Point(MODRead(1, i)[0] / 10.0, DateTime.Now));
+                    labelExtTemp.Text = "Температура окружающей среды: " + numbers[i-1].Last().temp.ToString() + " C";
                 }                        
-            }
-            if (form3 != null)
-            {
-                form3.Refresher();
             }
         }
 
@@ -93,63 +107,10 @@ namespace WindowsFormsApp1
             }
             catch
             {
-                ((Form1)MdiParent).tbErr.AppendText("Устройство с адресом <" + aa.ToString() + ">, регистр <" + rr.ToString() + "> не отвечает...");
-                ((Form1)MdiParent).tbErr.Visible = true;
-                ((Form1)MdiParent).tbErr.Refresh();
-                //                MessageBox.Show("Устройство с адресом <" + aa.ToString() + ">, регистр <" + rr.ToString() + "> не отвечает...");
                 dd = new ushort[] { 0 };
             }
             return dd;
-        }
-
-
-
-
-        //private void tCycle_Tick(object sender, EventArgs e)
-        //{
-        //    if ((!readState) & (Form1.ModBUS != null))
-        //    {
-        //        readState = true;
-        //        if (sBtS.Adr > 0)
-        //        {
-        //            var reg = MODRead(sBtS.Adr, sBtS.Reg);
-        //            int a = (int)reg[0] & (1 << sBtS.Msk);
-        //            int b = 0;
-        //            if (sBtst.Adr > 0)
-        //            {
-        //                reg = MODRead(sBtst.Adr, sBtst.Reg);
-        //                b = (int)reg[0] & (1 << sBtst.Msk);
-        //            };
-        //            if (a > 0)
-        //            {
-        //                if (b == 0) btStart_Click(sender, e); else btHZ_Manual();
-        //            }
-        //            readState = false;
-        //        }
-        //    };
-        //    if (tNext > 0)
-        //    {
-        //        tNext--;
-        //        lTime.Text = tNext.ToString(); lTime.Refresh();
-        //        if (tNext == 0)
-        //        {
-        //            Step++;
-        //            if (Step > (StepCount - 1))
-        //            {
-        //                Step = 0;
-        //                Stop();
-        //                lTime.Text = "";
-        //            }
-        //            else
-        //            {
-        //                tNext = sTim.power[Step];
-        //                textBox1.Text = tNext.ToString();
-        //                btStep_Click(sender, e);
-        //            };
-        //            Refresh();
-        //        }
-        //    }
-        //}
+        }   
 
     }
 

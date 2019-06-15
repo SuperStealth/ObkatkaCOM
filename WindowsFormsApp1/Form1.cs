@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO.Ports;
 using Modbus.Device;
@@ -29,7 +22,7 @@ namespace WindowsFormsApp1
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            ((ToolStripMenuItem)mmSpeed.DropDownItems.Add("9600", null, SetBaud_Click)).Checked = true;
+            mmSpeed.DropDownItems.Add("9600", null, SetBaud_Click);
             mmSpeed.DropDownItems.Add("14400", null, SetBaud_Click);
             mmSpeed.DropDownItems.Add("19200", null, SetBaud_Click);
             mmSpeed.DropDownItems.Add("38400", null, SetBaud_Click);
@@ -46,7 +39,7 @@ namespace WindowsFormsApp1
                 {
                     mmNuber.DropDownItems.Add(p,null, SetPort_Click);
                 }
-                ((ToolStripMenuItem)mmNuber.DropDownItems[0]).Checked = true;
+                ((ToolStripMenuItem)mmNuber.DropDownItems.Find(Properties.Settings.Default.port, false)[0]).Checked = true;
                 ChangePort(SerialPort.GetPortNames()[0]);
                 ModBUS = ModbusSerialMaster.CreateRtu(sp485);
             }
@@ -79,6 +72,7 @@ namespace WindowsFormsApp1
                 tt.Checked = false;
             }
             ((ToolStripMenuItem)sender).Checked = true;
+            Properties.Settings.Default.speed = ((ToolStripMenuItem)sender).Text;
             if (sp485.IsOpen) ChangePort(sp485.PortName);
         }
         private void SetPort_Click(object sender, EventArgs e)
@@ -88,12 +82,15 @@ namespace WindowsFormsApp1
                 tt.Checked = false;
             }
             ((ToolStripMenuItem)sender).Checked = true;
+            Properties.Settings.Default.port = ((ToolStripMenuItem)sender).Text;
             ChangePort(((ToolStripItem)sender).Text);   
         }
-        private void новаяToolStripMenuItem_Click(object sender, EventArgs e)
+        private void НоваяToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form2 cf = new Form2();
-            cf.MdiParent = this;
+            Form2 cf = new Form2
+            {
+                MdiParent = this
+            };
             cf.Show();
         }
     }

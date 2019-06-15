@@ -39,7 +39,6 @@
             this.mmSpeed = new System.Windows.Forms.ToolStripMenuItem();
             this.видToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sp485 = new System.IO.Ports.SerialPort(this.components);
-            this.tbErr = new System.Windows.Forms.TextBox();
             this.MainMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -51,7 +50,7 @@
             this.видToolStripMenuItem});
             this.MainMenu.Location = new System.Drawing.Point(0, 0);
             this.MainMenu.Name = "MainMenu";
-            this.MainMenu.Size = new System.Drawing.Size(1008, 24);
+            this.MainMenu.Size = new System.Drawing.Size(864, 24);
             this.MainMenu.TabIndex = 0;
             this.MainMenu.Text = "MainMenu";
             // 
@@ -69,7 +68,7 @@
             this.новаяToolStripMenuItem.Name = "новаяToolStripMenuItem";
             this.новаяToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.новаяToolStripMenuItem.Text = "Начать работу";
-            this.новаяToolStripMenuItem.Click += new System.EventHandler(this.новаяToolStripMenuItem_Click);
+            this.новаяToolStripMenuItem.Click += new System.EventHandler(this.НоваяToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
@@ -90,7 +89,7 @@
             this.mmNuber,
             this.mmSpeed});
             this.настройкиМашинToolStripMenuItem.Name = "настройкиМашинToolStripMenuItem";
-            this.настройкиМашинToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.настройкиМашинToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
             this.настройкиМашинToolStripMenuItem.Text = "Параметры порта";
             // 
             // mmNuber
@@ -118,24 +117,11 @@
             this.sp485.ReadTimeout = 50;
             this.sp485.WriteTimeout = 50;
             // 
-            // tbErr
-            // 
-            this.tbErr.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.tbErr.Location = new System.Drawing.Point(0, 617);
-            this.tbErr.Multiline = true;
-            this.tbErr.Name = "tbErr";
-            this.tbErr.ReadOnly = true;
-            this.tbErr.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.tbErr.Size = new System.Drawing.Size(1008, 44);
-            this.tbErr.TabIndex = 2;
-            this.tbErr.Visible = false;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1008, 661);
-            this.Controls.Add(this.tbErr);
+            this.ClientSize = new System.Drawing.Size(864, 501);
             this.Controls.Add(this.MainMenu);
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.MainMenu;
@@ -161,7 +147,6 @@
         private System.Windows.Forms.ToolStripMenuItem mmNuber;
         private System.Windows.Forms.ToolStripMenuItem mmSpeed;
         public System.IO.Ports.SerialPort sp485;
-        public System.Windows.Forms.TextBox tbErr;
     }
 }
 

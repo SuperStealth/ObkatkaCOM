@@ -38,7 +38,6 @@ namespace WindowsFormsApp1
             this.удалитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
             this.настройкаЛампыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tCycle = new System.Windows.Forms.Timer(this.components);
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
@@ -122,11 +121,6 @@ namespace WindowsFormsApp1
             this.настройкаЛампыToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.настройкаЛампыToolStripMenuItem.Text = "Настройка";
             // 
-            // tCycle
-            // 
-            this.tCycle.Enabled = true;
-            this.tCycle.Interval = 1000;
-            // 
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F);
@@ -202,7 +196,7 @@ namespace WindowsFormsApp1
             // timer1
             // 
             this.timer1.Enabled = true;
-            this.timer1.Interval = 1000;
+            this.timer1.Interval = 5000;
             this.timer1.Tick += new System.EventHandler(this.Count);
             // 
             // button9
@@ -436,7 +430,7 @@ namespace WindowsFormsApp1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(928, 566);
+            this.ClientSize = new System.Drawing.Size(844, 491);
             this.Controls.Add(this.labelExtTemp);
             this.Controls.Add(this.button17);
             this.Controls.Add(this.button18);
@@ -490,7 +484,6 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem3;
         private System.Windows.Forms.ToolStripMenuItem настройкаЛампыToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem4;
-        private System.Windows.Forms.Timer tCycle;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
