@@ -69,7 +69,7 @@
             // tCycle
             // 
             this.tCycle.Enabled = true;
-            this.tCycle.Interval = 5000;
+            this.tCycle.Interval = 500;
             this.tCycle.Tick += new System.EventHandler(this.Refresher);
             // 
             // label1
@@ -158,9 +158,9 @@
             // buttonStart
             // 
             this.buttonStart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonStart.Location = new System.Drawing.Point(625, 457);
+            this.buttonStart.Location = new System.Drawing.Point(538, 457);
             this.buttonStart.Name = "buttonStart";
-            this.buttonStart.Size = new System.Drawing.Size(105, 23);
+            this.buttonStart.Size = new System.Drawing.Size(192, 23);
             this.buttonStart.TabIndex = 10;
             this.buttonStart.Text = "Начать обкатку";
             this.buttonStart.UseVisualStyleBackColor = true;

@@ -19,23 +19,27 @@ namespace WindowsFormsApp1
         public int tNext = 0;
         public int Step, StepCount;
         public bool[] active = new bool[32];
+        public string[] name = new string[32];
+        public string[] serialNum = new string[32];
+        public string[] type = new string[32];
+        public string[] addInfo = new string[32];
         List<Button> lstBtnCalc;
         public int externalTemp = 1;
         Form2 form2;
 
-        public struct Point
+        public struct ChartPoint
         {
             public double temp;
             public DateTime time;
 
-            public Point(double temp, DateTime time)
+            public ChartPoint(double temp, DateTime time)
             {
                 this.temp = temp;
                 this.time = time;
             }
         }
 
-        public List<Point>[] numbers;
+        public List<ChartPoint>[] numbers;
 
         public Form2()
         {
@@ -53,19 +57,19 @@ namespace WindowsFormsApp1
             };
 
             form2 = this;
-            numbers = new List<Point>[32];
+            numbers = new List<ChartPoint>[32];
 
             for (ushort i = 1; i < 33; i++)
             {
                 active[i-1] = false;
-                lstBtnCalc[i - 1].Visible = false;
+                lstBtnCalc[i - 1].Enabled = false;
                 if (MODRead(1, i)[0] != 0)
                 {
                     active[i-1] = true;
-                    lstBtnCalc[i - 1].Visible = true;
+                    lstBtnCalc[i - 1].Enabled = true;
                     lstBtnCalc[i - 1].Click += new EventHandler(ShowForm3);
                 } 
-                numbers[i-1] = new List<Point>();
+                numbers[i-1] = new List<ChartPoint>();
             }
             active[externalTemp - 1] = false;
             lstBtnCalc[externalTemp - 1].Visible = false;
@@ -87,12 +91,12 @@ namespace WindowsFormsApp1
             {
                 if (active[i - 1] == true)
                 {                    
-                    numbers[i - 1].Add(new Point( MODRead(1, i)[0] / 10.0, DateTime.Now));
+                    numbers[i - 1].Add(new ChartPoint( MODRead(1, i)[0] / 10.0, DateTime.Now));
                     lstBtnCalc[i - 1].Text = i.ToString() + ": " + numbers[i-1].Last().temp.ToString() + " C";
                 }
                 else if (i == externalTemp)
                 {
-                    numbers[i - 1].Add(new Point(MODRead(1, i)[0] / 10.0, DateTime.Now));
+                    numbers[i - 1].Add(new ChartPoint(MODRead(1, i)[0] / 10.0, DateTime.Now));
                     labelExtTemp.Text = "Температура окружающей среды: " + numbers[i-1].Last().temp.ToString() + " C";
                 }                        
             }

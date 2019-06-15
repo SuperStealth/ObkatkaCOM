@@ -29,18 +29,32 @@ namespace WindowsFormsApp1
             mmSpeed.DropDownItems.Add("57600", null, SetBaud_Click);
             mmSpeed.DropDownItems.Add("115200", null, SetBaud_Click);
 
+            foreach (ToolStripMenuItem t in mmSpeed.DropDownItems)
+            {
+                if (t.Text == Properties.Settings.Default.speed)
+                {
+                    t.Checked = true;
+                }
+            }
+
             if (SerialPort.GetPortNames().Length == 0) {
                 mmNuber.DropDownItems.Add("<NULL>", null, SetPort_Click);
                 ChangePort("<NULL>");
             }
             else
-            { 
+            {
+                ChangePort(SerialPort.GetPortNames()[0]);
                 foreach (string p in SerialPort.GetPortNames())
                 {
-                    mmNuber.DropDownItems.Add(p,null, SetPort_Click);
+                    mmNuber.DropDownItems.Add(p, null, SetPort_Click);
+                    if (p == Properties.Settings.Default.port)
+                    {
+                        ChangePort(p);
+                        ((ToolStripMenuItem)mmNuber.DropDownItems[mmNuber.DropDownItems.Count - 1]).Checked = true;
+                    }
                 }
-                ((ToolStripMenuItem)mmNuber.DropDownItems.Find(Properties.Settings.Default.port, false)[0]).Checked = true;
-                ChangePort(SerialPort.GetPortNames()[0]);
+                //((ToolStripMenuItem)mmNuber.DropDownItems.Find(Properties.Settings.Default.port, false)[0]).Checked = true;
+
                 ModBUS = ModbusSerialMaster.CreateRtu(sp485);
             }
         }
@@ -73,6 +87,7 @@ namespace WindowsFormsApp1
             }
             ((ToolStripMenuItem)sender).Checked = true;
             Properties.Settings.Default.speed = ((ToolStripMenuItem)sender).Text;
+            Properties.Settings.Default.Save();
             if (sp485.IsOpen) ChangePort(sp485.PortName);
         }
         private void SetPort_Click(object sender, EventArgs e)
@@ -83,6 +98,7 @@ namespace WindowsFormsApp1
             }
             ((ToolStripMenuItem)sender).Checked = true;
             Properties.Settings.Default.port = ((ToolStripMenuItem)sender).Text;
+            Properties.Settings.Default.Save();
             ChangePort(((ToolStripItem)sender).Text);   
         }
         private void НоваяToolStripMenuItem_Click(object sender, EventArgs e)

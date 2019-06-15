@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
+using static WindowsFormsApp1.Form2;
 
 namespace WindowsFormsApp1
 {
@@ -15,6 +16,7 @@ namespace WindowsFormsApp1
 
         private readonly Form2 _form2;
         private readonly int _num;
+        private bool started = false;
         public Form3()
         {
             InitializeComponent();
@@ -65,20 +67,35 @@ namespace WindowsFormsApp1
 
             //Drawing control to the bitmap
             control.DrawToBitmap(bmp, new Rectangle(0, 0, control.Width, control.Height));
-
+            bmp = bmp.Clone(new Rectangle(20, 35, control.Width - 40, control.Height - 85), bmp.PixelFormat);
             bmp.Save(fileName);
+
             bmp.Dispose();
 
         }
 
         private void ButtonSave_Click(object sender, EventArgs e)
         {
-
+            SaveFileDialog save = new SaveFileDialog();
+            save.Filter = "Картинка (*.bmp)|*.bmp";
+            save.ShowDialog();
+            SaveAsBitmap(this, save.FileName);
         }
 
         private void ButtonStart_Click(object sender, EventArgs e)
         {
-
+            if (!started)
+            {
+                _form2.numbers[_form2.externalTemp - 1].RemoveAll(s => s.time < DateTime.Now);
+                _form2.numbers[_num - 1].RemoveAll(s => s.time < DateTime.Now);
+                started = true;
+                buttonStart.Text = "Остановить обкатку";
+            }
+            else
+            {
+                tCycle.Enabled = false;
+                buttonStart.Visible = false;
+            }                      
         }
     }
 }

@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="port" Type="System.String" Scope="User">
-      <Value Profile="(Default)">COM1</Value>
+      <Value Profile="(Default)">COM3</Value>
     </Setting>
     <Setting Name="speed" Type="System.String" Scope="User">
       <Value Profile="(Default)">19200</Value>
