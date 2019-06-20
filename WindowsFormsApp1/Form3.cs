@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -12,26 +10,26 @@ namespace WindowsFormsApp1
     public partial class Form3 : Form
     {
 
-        private readonly Form2 _form2;
-        private readonly int _num;
+        private Sensor _sensor;
+        private Sensor _externalSensor;
         private bool started = false;
         public Form3()
         {
             InitializeComponent();
         }
 
-        public Form3(Form2 form2, int num)
+        public Form3(Sensor sensor, Sensor externalSensor)
         {
             InitializeComponent();
-            _form2 = form2;
-            _num = num;
+            _sensor = sensor;
+            _externalSensor = externalSensor;
         }
 
         private void Form3_Load(object sender, EventArgs e)
         {
 
             chart1.Series.Clear();
-            chart1.Series.Add("Датчик" + (_num));
+            chart1.Series.Add("Датчик" + (_sensor.SensorNumber));
             chart1.Series[0].XValueType = ChartValueType.Time;
             chart1.Series[0].ChartType = SeriesChartType.Line;
 
@@ -46,12 +44,12 @@ namespace WindowsFormsApp1
 
         public void Refresher(object sender, EventArgs e)
         {
-            var times = _form2.numbers[_num - 1].Select(item => item.time).ToArray();
-            var temperatures = _form2.numbers[_num - 1].Select(item => item.temp).ToArray();
+            var times = _sensor.GetTimeArray();
+            var temperatures = _sensor.GetTempArray();
             chart1.Series[0].Points.DataBindXY(times, temperatures);
 
-            var externalTimes = _form2.numbers[_form2.externalTemp - 1].Select(item => item.time).ToArray();
-            var externalTemps = _form2.numbers[_form2.externalTemp - 1].Select(item => item.temp).ToArray();
+            var externalTimes = _externalSensor.GetTimeArray(_sensor.StartTime, _sensor.StopTime);
+            var externalTemps = _externalSensor.GetTempArray(_sensor.StartTime, _sensor.StopTime);
             chart1.Series[1].Points.DataBindXY(externalTimes, externalTemps);
 
         }
@@ -81,14 +79,13 @@ namespace WindowsFormsApp1
         {
             if (!started)
             {
-                _form2.numbers[_form2.externalTemp - 1].RemoveAll(s => s.time < DateTime.Now);
-                _form2.numbers[_num - 1].RemoveAll(s => s.time < DateTime.Now);
+                _sensor.StartTime = DateTime.Now;
                 started = true;
                 buttonStart.Text = "Остановить обкатку";
             }
             else
             {
-                tCycle.Enabled = false;
+                _sensor.StopTime = DateTime.Now;
                 buttonStart.Visible = false;
             }                      
         }

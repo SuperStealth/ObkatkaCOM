@@ -14,33 +14,10 @@ namespace WindowsFormsApp1
     
     public partial class Form2 : Form
     {
-
-        public bool loading;
-        public int tNext = 0;
-        public int Step, StepCount;
-        public bool[] active = new bool[32];
-        public string[] name = new string[32];
-        public string[] serialNum = new string[32];
-        public string[] type = new string[32];
-        public string[] addInfo = new string[32];
-        public List<ChartPoint>[] numbers;
+        private List<Sensor> sensors = new List<Sensor>();
         private Button[] lstBtnCalc;
-        public int externalTemp = 1;
+        public ushort externalTemp = 1;
         Form2 form2;
-
-        public struct ChartPoint
-        {
-            public double temp;
-            public DateTime time;
-
-            public ChartPoint(double temp, DateTime time)
-            {
-                this.temp = temp;
-                this.time = time;
-            }
-        }
-
-
 
         public Form2()
         {
@@ -58,64 +35,61 @@ namespace WindowsFormsApp1
             };
 
             form2 = this;
-            numbers = new List<ChartPoint>[32];
+
+            sensors.Add(new Sensor(externalTemp, true));
+            lstBtnCalc[externalTemp - 1].Visible = false;
 
             for (ushort i = 1; i < 33; i++)
             {
-                active[i-1] = false;
                 lstBtnCalc[i - 1].Enabled = false;
                 if (MODRead(1, i)[0] != 0)
                 {
-                    active[i-1] = true;
+                    sensors.Add(new Sensor(i,false));
                     lstBtnCalc[i - 1].Enabled = true;
                     lstBtnCalc[i - 1].Click += new EventHandler(ShowForm3);
                 } 
-                numbers[i-1] = new List<ChartPoint>();
+                
             }
-            active[externalTemp - 1] = false;
-            lstBtnCalc[externalTemp - 1].Visible = false;
+            
             WindowState = FormWindowState.Maximized;
         }
 
         private int GetButtonNumber(object sender) => Convert.ToInt32(((Button)sender).Name.ToString().Replace("button", ""));
-
         private void ShowForm3(object sender, EventArgs e)
         {
             int lastClickedButton = GetButtonNumber(sender);
-            Form3 form3 = new Form3(form2, lastClickedButton);
+            Form3 form3 = new Form3(sensors.Find(s => s.SensorNumber == lastClickedButton), sensors.Find(s => s.IsExternal));
             form3.Show();
             form3.Text = "Датчик №" + lastClickedButton;
         }
-
         private void Count(object sender, EventArgs e)
         {
-            for (ushort i = 1; i < 33; i++)
+            foreach (Sensor sensor in sensors)
             {
-                if (active[i - 1] == true)
-                {                    
-                    numbers[i - 1].Add(new ChartPoint( MODRead(1, i)[0] / 10.0, DateTime.Now));
-                    lstBtnCalc[i - 1].Text = i.ToString() + ": " + numbers[i-1].Last().temp.ToString() + " C";
-                }
-                else if (i == externalTemp)
+                if (!sensor.IsExternal)
                 {
-                    numbers[i - 1].Add(new ChartPoint(MODRead(1, i)[0] / 10.0, DateTime.Now));
-                    labelExtTemp.Text = "Температура окружающей среды: " + numbers[i-1].Last().temp.ToString() + " C";
-                }                        
+                    sensor.measurements.Add(new ChartPoint(MODRead(1, sensor.SensorNumber)[0] / 10.0, DateTime.Now));
+                    lstBtnCalc[sensor.SensorNumber - 1].Text = sensor.SensorNumber.ToString() + ": " + sensor.GetLastMeasurement().ToString() + " C";
+                }
+                else if (sensor.IsExternal)
+                {
+                    sensor.measurements.Add(new ChartPoint(MODRead(1, sensor.SensorNumber)[0] / 10.0, DateTime.Now));
+                    labelExtTemp.Text = "Температура окружающей среды: " + sensor.GetLastMeasurement().ToString() + " C";
+                }
             }
         }
-
-        private ushort[] MODRead(byte aa, ushort rr)
+        private ushort[] MODRead(byte slaveAdress, ushort startAdress)
         {
-            ushort[] dd;
+            ushort[] result;
             try
             {
-                dd = Form1.ModBUS.ReadHoldingRegisters(aa, rr, 1);
+                result = Form1.ModBUS.ReadHoldingRegisters(slaveAdress, startAdress, 1);
             }
             catch
             {
-                dd = new ushort[] { 0 };
+                result = new ushort[] { 0 };
             }
-            return dd;
+            return result;
         }   
 
     }
