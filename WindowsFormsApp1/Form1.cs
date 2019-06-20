@@ -53,7 +53,6 @@ namespace WindowsFormsApp1
                         ((ToolStripMenuItem)mmNuber.DropDownItems[mmNuber.DropDownItems.Count - 1]).Checked = true;
                     }
                 }
-                //((ToolStripMenuItem)mmNuber.DropDownItems.Find(Properties.Settings.Default.port, false)[0]).Checked = true;
 
                 ModBUS = ModbusSerialMaster.CreateRtu(sp485);
             }

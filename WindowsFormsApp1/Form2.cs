@@ -23,7 +23,8 @@ namespace WindowsFormsApp1
         public string[] serialNum = new string[32];
         public string[] type = new string[32];
         public string[] addInfo = new string[32];
-        List<Button> lstBtnCalc;
+        public List<ChartPoint>[] numbers;
+        private Button[] lstBtnCalc;
         public int externalTemp = 1;
         Form2 form2;
 
@@ -39,7 +40,7 @@ namespace WindowsFormsApp1
             }
         }
 
-        public List<ChartPoint>[] numbers;
+
 
         public Form2()
         {
@@ -48,7 +49,7 @@ namespace WindowsFormsApp1
 
         public void Form2_Load(object sender, EventArgs e)
         {
-            lstBtnCalc = new List<Button>
+            lstBtnCalc = new Button[]
             {
                 button1, button2, button3, button4, button5, button6, button7, button8,
                 button9, button10, button11, button12, button13, button14, button15, button16,
@@ -76,13 +77,14 @@ namespace WindowsFormsApp1
             WindowState = FormWindowState.Maximized;
         }
 
+        private int GetButtonNumber(object sender) => Convert.ToInt32(((Button)sender).Name.ToString().Replace("button", ""));
+
         private void ShowForm3(object sender, EventArgs e)
         {
-            int lastClick = Convert.ToInt32(((Button)sender).Name.ToString().Replace("button", ""));
-
-            Form3 form3 = new Form3(form2, lastClick);
+            int lastClickedButton = GetButtonNumber(sender);
+            Form3 form3 = new Form3(form2, lastClickedButton);
             form3.Show();
-            form3.Text = "Датчик №" + lastClick;
+            form3.Text = "Датчик №" + lastClickedButton;
         }
 
         private void Count(object sender, EventArgs e)

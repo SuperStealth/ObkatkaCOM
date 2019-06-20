@@ -4,10 +4,8 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
-using static WindowsFormsApp1.Form2;
 
 namespace WindowsFormsApp1
 {
@@ -35,43 +33,40 @@ namespace WindowsFormsApp1
             chart1.Series.Clear();
             chart1.Series.Add("Датчик" + (_num));
             chart1.Series[0].XValueType = ChartValueType.Time;
-            chart1.Series[0].Points.DataBindXY(_form2.numbers[_num - 1].Select(item => item.time).ToArray(), _form2.numbers[_num - 1].Select(item => item.temp).ToArray());
             chart1.Series[0].ChartType = SeriesChartType.Line;
 
             chart1.Series.Add("Наружняя температура");
             chart1.Series[1].XValueType = ChartValueType.Time;
-            chart1.Series[1].Points.DataBindXY(_form2.numbers[_form2.externalTemp - 1].Select(item => item.time).ToArray(), _form2.numbers[_form2.externalTemp - 1].Select(item => item.temp).ToArray());
             chart1.Series[1].ChartType = SeriesChartType.Line;
+
+            Refresher(sender, e);
 
             chart1.ChartAreas[0].AxisX.LabelStyle.Format = "HH:mm:ss";
         }
 
         public void Refresher(object sender, EventArgs e)
         {
-            //chart1.Series.Add("Датчик" + (_num));
-            chart1.Series[0].Points.DataBindXY(_form2.numbers[_num - 1].Select(item => item.time).ToArray(), _form2.numbers[_num - 1].Select(item => item.temp).ToArray());
-            //chart1.Series[0].ChartType = SeriesChartType.Line;
+            var times = _form2.numbers[_num - 1].Select(item => item.time).ToArray();
+            var temperatures = _form2.numbers[_num - 1].Select(item => item.temp).ToArray();
+            chart1.Series[0].Points.DataBindXY(times, temperatures);
 
-            //chart1.Series.Add("Наружняя температура");
-            chart1.Series[1].Points.DataBindXY(_form2.numbers[_form2.externalTemp - 1].Select(item => item.time).ToArray(), _form2.numbers[_form2.externalTemp - 1].Select(item => item.temp).ToArray());
-            //chart1.Series[1].ChartType = SeriesChartType.Line;
+            var externalTimes = _form2.numbers[_form2.externalTemp - 1].Select(item => item.time).ToArray();
+            var externalTemps = _form2.numbers[_form2.externalTemp - 1].Select(item => item.temp).ToArray();
+            chart1.Series[1].Points.DataBindXY(externalTimes, externalTemps);
+
         }
 
         public void SaveAsBitmap(Control control, string fileName)
         {
-            //get the instance of the graphics from the control
             Graphics g = control.CreateGraphics();
 
-            //new bitmap object to save the image
             Bitmap bmp = new Bitmap(control.Width, control.Height);
 
-            //Drawing control to the bitmap
             control.DrawToBitmap(bmp, new Rectangle(0, 0, control.Width, control.Height));
             bmp = bmp.Clone(new Rectangle(20, 35, control.Width - 40, control.Height - 85), bmp.PixelFormat);
             bmp.Save(fileName);
 
             bmp.Dispose();
-
         }
 
         private void ButtonSave_Click(object sender, EventArgs e)
