@@ -46,5 +46,17 @@ namespace WindowsFormsApp1.Properties {
                 this["speed"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("5000")]
+        public int interval {
+            get {
+                return ((int)(this["interval"]));
+            }
+            set {
+                this["interval"] = value;
+            }
+        }
     }
 }

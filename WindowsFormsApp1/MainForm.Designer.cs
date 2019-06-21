@@ -1,6 +1,6 @@
 ﻿namespace WindowsFormsApp1
 {
-    partial class Form1
+    partial class MainForm
     {
         /// <summary>
         /// Обязательная переменная конструктора.
@@ -32,12 +32,13 @@
             this.MainMenu = new System.Windows.Forms.MenuStrip();
             this.файлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.новаяToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
+            this.открытьОбкаткуToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.параметрыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.настройкиМашинToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.mmNuber = new System.Windows.Forms.ToolStripMenuItem();
-            this.mmSpeed = new System.Windows.Forms.ToolStripMenuItem();
-            this.видToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.portNumberList = new System.Windows.Forms.ToolStripMenuItem();
+            this.speedList = new System.Windows.Forms.ToolStripMenuItem();
+            this.интервалToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripTextBoxInterval = new System.Windows.Forms.ToolStripTextBox();
             this.sp485 = new System.IO.Ports.SerialPort(this.components);
             this.MainMenu.SuspendLayout();
             this.SuspendLayout();
@@ -46,8 +47,7 @@
             // 
             this.MainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.файлToolStripMenuItem,
-            this.параметрыToolStripMenuItem,
-            this.видToolStripMenuItem});
+            this.параметрыToolStripMenuItem});
             this.MainMenu.Location = new System.Drawing.Point(0, 0);
             this.MainMenu.Name = "MainMenu";
             this.MainMenu.Size = new System.Drawing.Size(864, 24);
@@ -58,7 +58,7 @@
             // 
             this.файлToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.новаяToolStripMenuItem,
-            this.toolStripMenuItem1});
+            this.открытьОбкаткуToolStripMenuItem});
             this.файлToolStripMenuItem.Name = "файлToolStripMenuItem";
             this.файлToolStripMenuItem.Size = new System.Drawing.Size(64, 20);
             this.файлToolStripMenuItem.Text = "Обкатка";
@@ -66,14 +66,16 @@
             // новаяToolStripMenuItem
             // 
             this.новаяToolStripMenuItem.Name = "новаяToolStripMenuItem";
-            this.новаяToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.новаяToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.новаяToolStripMenuItem.Text = "Начать работу";
             this.новаяToolStripMenuItem.Click += new System.EventHandler(this.НоваяToolStripMenuItem_Click);
             // 
-            // toolStripMenuItem1
+            // открытьОбкаткуToolStripMenuItem
             // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(151, 6);
+            this.открытьОбкаткуToolStripMenuItem.Name = "открытьОбкаткуToolStripMenuItem";
+            this.открытьОбкаткуToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.открытьОбкаткуToolStripMenuItem.Text = "Открыть обкатку";
+            this.открытьОбкаткуToolStripMenuItem.Click += new System.EventHandler(this.ОткрытьОбкаткуToolStripMenuItem_Click);
             // 
             // параметрыToolStripMenuItem
             // 
@@ -86,29 +88,38 @@
             // настройкиМашинToolStripMenuItem
             // 
             this.настройкиМашинToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mmNuber,
-            this.mmSpeed});
+            this.portNumberList,
+            this.speedList,
+            this.интервалToolStripMenuItem});
             this.настройкиМашинToolStripMenuItem.Name = "настройкиМашинToolStripMenuItem";
-            this.настройкиМашинToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.настройкиМашинToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.настройкиМашинToolStripMenuItem.Text = "Параметры порта";
             // 
-            // mmNuber
+            // portNumberList
             // 
-            this.mmNuber.Name = "mmNuber";
-            this.mmNuber.Size = new System.Drawing.Size(126, 22);
-            this.mmNuber.Text = "Порт";
+            this.portNumberList.Name = "portNumberList";
+            this.portNumberList.Size = new System.Drawing.Size(244, 22);
+            this.portNumberList.Text = "Номер порта";
             // 
-            // mmSpeed
+            // speedList
             // 
-            this.mmSpeed.Name = "mmSpeed";
-            this.mmSpeed.Size = new System.Drawing.Size(126, 22);
-            this.mmSpeed.Text = "Скорость";
+            this.speedList.Name = "speedList";
+            this.speedList.Size = new System.Drawing.Size(244, 22);
+            this.speedList.Text = "Скорость соединения";
             // 
-            // видToolStripMenuItem
+            // интервалToolStripMenuItem
             // 
-            this.видToolStripMenuItem.Name = "видToolStripMenuItem";
-            this.видToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
-            this.видToolStripMenuItem.Text = "Вид";
+            this.интервалToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripTextBoxInterval});
+            this.интервалToolStripMenuItem.Name = "интервалToolStripMenuItem";
+            this.интервалToolStripMenuItem.Size = new System.Drawing.Size(244, 22);
+            this.интервалToolStripMenuItem.Text = "Интервал чтения температуры";
+            // 
+            // toolStripTextBoxInterval
+            // 
+            this.toolStripTextBoxInterval.Name = "toolStripTextBoxInterval";
+            this.toolStripTextBoxInterval.Size = new System.Drawing.Size(100, 23);
+            this.toolStripTextBoxInterval.TextChanged += new System.EventHandler(this.IntervalTextBox_TextChanged);
             // 
             // sp485
             // 
@@ -117,7 +128,7 @@
             this.sp485.ReadTimeout = 50;
             this.sp485.WriteTimeout = 50;
             // 
-            // Form1
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -125,7 +136,7 @@
             this.Controls.Add(this.MainMenu);
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.MainMenu;
-            this.Name = "Form1";
+            this.Name = "MainForm";
             this.Text = "Линия обкатки";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.MainMenu.ResumeLayout(false);
@@ -142,11 +153,11 @@
         private System.Windows.Forms.ToolStripMenuItem параметрыToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem настройкиМашинToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem новаяToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem видToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem mmNuber;
-        private System.Windows.Forms.ToolStripMenuItem mmSpeed;
-        public System.IO.Ports.SerialPort sp485;
+        private System.Windows.Forms.ToolStripMenuItem portNumberList;
+        private System.Windows.Forms.ToolStripMenuItem speedList;
+        private System.Windows.Forms.ToolStripMenuItem открытьОбкаткуToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem интервалToolStripMenuItem;
+        private System.Windows.Forms.ToolStripTextBox toolStripTextBoxInterval;
     }
 }
 

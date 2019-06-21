@@ -7,18 +7,18 @@ using System.Windows.Forms.DataVisualization.Charting;
 
 namespace WindowsFormsApp1
 {
-    public partial class Form3 : Form
+    public partial class FormSensorChart : Form
     {
 
         private Sensor _sensor;
         private Sensor _externalSensor;
         private bool started = false;
-        public Form3()
+        public FormSensorChart()
         {
             InitializeComponent();
         }
 
-        public Form3(Sensor sensor, Sensor externalSensor)
+        public FormSensorChart(Sensor sensor, Sensor externalSensor)
         {
             InitializeComponent();
             _sensor = sensor;
@@ -40,6 +40,19 @@ namespace WindowsFormsApp1
             Refresher(sender, e);
 
             chart1.ChartAreas[0].AxisX.LabelStyle.Format = "HH:mm:ss";
+
+            tCycle.Interval = Properties.Settings.Default.interval;
+
+            if (_sensor.StartTime != DateTime.MinValue)
+            {
+                StartObkatkaProcess();
+            }
+        }
+
+        private void StartObkatkaProcess()
+        {
+            started = true;
+            buttonStart.Text = "Остановить обкатку";
         }
 
         public void Refresher(object sender, EventArgs e)
@@ -56,7 +69,7 @@ namespace WindowsFormsApp1
 
         public void SaveAsBitmap(Control control, string fileName)
         {
-            Graphics g = control.CreateGraphics();
+            control.CreateGraphics();
 
             Bitmap bmp = new Bitmap(control.Width, control.Height);
 
@@ -69,8 +82,10 @@ namespace WindowsFormsApp1
 
         private void ButtonSave_Click(object sender, EventArgs e)
         {
-            SaveFileDialog save = new SaveFileDialog();
-            save.Filter = "Картинка (*.bmp)|*.bmp";
+            SaveFileDialog save = new SaveFileDialog
+            {
+                Filter = "Картинка (*.bmp)|*.bmp"
+            };
             save.ShowDialog();
             SaveAsBitmap(this, save.FileName);
         }
@@ -80,8 +95,7 @@ namespace WindowsFormsApp1
             if (!started)
             {
                 _sensor.StartTime = DateTime.Now;
-                started = true;
-                buttonStart.Text = "Остановить обкатку";
+                StartObkatkaProcess();
             }
             else
             {

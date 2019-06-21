@@ -40,7 +40,7 @@ namespace WindowsFormsApp1
 
         public DateTime[] GetTimeArray()
         {
-            return measurements.FindAll(s => (s.time > StartTime)&&(s.time < StopTime)).Select(item => item.time).ToArray();
+            return measurements.FindAll(s => (s.time > StartTime) && (s.time < StopTime)).Select(item => item.time).ToArray();
         }
         public double[] GetTempArray()
         {

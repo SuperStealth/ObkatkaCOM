@@ -2,7 +2,7 @@
 
 namespace WindowsFormsApp1
 {
-    partial class Form2
+    partial class FormSensorButtons
     {
         /// <summary>
         /// Required designer variable.
@@ -196,7 +196,7 @@ namespace WindowsFormsApp1
             // timer1
             // 
             this.timer1.Enabled = true;
-            this.timer1.Interval = 500;
+            this.timer1.Interval = 5000;
             this.timer1.Tick += new System.EventHandler(this.Count);
             // 
             // button9
@@ -426,7 +426,7 @@ namespace WindowsFormsApp1
             this.labelExtTemp.TabIndex = 33;
             this.labelExtTemp.Text = "Температура окружающей среды:";
             // 
-            // Form2
+            // FormSensorButtons
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -466,7 +466,7 @@ namespace WindowsFormsApp1
             this.Controls.Add(this.button1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.MinimumSize = new System.Drawing.Size(640, 480);
-            this.Name = "Form2";
+            this.Name = "FormSensorButtons";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Датчики";
             this.Load += new System.EventHandler(this.Form2_Load);

@@ -1,6 +1,6 @@
 ﻿namespace WindowsFormsApp1
 {
-    partial class Form3
+    partial class FormSensorChart
     {
         /// <summary>
         /// Required designer variable.
@@ -69,7 +69,7 @@
             // tCycle
             // 
             this.tCycle.Enabled = true;
-            this.tCycle.Interval = 500;
+            this.tCycle.Interval = 5000;
             this.tCycle.Tick += new System.EventHandler(this.Refresher);
             // 
             // label1
@@ -166,7 +166,7 @@
             this.buttonStart.UseVisualStyleBackColor = true;
             this.buttonStart.Click += new System.EventHandler(this.ButtonStart_Click);
             // 
-            // Form3
+            // FormSensorChart
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -182,7 +182,7 @@
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.chart1);
-            this.Name = "Form3";
+            this.Name = "FormSensorChart";
             this.Text = "Form3";
             this.Load += new System.EventHandler(this.Form3_Load);
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();

@@ -12,14 +12,13 @@ namespace WindowsFormsApp1
 {
 
     
-    public partial class Form2 : Form
+    public partial class FormSensorButtons : Form
     {
         private List<Sensor> sensors = new List<Sensor>();
         private Button[] lstBtnCalc;
         public ushort externalTemp = 1;
-        Form2 form2;
 
-        public Form2()
+        public FormSensorButtons()
         {
             InitializeComponent();
         }
@@ -34,33 +33,33 @@ namespace WindowsFormsApp1
                 button25, button26, button27, button28, button29, button30, button31, button32
             };
 
-            form2 = this;
-
             sensors.Add(new Sensor(externalTemp, true));
             lstBtnCalc[externalTemp - 1].Visible = false;
 
             for (ushort i = 1; i < 33; i++)
             {
                 lstBtnCalc[i - 1].Enabled = false;
-                if (MODRead(1, i)[0] != 0)
+                if (MODRead(i) != 0)
                 {
                     sensors.Add(new Sensor(i,false));
                     lstBtnCalc[i - 1].Enabled = true;
-                    lstBtnCalc[i - 1].Click += new EventHandler(ShowForm3);
+                    lstBtnCalc[i - 1].Click += new EventHandler(ShowFormSensorChart);
                 } 
                 
             }
-            
+            timer1.Interval = Properties.Settings.Default.interval;
             WindowState = FormWindowState.Maximized;
+
+            Count(sender, e);
         }
 
         private int GetButtonNumber(object sender) => Convert.ToInt32(((Button)sender).Name.ToString().Replace("button", ""));
-        private void ShowForm3(object sender, EventArgs e)
+        private void ShowFormSensorChart(object sender, EventArgs e)
         {
-            int lastClickedButton = GetButtonNumber(sender);
-            Form3 form3 = new Form3(sensors.Find(s => s.SensorNumber == lastClickedButton), sensors.Find(s => s.IsExternal));
-            form3.Show();
-            form3.Text = "Датчик №" + lastClickedButton;
+            int sensorNumber = GetButtonNumber(sender);
+            FormSensorChart formSensorChart = new FormSensorChart(sensors.Find(s => s.SensorNumber == sensorNumber), sensors.Find(s => s.IsExternal));
+            formSensorChart.Show();
+            formSensorChart.Text = "Датчик №" + sensorNumber;
         }
         private void Count(object sender, EventArgs e)
         {
@@ -68,28 +67,28 @@ namespace WindowsFormsApp1
             {
                 if (!sensor.IsExternal)
                 {
-                    sensor.measurements.Add(new ChartPoint(MODRead(1, sensor.SensorNumber)[0] / 10.0, DateTime.Now));
+                    sensor.measurements.Add(new ChartPoint(MODRead(sensor.SensorNumber) / 10.0, DateTime.Now));
                     lstBtnCalc[sensor.SensorNumber - 1].Text = sensor.SensorNumber.ToString() + ": " + sensor.GetLastMeasurement().ToString() + " C";
                 }
                 else if (sensor.IsExternal)
                 {
-                    sensor.measurements.Add(new ChartPoint(MODRead(1, sensor.SensorNumber)[0] / 10.0, DateTime.Now));
+                    sensor.measurements.Add(new ChartPoint(MODRead(sensor.SensorNumber) / 10.0, DateTime.Now));
                     labelExtTemp.Text = "Температура окружающей среды: " + sensor.GetLastMeasurement().ToString() + " C";
                 }
             }
         }
-        private ushort[] MODRead(byte slaveAdress, ushort startAdress)
+        private ushort MODRead(ushort startAdress)
         {
             ushort[] result;
             try
             {
-                result = Form1.ModBUS.ReadHoldingRegisters(slaveAdress, startAdress, 1);
+                result = MainForm.ModBUS.ReadHoldingRegisters(1, startAdress, 1);
             }
             catch
             {
                 result = new ushort[] { 0 };
             }
-            return result;
+            return result[0];
         }   
 
     }
