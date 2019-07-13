@@ -68,7 +68,7 @@
             this.новаяToolStripMenuItem.Name = "новаяToolStripMenuItem";
             this.новаяToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.новаяToolStripMenuItem.Text = "Начать работу";
-            this.новаяToolStripMenuItem.Click += new System.EventHandler(this.НоваяToolStripMenuItem_Click);
+            this.новаяToolStripMenuItem.Click += new System.EventHandler(this.NewObkatkaMenuItem_Click);
             // 
             // открытьОбкаткуToolStripMenuItem
             // 

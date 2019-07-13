@@ -10,19 +10,15 @@ using System.Windows.Forms;
 
 namespace WindowsFormsApp1
 {
-
-    
     public partial class FormSensorButtons : Form
     {
         private List<Sensor> sensors = new List<Sensor>();
         private Button[] lstBtnCalc;
         public ushort externalTemp = 1;
-
         public FormSensorButtons()
         {
             InitializeComponent();
         }
-
         public void Form2_Load(object sender, EventArgs e)
         {
             lstBtnCalc = new Button[]
@@ -75,9 +71,24 @@ namespace WindowsFormsApp1
                     sensor.measurements.Add(new ChartPoint(MODRead(sensor.SensorNumber) / 10.0, DateTime.Now));
                     labelExtTemp.Text = "Температура окружающей среды: " + sensor.GetLastMeasurement().ToString() + " C";
                 }
+                if (sensor.StartTime != DateTime.MinValue)
+                {
+                    if (sensor.StopTime != DateTime.MaxValue)
+                    {
+                        lstBtnCalc[sensor.SensorNumber - 1].BackColor = Color.Yellow;
+                    }
+                    else
+                    {
+                        lstBtnCalc[sensor.SensorNumber - 1].BackColor = Color.LightGreen;
+                    }
+                }
+                else
+                {
+                    lstBtnCalc[sensor.SensorNumber - 1].BackColor = Color.WhiteSmoke;
+                }
             }
         }
-        private ushort MODRead(ushort startAdress)
+        private short MODRead(ushort startAdress)
         {
             ushort[] result;
             try
@@ -86,9 +97,9 @@ namespace WindowsFormsApp1
             }
             catch
             {
-                result = new ushort[] { 0 };
+                return 0;
             }
-            return result[0];
+            return (short)result[0];
         }   
 
     }

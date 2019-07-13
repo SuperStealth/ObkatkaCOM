@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
@@ -12,7 +13,6 @@ namespace WindowsFormsApp1
 
         private Sensor _sensor;
         private Sensor _externalSensor;
-        private bool started = false;
         public FormSensorChart()
         {
             InitializeComponent();
@@ -27,7 +27,6 @@ namespace WindowsFormsApp1
 
         private void Form3_Load(object sender, EventArgs e)
         {
-
             chart1.Series.Clear();
             chart1.Series.Add("Датчик" + (_sensor.SensorNumber));
             chart1.Series[0].XValueType = ChartValueType.Time;
@@ -40,7 +39,7 @@ namespace WindowsFormsApp1
             Refresher(sender, e);
 
             chart1.ChartAreas[0].AxisX.LabelStyle.Format = "HH:mm:ss";
-
+            
             tCycle.Interval = Properties.Settings.Default.interval;
 
             if (_sensor.StartTime != DateTime.MinValue)
@@ -51,7 +50,6 @@ namespace WindowsFormsApp1
 
         private void StartObkatkaProcess()
         {
-            started = true;
             buttonStart.Text = "Остановить обкатку";
         }
 
@@ -80,28 +78,82 @@ namespace WindowsFormsApp1
             bmp.Dispose();
         }
 
+        public void SaveAsTXT(string fileName)
+        {
+            StreamWriter textFile = new StreamWriter(fileName);
+            textFile.WriteLine(_sensor.Name);
+            textFile.WriteLine(_sensor.SerialNum);
+            textFile.WriteLine(_sensor.FreonMark);
+            textFile.WriteLine(_sensor.FreonQuantity);
+            textFile.WriteLine(_sensor.AddInfo);
+            for (int i = 0; i < _sensor.measurements.Count; i++)
+                if (_sensor.measurements[i].time >= _sensor.StartTime && _sensor.measurements[i].time <= _sensor.StopTime)
+                {
+                    textFile.WriteLine(_sensor.measurements[i].time + "," + _sensor.measurements[i].temp.ToString().Replace(",","."));
+                }
+            textFile.Close();
+        }
+
         private void ButtonSave_Click(object sender, EventArgs e)
         {
             SaveFileDialog save = new SaveFileDialog
             {
-                Filter = "Картинка (*.bmp)|*.bmp"
+                Filter = "Картинка (*.bmp)|*.bmp|Текст (.txt)|*.txt"
             };
-            save.ShowDialog();
-            SaveAsBitmap(this, save.FileName);
+            if (save.ShowDialog() == DialogResult.OK)
+            {
+                switch (save.FilterIndex)
+                {
+                    case 1:
+                        SaveAsBitmap(this, save.FileName);
+                        break;
+                    case 2:
+                        SaveAsTXT(save.FileName);
+                        break;
+                }
+                
+            };
         }
 
         private void ButtonStart_Click(object sender, EventArgs e)
         {
-            if (!started)
+            if (buttonStart.Text == "Начать обкатку")
             {
                 _sensor.StartTime = DateTime.Now;
                 StartObkatkaProcess();
             }
-            else
+            else if (buttonStart.Text == "Остановить обкатку")
             {
                 _sensor.StopTime = DateTime.Now;
-                buttonStart.Visible = false;
-            }                      
+                buttonStart.Text = "Сбросить обкатку";
+            }
+            else
+            {
+                _sensor.StartTime = DateTime.MinValue;
+                _sensor.StopTime = DateTime.MaxValue;
+                buttonStart.Text = "Начать обкатку";
+            }
+        }
+
+        private void ExternalTempCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (externalTempCheckBox.Checked)
+            {
+                chart1.Series[1].Enabled = true;
+            }
+            else
+            {
+                chart1.Series[1].Enabled = false;
+            }
+        }
+
+        private void NameTextBox_TextChanged(object sender, EventArgs e)
+        {
+            _sensor.Name = nameTextBox.Text;
+            _sensor.SerialNum = serialNumberTextBox.Text;
+            _sensor.FreonMark = freonMarkTextBox.Text;
+            _sensor.FreonQuantity = freonQuantityTextBox.Text;
+            _sensor.AddInfo = addInfoTextBox.Text;
         }
     }
 }

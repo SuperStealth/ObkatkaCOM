@@ -23,11 +23,11 @@ namespace WindowsFormsApp1
 
         private void GetCheckedSpeed()
         {
-            foreach (ToolStripMenuItem t in speedList.DropDownItems)
+            foreach (ToolStripMenuItem toolStripMenuItem in speedList.DropDownItems)
             {
-                if (t.Text == Properties.Settings.Default.speed)
+                if (toolStripMenuItem.Text == Properties.Settings.Default.speed)
                 {
-                    t.Checked = true;
+                    toolStripMenuItem.Checked = true;
                 }
             }
         }
@@ -60,7 +60,6 @@ namespace WindowsFormsApp1
                     }
                 }
                 ChangePort(Properties.Settings.Default.port);
-                ModBUS = ModbusSerialMaster.CreateRtu(sp485);
             }
         }
 
@@ -90,10 +89,6 @@ namespace WindowsFormsApp1
                 {
                     if (tt.Checked) sp485.BaudRate = Convert.ToInt32(tt.Text);
                 }
-                sp485.Open();
-                sp485.DiscardOutBuffer();
-                sp485.DiscardInBuffer();
-                ModBUS = ModbusSerialMaster.CreateRtu(sp485);
             }
         }
         private void SetBaud_Click(object sender, EventArgs e)
@@ -120,6 +115,15 @@ namespace WindowsFormsApp1
         }
         private void NewObkatkaMenuItem_Click(object sender, EventArgs e)
         {
+            if (sp485.IsOpen)
+            {
+                sp485.Close();
+                ModBUS.Dispose();
+            }
+            sp485.Open();
+            sp485.DiscardOutBuffer();
+            sp485.DiscardInBuffer();
+            ModBUS = ModbusSerialMaster.CreateRtu(sp485);
             FormSensorButtons formSensorButtons = new FormSensorButtons
             {
                 MdiParent = this

@@ -24,7 +24,8 @@ namespace WindowsFormsApp1
         public ushort SensorNumber { get; set; }
         public string Name { get; set; }
         public string SerialNum { get; set; }
-        public string Type { get; set; }
+        public string FreonMark { get; set; }
+        public string FreonQuantity { get; set; }
         public string AddInfo { get; set; }
         public DateTime StartTime { get; set; }
         public DateTime StopTime { get; set; }
