@@ -123,12 +123,8 @@ namespace WindowsFormsApp1
             // 
             // button1
             // 
-            this.button1.AutoSize = true;
-            this.button1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F);
             this.button1.Location = new System.Drawing.Point(12, 39);
-            this.button1.MaximumSize = new System.Drawing.Size(400, 160);
-            this.button1.MinimumSize = new System.Drawing.Size(200, 50);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(200, 50);
             this.button1.TabIndex = 1;
@@ -136,12 +132,8 @@ namespace WindowsFormsApp1
             // 
             // button2
             // 
-            this.button2.AutoSize = true;
-            this.button2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F);
             this.button2.Location = new System.Drawing.Point(218, 39);
-            this.button2.MaximumSize = new System.Drawing.Size(400, 160);
-            this.button2.MinimumSize = new System.Drawing.Size(200, 50);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(200, 50);
             this.button2.TabIndex = 2;
@@ -149,12 +141,8 @@ namespace WindowsFormsApp1
             // 
             // button3
             // 
-            this.button3.AutoSize = true;
-            this.button3.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F);
             this.button3.Location = new System.Drawing.Point(424, 39);
-            this.button3.MaximumSize = new System.Drawing.Size(400, 160);
-            this.button3.MinimumSize = new System.Drawing.Size(200, 50);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(200, 50);
             this.button3.TabIndex = 3;
@@ -162,12 +150,8 @@ namespace WindowsFormsApp1
             // 
             // button4
             // 
-            this.button4.AutoSize = true;
-            this.button4.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.button4.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F);
             this.button4.Location = new System.Drawing.Point(630, 39);
-            this.button4.MaximumSize = new System.Drawing.Size(400, 160);
-            this.button4.MinimumSize = new System.Drawing.Size(200, 50);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(200, 50);
             this.button4.TabIndex = 4;
@@ -175,12 +159,8 @@ namespace WindowsFormsApp1
             // 
             // button5
             // 
-            this.button5.AutoSize = true;
-            this.button5.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.button5.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F);
             this.button5.Location = new System.Drawing.Point(12, 95);
-            this.button5.MaximumSize = new System.Drawing.Size(400, 160);
-            this.button5.MinimumSize = new System.Drawing.Size(200, 50);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(200, 50);
             this.button5.TabIndex = 5;
@@ -188,12 +168,8 @@ namespace WindowsFormsApp1
             // 
             // button6
             // 
-            this.button6.AutoSize = true;
-            this.button6.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.button6.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F);
             this.button6.Location = new System.Drawing.Point(218, 95);
-            this.button6.MaximumSize = new System.Drawing.Size(400, 160);
-            this.button6.MinimumSize = new System.Drawing.Size(200, 50);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(200, 50);
             this.button6.TabIndex = 6;
@@ -201,12 +177,8 @@ namespace WindowsFormsApp1
             // 
             // button7
             // 
-            this.button7.AutoSize = true;
-            this.button7.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.button7.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F);
             this.button7.Location = new System.Drawing.Point(424, 95);
-            this.button7.MaximumSize = new System.Drawing.Size(400, 160);
-            this.button7.MinimumSize = new System.Drawing.Size(200, 50);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(200, 50);
             this.button7.TabIndex = 7;
@@ -214,12 +186,8 @@ namespace WindowsFormsApp1
             // 
             // button8
             // 
-            this.button8.AutoSize = true;
-            this.button8.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.button8.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F);
             this.button8.Location = new System.Drawing.Point(630, 95);
-            this.button8.MaximumSize = new System.Drawing.Size(400, 160);
-            this.button8.MinimumSize = new System.Drawing.Size(200, 50);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(200, 50);
             this.button8.TabIndex = 8;
@@ -229,16 +197,12 @@ namespace WindowsFormsApp1
             // 
             this.timer1.Enabled = true;
             this.timer1.Interval = 5000;
-            this.timer1.Tick += new System.EventHandler(this.Count);
+            this.timer1.Tick += new System.EventHandler(this.OnCount);
             // 
             // button9
             // 
-            this.button9.AutoSize = true;
-            this.button9.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.button9.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F);
             this.button9.Location = new System.Drawing.Point(12, 151);
-            this.button9.MaximumSize = new System.Drawing.Size(400, 160);
-            this.button9.MinimumSize = new System.Drawing.Size(200, 50);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(200, 50);
             this.button9.TabIndex = 16;
@@ -246,12 +210,8 @@ namespace WindowsFormsApp1
             // 
             // button10
             // 
-            this.button10.AutoSize = true;
-            this.button10.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.button10.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F);
             this.button10.Location = new System.Drawing.Point(218, 151);
-            this.button10.MaximumSize = new System.Drawing.Size(400, 160);
-            this.button10.MinimumSize = new System.Drawing.Size(200, 50);
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(200, 50);
             this.button10.TabIndex = 15;
@@ -259,12 +219,8 @@ namespace WindowsFormsApp1
             // 
             // button11
             // 
-            this.button11.AutoSize = true;
-            this.button11.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.button11.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F);
             this.button11.Location = new System.Drawing.Point(424, 151);
-            this.button11.MaximumSize = new System.Drawing.Size(400, 160);
-            this.button11.MinimumSize = new System.Drawing.Size(200, 50);
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(200, 50);
             this.button11.TabIndex = 14;
@@ -272,12 +228,8 @@ namespace WindowsFormsApp1
             // 
             // button12
             // 
-            this.button12.AutoSize = true;
-            this.button12.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.button12.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F);
             this.button12.Location = new System.Drawing.Point(630, 151);
-            this.button12.MaximumSize = new System.Drawing.Size(400, 160);
-            this.button12.MinimumSize = new System.Drawing.Size(200, 50);
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(200, 50);
             this.button12.TabIndex = 13;
@@ -285,12 +237,8 @@ namespace WindowsFormsApp1
             // 
             // button13
             // 
-            this.button13.AutoSize = true;
-            this.button13.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.button13.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F);
             this.button13.Location = new System.Drawing.Point(12, 207);
-            this.button13.MaximumSize = new System.Drawing.Size(400, 160);
-            this.button13.MinimumSize = new System.Drawing.Size(200, 50);
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(200, 50);
             this.button13.TabIndex = 12;
@@ -298,12 +246,8 @@ namespace WindowsFormsApp1
             // 
             // button14
             // 
-            this.button14.AutoSize = true;
-            this.button14.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.button14.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F);
             this.button14.Location = new System.Drawing.Point(218, 207);
-            this.button14.MaximumSize = new System.Drawing.Size(400, 160);
-            this.button14.MinimumSize = new System.Drawing.Size(200, 50);
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(200, 50);
             this.button14.TabIndex = 11;
@@ -311,12 +255,8 @@ namespace WindowsFormsApp1
             // 
             // button15
             // 
-            this.button15.AutoSize = true;
-            this.button15.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.button15.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F);
             this.button15.Location = new System.Drawing.Point(424, 207);
-            this.button15.MaximumSize = new System.Drawing.Size(400, 160);
-            this.button15.MinimumSize = new System.Drawing.Size(200, 50);
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(200, 50);
             this.button15.TabIndex = 10;
@@ -324,12 +264,8 @@ namespace WindowsFormsApp1
             // 
             // button16
             // 
-            this.button16.AutoSize = true;
-            this.button16.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.button16.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F);
             this.button16.Location = new System.Drawing.Point(630, 207);
-            this.button16.MaximumSize = new System.Drawing.Size(400, 160);
-            this.button16.MinimumSize = new System.Drawing.Size(200, 50);
             this.button16.Name = "button16";
             this.button16.Size = new System.Drawing.Size(200, 50);
             this.button16.TabIndex = 9;
@@ -337,12 +273,8 @@ namespace WindowsFormsApp1
             // 
             // button17
             // 
-            this.button17.AutoSize = true;
-            this.button17.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.button17.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F);
             this.button17.Location = new System.Drawing.Point(12, 263);
-            this.button17.MaximumSize = new System.Drawing.Size(400, 160);
-            this.button17.MinimumSize = new System.Drawing.Size(200, 50);
             this.button17.Name = "button17";
             this.button17.Size = new System.Drawing.Size(200, 50);
             this.button17.TabIndex = 32;
@@ -350,12 +282,8 @@ namespace WindowsFormsApp1
             // 
             // button18
             // 
-            this.button18.AutoSize = true;
-            this.button18.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.button18.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F);
             this.button18.Location = new System.Drawing.Point(218, 263);
-            this.button18.MaximumSize = new System.Drawing.Size(400, 160);
-            this.button18.MinimumSize = new System.Drawing.Size(200, 50);
             this.button18.Name = "button18";
             this.button18.Size = new System.Drawing.Size(200, 50);
             this.button18.TabIndex = 31;
@@ -363,12 +291,8 @@ namespace WindowsFormsApp1
             // 
             // button19
             // 
-            this.button19.AutoSize = true;
-            this.button19.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.button19.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F);
             this.button19.Location = new System.Drawing.Point(424, 263);
-            this.button19.MaximumSize = new System.Drawing.Size(400, 160);
-            this.button19.MinimumSize = new System.Drawing.Size(200, 50);
             this.button19.Name = "button19";
             this.button19.Size = new System.Drawing.Size(200, 50);
             this.button19.TabIndex = 30;
@@ -376,12 +300,8 @@ namespace WindowsFormsApp1
             // 
             // button20
             // 
-            this.button20.AutoSize = true;
-            this.button20.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.button20.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F);
             this.button20.Location = new System.Drawing.Point(630, 263);
-            this.button20.MaximumSize = new System.Drawing.Size(400, 160);
-            this.button20.MinimumSize = new System.Drawing.Size(200, 50);
             this.button20.Name = "button20";
             this.button20.Size = new System.Drawing.Size(200, 50);
             this.button20.TabIndex = 29;
@@ -389,12 +309,8 @@ namespace WindowsFormsApp1
             // 
             // button21
             // 
-            this.button21.AutoSize = true;
-            this.button21.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.button21.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F);
             this.button21.Location = new System.Drawing.Point(12, 319);
-            this.button21.MaximumSize = new System.Drawing.Size(400, 160);
-            this.button21.MinimumSize = new System.Drawing.Size(200, 50);
             this.button21.Name = "button21";
             this.button21.Size = new System.Drawing.Size(200, 50);
             this.button21.TabIndex = 28;
@@ -402,12 +318,8 @@ namespace WindowsFormsApp1
             // 
             // button22
             // 
-            this.button22.AutoSize = true;
-            this.button22.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.button22.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F);
             this.button22.Location = new System.Drawing.Point(218, 319);
-            this.button22.MaximumSize = new System.Drawing.Size(400, 160);
-            this.button22.MinimumSize = new System.Drawing.Size(200, 50);
             this.button22.Name = "button22";
             this.button22.Size = new System.Drawing.Size(200, 50);
             this.button22.TabIndex = 27;
@@ -415,12 +327,8 @@ namespace WindowsFormsApp1
             // 
             // button23
             // 
-            this.button23.AutoSize = true;
-            this.button23.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.button23.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F);
             this.button23.Location = new System.Drawing.Point(424, 319);
-            this.button23.MaximumSize = new System.Drawing.Size(400, 160);
-            this.button23.MinimumSize = new System.Drawing.Size(200, 50);
             this.button23.Name = "button23";
             this.button23.Size = new System.Drawing.Size(200, 50);
             this.button23.TabIndex = 26;
@@ -428,12 +336,8 @@ namespace WindowsFormsApp1
             // 
             // button24
             // 
-            this.button24.AutoSize = true;
-            this.button24.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.button24.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F);
             this.button24.Location = new System.Drawing.Point(630, 319);
-            this.button24.MaximumSize = new System.Drawing.Size(400, 160);
-            this.button24.MinimumSize = new System.Drawing.Size(200, 50);
             this.button24.Name = "button24";
             this.button24.Size = new System.Drawing.Size(200, 50);
             this.button24.TabIndex = 25;
@@ -441,12 +345,8 @@ namespace WindowsFormsApp1
             // 
             // button25
             // 
-            this.button25.AutoSize = true;
-            this.button25.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.button25.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F);
             this.button25.Location = new System.Drawing.Point(12, 375);
-            this.button25.MaximumSize = new System.Drawing.Size(400, 160);
-            this.button25.MinimumSize = new System.Drawing.Size(200, 50);
             this.button25.Name = "button25";
             this.button25.Size = new System.Drawing.Size(200, 50);
             this.button25.TabIndex = 24;
@@ -454,12 +354,8 @@ namespace WindowsFormsApp1
             // 
             // button26
             // 
-            this.button26.AutoSize = true;
-            this.button26.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.button26.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F);
             this.button26.Location = new System.Drawing.Point(218, 375);
-            this.button26.MaximumSize = new System.Drawing.Size(400, 160);
-            this.button26.MinimumSize = new System.Drawing.Size(200, 50);
             this.button26.Name = "button26";
             this.button26.Size = new System.Drawing.Size(200, 50);
             this.button26.TabIndex = 23;
@@ -467,12 +363,8 @@ namespace WindowsFormsApp1
             // 
             // button27
             // 
-            this.button27.AutoSize = true;
-            this.button27.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.button27.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F);
             this.button27.Location = new System.Drawing.Point(424, 375);
-            this.button27.MaximumSize = new System.Drawing.Size(400, 160);
-            this.button27.MinimumSize = new System.Drawing.Size(200, 50);
             this.button27.Name = "button27";
             this.button27.Size = new System.Drawing.Size(200, 50);
             this.button27.TabIndex = 22;
@@ -480,12 +372,8 @@ namespace WindowsFormsApp1
             // 
             // button28
             // 
-            this.button28.AutoSize = true;
-            this.button28.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.button28.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F);
             this.button28.Location = new System.Drawing.Point(630, 375);
-            this.button28.MaximumSize = new System.Drawing.Size(400, 160);
-            this.button28.MinimumSize = new System.Drawing.Size(200, 50);
             this.button28.Name = "button28";
             this.button28.Size = new System.Drawing.Size(200, 50);
             this.button28.TabIndex = 21;
@@ -493,12 +381,8 @@ namespace WindowsFormsApp1
             // 
             // button29
             // 
-            this.button29.AutoSize = true;
-            this.button29.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.button29.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F);
             this.button29.Location = new System.Drawing.Point(12, 431);
-            this.button29.MaximumSize = new System.Drawing.Size(400, 160);
-            this.button29.MinimumSize = new System.Drawing.Size(200, 50);
             this.button29.Name = "button29";
             this.button29.Size = new System.Drawing.Size(200, 50);
             this.button29.TabIndex = 20;
@@ -506,12 +390,8 @@ namespace WindowsFormsApp1
             // 
             // button30
             // 
-            this.button30.AutoSize = true;
-            this.button30.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.button30.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F);
             this.button30.Location = new System.Drawing.Point(218, 431);
-            this.button30.MaximumSize = new System.Drawing.Size(400, 160);
-            this.button30.MinimumSize = new System.Drawing.Size(200, 50);
             this.button30.Name = "button30";
             this.button30.Size = new System.Drawing.Size(200, 50);
             this.button30.TabIndex = 19;
@@ -519,12 +399,8 @@ namespace WindowsFormsApp1
             // 
             // button31
             // 
-            this.button31.AutoSize = true;
-            this.button31.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.button31.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F);
             this.button31.Location = new System.Drawing.Point(424, 431);
-            this.button31.MaximumSize = new System.Drawing.Size(400, 160);
-            this.button31.MinimumSize = new System.Drawing.Size(200, 50);
             this.button31.Name = "button31";
             this.button31.Size = new System.Drawing.Size(200, 50);
             this.button31.TabIndex = 18;
@@ -532,12 +408,8 @@ namespace WindowsFormsApp1
             // 
             // button32
             // 
-            this.button32.AutoSize = true;
-            this.button32.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.button32.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F);
             this.button32.Location = new System.Drawing.Point(630, 431);
-            this.button32.MaximumSize = new System.Drawing.Size(400, 160);
-            this.button32.MinimumSize = new System.Drawing.Size(200, 50);
             this.button32.Name = "button32";
             this.button32.Size = new System.Drawing.Size(200, 50);
             this.button32.TabIndex = 17;
@@ -558,7 +430,7 @@ namespace WindowsFormsApp1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(837, 491);
+            this.ClientSize = new System.Drawing.Size(844, 491);
             this.Controls.Add(this.labelExtTemp);
             this.Controls.Add(this.button17);
             this.Controls.Add(this.button18);

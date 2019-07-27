@@ -78,6 +78,10 @@ namespace WindowsFormsApp1
             bmp.Dispose();
         }
 
+        public int GetFormNumber()
+        {
+            return _sensor.SensorNumber;
+        }
         public void SaveAsTXT(string fileName)
         {
             StreamWriter textFile = new StreamWriter(fileName);

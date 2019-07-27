@@ -46,18 +46,21 @@ namespace WindowsFormsApp1
             timer1.Interval = Properties.Settings.Default.interval;
             WindowState = FormWindowState.Maximized;
 
-            Count(sender, e);
+            OnCount(sender, e);
         }
 
         private int GetButtonNumber(object sender) => Convert.ToInt32(((Button)sender).Name.ToString().Replace("button", ""));
         private void ShowFormSensorChart(object sender, EventArgs e)
         {
             int sensorNumber = GetButtonNumber(sender);
-            FormSensorChart formSensorChart = new FormSensorChart(sensors.Find(s => s.SensorNumber == sensorNumber), sensors.Find(s => s.IsExternal));
-            formSensorChart.Show();
-            formSensorChart.Text = "Датчик №" + sensorNumber;
+            if (!Application.OpenForms.OfType<FormSensorChart>().Cast<FormSensorChart>().Any(form => form.GetFormNumber() == sensorNumber))
+            {
+                FormSensorChart formSensorChart = new FormSensorChart(sensors.Find(s => s.SensorNumber == sensorNumber), sensors.Find(s => s.IsExternal));
+                formSensorChart.Show();
+                formSensorChart.Text = "Датчик №" + sensorNumber;
+            }
         }
-        private void Count(object sender, EventArgs e)
+        private void OnCount(object sender, EventArgs e)
         {
             foreach (Sensor sensor in sensors)
             {
