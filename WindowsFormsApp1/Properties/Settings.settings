@@ -11,5 +11,8 @@
     <Setting Name="interval" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">5000</Value>
     </Setting>
+    <Setting Name="type" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Проводной</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

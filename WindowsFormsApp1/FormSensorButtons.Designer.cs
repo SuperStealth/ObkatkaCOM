@@ -469,6 +469,7 @@ namespace WindowsFormsApp1
             this.Name = "FormSensorButtons";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Датчики";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormSensorButtons_FormClosed);
             this.Load += new System.EventHandler(this.Form2_Load);
             this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);

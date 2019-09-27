@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.tCycle = new System.Windows.Forms.Timer(this.components);
             this.nameLabel = new System.Windows.Forms.Label();
@@ -40,13 +40,18 @@
             this.serialNumberLabel = new System.Windows.Forms.Label();
             this.addInfoTextBox = new System.Windows.Forms.TextBox();
             this.addInfoLabel = new System.Windows.Forms.Label();
-            this.freonMarkTextBox = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.buttonSave = new System.Windows.Forms.Button();
             this.buttonStart = new System.Windows.Forms.Button();
             this.freonQuantityTextBox = new System.Windows.Forms.TextBox();
             this.freonQuantityLabel = new System.Windows.Forms.Label();
             this.externalTempCheckBox = new System.Windows.Forms.CheckBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.timePickerFrom = new System.Windows.Forms.DateTimePicker();
+            this.timePickerTo = new System.Windows.Forms.DateTimePicker();
+            this.comboBoxFreonMark = new System.Windows.Forms.ComboBox();
+            this.averageTemperatureLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -55,23 +60,23 @@
             this.chart1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            chartArea1.CursorX.IsUserEnabled = true;
-            chartArea1.CursorX.IsUserSelectionEnabled = true;
-            chartArea1.CursorX.LineWidth = 2;
-            chartArea1.CursorY.IsUserEnabled = true;
-            chartArea1.CursorY.IsUserSelectionEnabled = true;
-            chartArea1.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea1);
+            chartArea2.CursorX.IsUserEnabled = true;
+            chartArea2.CursorX.IsUserSelectionEnabled = true;
+            chartArea2.CursorX.LineWidth = 2;
+            chartArea2.CursorY.IsUserEnabled = true;
+            chartArea2.CursorY.IsUserSelectionEnabled = true;
+            chartArea2.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea2);
             this.chart1.ImeMode = System.Windows.Forms.ImeMode.Hiragana;
-            legend1.Name = "Legend1";
-            this.chart1.Legends.Add(legend1);
+            legend2.Name = "Legend1";
+            this.chart1.Legends.Add(legend2);
             this.chart1.Location = new System.Drawing.Point(13, 116);
             this.chart1.Name = "chart1";
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.chart1.Series.Add(series1);
-            this.chart1.Size = new System.Drawing.Size(838, 330);
+            series2.ChartArea = "ChartArea1";
+            series2.Legend = "Legend1";
+            series2.Name = "Series1";
+            this.chart1.Series.Add(series2);
+            this.chart1.Size = new System.Drawing.Size(872, 337);
             this.chart1.TabIndex = 0;
             this.chart1.Text = "chart1";
             // 
@@ -96,9 +101,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.nameTextBox.Location = new System.Drawing.Point(181, 12);
             this.nameTextBox.Name = "nameTextBox";
-            this.nameTextBox.Size = new System.Drawing.Size(670, 20);
+            this.nameTextBox.Size = new System.Drawing.Size(704, 20);
             this.nameTextBox.TabIndex = 2;
-            this.nameTextBox.TextChanged += new System.EventHandler(this.NameTextBox_TextChanged);
+            this.nameTextBox.TextChanged += new System.EventHandler(this.TextBox_TextChanged);
             // 
             // serialNumberTextBox
             // 
@@ -106,9 +111,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.serialNumberTextBox.Location = new System.Drawing.Point(181, 38);
             this.serialNumberTextBox.Name = "serialNumberTextBox";
-            this.serialNumberTextBox.Size = new System.Drawing.Size(670, 20);
+            this.serialNumberTextBox.Size = new System.Drawing.Size(704, 20);
             this.serialNumberTextBox.TabIndex = 4;
-            this.serialNumberTextBox.TextChanged += new System.EventHandler(this.NameTextBox_TextChanged);
+            this.serialNumberTextBox.TextChanged += new System.EventHandler(this.TextBox_TextChanged);
             // 
             // serialNumberLabel
             // 
@@ -125,9 +130,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.addInfoTextBox.Location = new System.Drawing.Point(181, 90);
             this.addInfoTextBox.Name = "addInfoTextBox";
-            this.addInfoTextBox.Size = new System.Drawing.Size(670, 20);
+            this.addInfoTextBox.Size = new System.Drawing.Size(704, 20);
             this.addInfoTextBox.TabIndex = 8;
-            this.addInfoTextBox.TextChanged += new System.EventHandler(this.NameTextBox_TextChanged);
+            this.addInfoTextBox.TextChanged += new System.EventHandler(this.TextBox_TextChanged);
             // 
             // addInfoLabel
             // 
@@ -137,16 +142,6 @@
             this.addInfoLabel.Size = new System.Drawing.Size(163, 13);
             this.addInfoLabel.TabIndex = 7;
             this.addInfoLabel.Text = "Дополнительная информация:";
-            // 
-            // freonMarkTextBox
-            // 
-            this.freonMarkTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.freonMarkTextBox.Location = new System.Drawing.Point(181, 64);
-            this.freonMarkTextBox.Name = "freonMarkTextBox";
-            this.freonMarkTextBox.Size = new System.Drawing.Size(250, 20);
-            this.freonMarkTextBox.TabIndex = 6;
-            this.freonMarkTextBox.TextChanged += new System.EventHandler(this.NameTextBox_TextChanged);
             // 
             // label4
             // 
@@ -160,7 +155,7 @@
             // buttonSave
             // 
             this.buttonSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonSave.Location = new System.Drawing.Point(736, 457);
+            this.buttonSave.Location = new System.Drawing.Point(770, 492);
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(115, 23);
             this.buttonSave.TabIndex = 9;
@@ -171,7 +166,7 @@
             // buttonStart
             // 
             this.buttonStart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonStart.Location = new System.Drawing.Point(538, 457);
+            this.buttonStart.Location = new System.Drawing.Point(572, 492);
             this.buttonStart.Name = "buttonStart";
             this.buttonStart.Size = new System.Drawing.Size(192, 23);
             this.buttonStart.TabIndex = 10;
@@ -185,9 +180,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.freonQuantityTextBox.Location = new System.Drawing.Point(553, 64);
             this.freonQuantityTextBox.Name = "freonQuantityTextBox";
-            this.freonQuantityTextBox.Size = new System.Drawing.Size(298, 20);
+            this.freonQuantityTextBox.Size = new System.Drawing.Size(332, 20);
             this.freonQuantityTextBox.TabIndex = 12;
-            this.freonQuantityTextBox.TextChanged += new System.EventHandler(this.NameTextBox_TextChanged);
+            this.freonQuantityTextBox.TextChanged += new System.EventHandler(this.TextBox_TextChanged);
             // 
             // freonQuantityLabel
             // 
@@ -204,7 +199,7 @@
             this.externalTempCheckBox.AutoSize = true;
             this.externalTempCheckBox.Checked = true;
             this.externalTempCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.externalTempCheckBox.Location = new System.Drawing.Point(15, 463);
+            this.externalTempCheckBox.Location = new System.Drawing.Point(15, 498);
             this.externalTempCheckBox.Name = "externalTempCheckBox";
             this.externalTempCheckBox.Size = new System.Drawing.Size(260, 17);
             this.externalTempCheckBox.TabIndex = 13;
@@ -212,11 +207,78 @@
             this.externalTempCheckBox.UseVisualStyleBackColor = true;
             this.externalTempCheckBox.CheckedChanged += new System.EventHandler(this.ExternalTempCheckBox_CheckedChanged);
             // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(13, 467);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(81, 13);
+            this.label1.TabIndex = 14;
+            this.label1.Text = "Время начала:";
+            // 
+            // label2
+            // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(306, 467);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(99, 13);
+            this.label2.TabIndex = 15;
+            this.label2.Text = "Время окончания:";
+            // 
+            // timePickerFrom
+            // 
+            this.timePickerFrom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.timePickerFrom.CustomFormat = "HH:MM";
+            this.timePickerFrom.Location = new System.Drawing.Point(100, 465);
+            this.timePickerFrom.Name = "timePickerFrom";
+            this.timePickerFrom.Size = new System.Drawing.Size(200, 20);
+            this.timePickerFrom.TabIndex = 16;
+            this.timePickerFrom.ValueChanged += new System.EventHandler(this.TimePicker_ValueChanged);
+            // 
+            // timePickerTo
+            // 
+            this.timePickerTo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.timePickerTo.CustomFormat = "HH:MM";
+            this.timePickerTo.Location = new System.Drawing.Point(411, 465);
+            this.timePickerTo.Name = "timePickerTo";
+            this.timePickerTo.Size = new System.Drawing.Size(200, 20);
+            this.timePickerTo.TabIndex = 17;
+            this.timePickerTo.ValueChanged += new System.EventHandler(this.TimePicker_ValueChanged);
+            // 
+            // comboBoxFreonMark
+            // 
+            this.comboBoxFreonMark.FormattingEnabled = true;
+            this.comboBoxFreonMark.Items.AddRange(new object[] {
+            "R134a",
+            "R404",
+            "R290"});
+            this.comboBoxFreonMark.Location = new System.Drawing.Point(181, 65);
+            this.comboBoxFreonMark.Name = "comboBoxFreonMark";
+            this.comboBoxFreonMark.Size = new System.Drawing.Size(250, 21);
+            this.comboBoxFreonMark.TabIndex = 18;
+            this.comboBoxFreonMark.SelectedIndexChanged += new System.EventHandler(this.TextBox_TextChanged);
+            // 
+            // averageTemperatureLabel
+            // 
+            this.averageTemperatureLabel.AutoSize = true;
+            this.averageTemperatureLabel.Location = new System.Drawing.Point(617, 467);
+            this.averageTemperatureLabel.Name = "averageTemperatureLabel";
+            this.averageTemperatureLabel.Size = new System.Drawing.Size(0, 13);
+            this.averageTemperatureLabel.TabIndex = 19;
+            // 
             // FormSensorChart
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(863, 492);
+            this.ClientSize = new System.Drawing.Size(897, 527);
+            this.Controls.Add(this.averageTemperatureLabel);
+            this.Controls.Add(this.comboBoxFreonMark);
+            this.Controls.Add(this.timePickerTo);
+            this.Controls.Add(this.timePickerFrom);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.externalTempCheckBox);
             this.Controls.Add(this.freonQuantityTextBox);
             this.Controls.Add(this.freonQuantityLabel);
@@ -224,7 +286,6 @@
             this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.addInfoTextBox);
             this.Controls.Add(this.addInfoLabel);
-            this.Controls.Add(this.freonMarkTextBox);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.serialNumberTextBox);
             this.Controls.Add(this.serialNumberLabel);
@@ -250,12 +311,17 @@
         private System.Windows.Forms.Label serialNumberLabel;
         private System.Windows.Forms.TextBox addInfoTextBox;
         private System.Windows.Forms.Label addInfoLabel;
-        private System.Windows.Forms.TextBox freonMarkTextBox;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button buttonSave;
         private System.Windows.Forms.Button buttonStart;
         private System.Windows.Forms.TextBox freonQuantityTextBox;
         private System.Windows.Forms.Label freonQuantityLabel;
         private System.Windows.Forms.CheckBox externalTempCheckBox;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.DateTimePicker timePickerFrom;
+        private System.Windows.Forms.DateTimePicker timePickerTo;
+        private System.Windows.Forms.ComboBox comboBoxFreonMark;
+        private System.Windows.Forms.Label averageTemperatureLabel;
     }
 }

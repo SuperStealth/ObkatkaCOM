@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 
@@ -27,31 +27,30 @@ namespace WindowsFormsApp1
 
         private void Form3_Load(object sender, EventArgs e)
         {
+
+            timePickerFrom.Format = DateTimePickerFormat.Custom;
+            timePickerFrom.CustomFormat = "HH:mm";
+            timePickerTo.Format = DateTimePickerFormat.Custom;
+            timePickerTo.CustomFormat = "HH:mm";
             chart1.Series.Clear();
             chart1.Series.Add("Датчик" + (_sensor.SensorNumber));
             chart1.Series[0].XValueType = ChartValueType.Time;
             chart1.Series[0].ChartType = SeriesChartType.Line;
+            chart1.Series[0].BorderWidth = 3;
 
             chart1.Series.Add("Наружняя температура");
             chart1.Series[1].XValueType = ChartValueType.Time;
             chart1.Series[1].ChartType = SeriesChartType.Line;
+            chart1.Series[1].BorderWidth = 3;
 
             Refresher(sender, e);
 
             chart1.ChartAreas[0].AxisX.LabelStyle.Format = "HH:mm:ss";
             
-            tCycle.Interval = Properties.Settings.Default.interval;
-
-            if (_sensor.StartTime != DateTime.MinValue)
-            {
-                StartObkatkaProcess();
-            }
+            tCycle.Interval = Properties.Settings.Default.interval;          
         }
 
-        private void StartObkatkaProcess()
-        {
-            buttonStart.Text = "Остановить обкатку";
-        }
+
 
         public void Refresher(object sender, EventArgs e)
         {
@@ -63,6 +62,11 @@ namespace WindowsFormsApp1
             var externalTemps = _externalSensor.GetTempArray(_sensor.StartTime, _sensor.StopTime);
             chart1.Series[1].Points.DataBindXY(externalTimes, externalTemps);
 
+
+            StringBuilder avgTemperatureString = new StringBuilder("Средняя температура окружающей среды: ");
+            if (externalTemps.Length > 0) avgTemperatureString.Append(externalTemps.Average().ToString("0.##"));
+            avgTemperatureString.Append("C");
+            averageTemperatureLabel.Text = avgTemperatureString.ToString();
         }
 
         public void SaveAsBitmap(Control control, string fileName)
@@ -72,7 +76,7 @@ namespace WindowsFormsApp1
             Bitmap bmp = new Bitmap(control.Width, control.Height);
 
             control.DrawToBitmap(bmp, new Rectangle(0, 0, control.Width, control.Height));
-            bmp = bmp.Clone(new Rectangle(20, 35, control.Width - 40, control.Height - 85), bmp.PixelFormat);
+            bmp = bmp.Clone(new Rectangle(20, 33, control.Width - 40, control.Height - 80), bmp.PixelFormat);
             bmp.Save(fileName);
 
             bmp.Dispose();
@@ -124,18 +128,29 @@ namespace WindowsFormsApp1
             if (buttonStart.Text == "Начать обкатку")
             {
                 _sensor.StartTime = DateTime.Now;
-                StartObkatkaProcess();
+                timePickerFrom.Value = DateTime.Now;
+                timePickerTo.Value = DateTime.Now.AddHours(3);
+                buttonStart.Text = "Остановить обкатку";
+                _sensor.state = State.ObkatkaStarted;
             }
             else if (buttonStart.Text == "Остановить обкатку")
             {
                 _sensor.StopTime = DateTime.Now;
+                timePickerTo.Value = DateTime.Now;
                 buttonStart.Text = "Сбросить обкатку";
+                _sensor.state = State.ObkatkaEnded;
             }
             else
             {
                 _sensor.StartTime = DateTime.MinValue;
                 _sensor.StopTime = DateTime.MaxValue;
+                addInfoTextBox.Text = "";
+                serialNumberTextBox.Text = "";
+                nameTextBox.Text = "";
+                comboBoxFreonMark.Text = "";
+                freonQuantityTextBox.Text = "";
                 buttonStart.Text = "Начать обкатку";
+                _sensor.state = State.WaitingForStart;
             }
         }
 
@@ -151,13 +166,21 @@ namespace WindowsFormsApp1
             }
         }
 
-        private void NameTextBox_TextChanged(object sender, EventArgs e)
+        private void TextBox_TextChanged(object sender, EventArgs e)
         {
             _sensor.Name = nameTextBox.Text;
             _sensor.SerialNum = serialNumberTextBox.Text;
-            _sensor.FreonMark = freonMarkTextBox.Text;
+            _sensor.FreonMark = comboBoxFreonMark.Text;
             _sensor.FreonQuantity = freonQuantityTextBox.Text;
             _sensor.AddInfo = addInfoTextBox.Text;
+        }
+
+        private void TimePicker_ValueChanged(object sender, EventArgs e)
+        {
+            _sensor.StartTime = timePickerFrom.Value;
+            _sensor.StopTime = timePickerTo.Value;
+            timePickerFrom.Value = DateTime.Today + _sensor.StartTime.TimeOfDay;
+            timePickerTo.Value = DateTime.Today + _sensor.StopTime.TimeOfDay;
         }
     }
 }

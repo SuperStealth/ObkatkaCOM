@@ -5,6 +5,13 @@ using System.Text;
 
 namespace WindowsFormsApp1
 {
+    public enum State
+    {
+        WaitingForStart,
+        ObkatkaStarted,
+        ObkatkaEnded
+    }
+    [Serializable]
     public struct ChartPoint
     {
         public double temp;
@@ -16,6 +23,7 @@ namespace WindowsFormsApp1
             this.time = time;
         }
     }
+    [Serializable]
     public class Sensor
     {
 
@@ -29,6 +37,7 @@ namespace WindowsFormsApp1
         public string AddInfo { get; set; }
         public DateTime StartTime { get; set; }
         public DateTime StopTime { get; set; }
+        public State state { get; set; }
 
         public Sensor(ushort num, bool isExternal)
         {

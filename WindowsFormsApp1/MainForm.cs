@@ -31,6 +31,22 @@ namespace WindowsFormsApp1
                 }
             }
         }
+        private void FillDropDownListWithTypes()
+        {
+            toolStripMenuItemSensorType.DropDownItems.Add("Проводной", null, SetType_Click);
+            toolStripMenuItemSensorType.DropDownItems.Add("Беспроводной", null, SetType_Click);
+        }
+        private void SetType_Click(object sender, EventArgs e)
+        {
+            foreach (ToolStripMenuItem tt in toolStripMenuItemSensorType.DropDownItems)
+            {
+                tt.Checked = false;
+            }
+            ((ToolStripMenuItem)sender).Checked = true;
+            Properties.Settings.Default.type = ((ToolStripMenuItem)sender).Text;
+            Properties.Settings.Default.Save();
+            if (sp485.IsOpen) ChangePort(sp485.PortName);
+        }
         private void FillDropDownListWithSpeeds()
         {
             speedList.DropDownItems.Add("9600", null, SetBaud_Click);
@@ -73,6 +89,7 @@ namespace WindowsFormsApp1
             FillDropDownListWithSpeeds();
             FillDropDownListWithPorts();
             FillDropDownTextBoxWithInterval();
+            FillDropDownListWithTypes();
         }
 
         private void ChangePort(string port)
@@ -111,9 +128,10 @@ namespace WindowsFormsApp1
             ((ToolStripMenuItem)sender).Checked = true;
             Properties.Settings.Default.port = ((ToolStripMenuItem)sender).Text;
             Properties.Settings.Default.Save();
-            ChangePort(Properties.Settings.Default.port);   
+            ChangePort(Properties.Settings.Default.port);
         }
-        private void NewObkatkaMenuItem_Click(object sender, EventArgs e)
+
+        private IProtocol ActivatePort()
         {
             if (sp485.IsOpen)
             {
@@ -124,7 +142,18 @@ namespace WindowsFormsApp1
             sp485.DiscardOutBuffer();
             sp485.DiscardInBuffer();
             ModBUS = ModbusSerialMaster.CreateRtu(sp485);
-            FormSensorButtons formSensorButtons = new FormSensorButtons
+            if (Properties.Settings.Default.type == "Проводной")
+            {
+                return new WiredProtocol();
+            }
+            else
+            {
+                return new WirelessProtocol();
+            }
+        }
+        private void NewObkatkaMenuItem_Click(object sender, EventArgs e)
+        {
+            FormSensorButtons formSensorButtons = new FormSensorButtons(ActivatePort())
             {
                 MdiParent = this
             };
@@ -133,7 +162,7 @@ namespace WindowsFormsApp1
 
         private void ОткрытьОбкаткуToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //todo
+
         }
 
         private void IntervalTextBox_TextChanged(object sender, EventArgs e)
@@ -146,5 +175,29 @@ namespace WindowsFormsApp1
             }
 
         }
+
+        private void ОткрытьРезервнуюКопиюToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.Filter = "файл бэкапа (*.bkp)|*.bkp";
+                openFileDialog.RestoreDirectory = true;
+
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    //Get the path of specified file
+                    string filePath = openFileDialog.FileName;
+                    FormSensorButtons formSensorButtons = new FormSensorButtons(ActivatePort(), Backup.Restore(filePath))
+                    {
+                        MdiParent = this
+                    };
+                formSensorButtons.Show();
+            }
+
+        }
     }
+
+
+}
+}
 }

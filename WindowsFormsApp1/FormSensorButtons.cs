@@ -15,9 +15,18 @@ namespace WindowsFormsApp1
         private List<Sensor> sensors = new List<Sensor>();
         private Button[] lstBtnCalc;
         public ushort externalTemp = 1;
-        public FormSensorButtons()
+        private Backup backup;
+        private IProtocol temperatureSensor;
+        public FormSensorButtons(IProtocol iProtocol)
         {
-            InitializeComponent();
+            temperatureSensor = iProtocol;
+            InitializeComponent();           
+        }
+        public FormSensorButtons(IProtocol iProtocol, List<Sensor> restore)
+        {
+            sensors = restore;
+            temperatureSensor = iProtocol;
+            InitializeComponent();           
         }
         public void Form2_Load(object sender, EventArgs e)
         {
@@ -37,18 +46,22 @@ namespace WindowsFormsApp1
                 lstBtnCalc[i - 1].Enabled = false;
                 if (MODRead(i) != 0)
                 {
-                    sensors.Add(new Sensor(i,false));
+                    sensors.Add(new Sensor(i, false));
                     lstBtnCalc[i - 1].Enabled = true;
                     lstBtnCalc[i - 1].Click += new EventHandler(ShowFormSensorChart);
-                } 
-                
+                }
+
             }
             timer1.Interval = Properties.Settings.Default.interval;
             WindowState = FormWindowState.Maximized;
 
             OnCount(sender, e);
+            backup = new Backup(this, Properties.Settings.Default.interval);
         }
-
+        public List<Sensor> GetSensors()
+        {
+            return sensors;
+        }
         private int GetButtonNumber(object sender) => Convert.ToInt32(((Button)sender).Name.ToString().Replace("button", ""));
         private void ShowFormSensorChart(object sender, EventArgs e)
         {
@@ -62,6 +75,7 @@ namespace WindowsFormsApp1
         }
         private void OnCount(object sender, EventArgs e)
         {
+
             foreach (Sensor sensor in sensors)
             {
                 if (!sensor.IsExternal)
@@ -69,25 +83,22 @@ namespace WindowsFormsApp1
                     sensor.measurements.Add(new ChartPoint(MODRead(sensor.SensorNumber) / 10.0, DateTime.Now));
                     lstBtnCalc[sensor.SensorNumber - 1].Text = sensor.SensorNumber.ToString() + ": " + sensor.GetLastMeasurement().ToString() + " C";
                 }
-                else if (sensor.IsExternal)
+                else
                 {
                     sensor.measurements.Add(new ChartPoint(MODRead(sensor.SensorNumber) / 10.0, DateTime.Now));
                     labelExtTemp.Text = "Температура окружающей среды: " + sensor.GetLastMeasurement().ToString() + " C";
                 }
-                if (sensor.StartTime != DateTime.MinValue)
+                switch (sensor.state)
                 {
-                    if (sensor.StopTime != DateTime.MaxValue)
-                    {
-                        lstBtnCalc[sensor.SensorNumber - 1].BackColor = Color.Yellow;
-                    }
-                    else
-                    {
+                    case State.ObkatkaStarted:
                         lstBtnCalc[sensor.SensorNumber - 1].BackColor = Color.LightGreen;
-                    }
-                }
-                else
-                {
-                    lstBtnCalc[sensor.SensorNumber - 1].BackColor = Color.WhiteSmoke;
+                        break;
+                    case State.ObkatkaEnded:
+                        lstBtnCalc[sensor.SensorNumber - 1].BackColor = Color.Yellow;
+                        break;
+                    case State.WaitingForStart:
+                        lstBtnCalc[sensor.SensorNumber - 1].BackColor = Color.WhiteSmoke;
+                        break;
                 }
             }
         }
@@ -103,8 +114,12 @@ namespace WindowsFormsApp1
                 return 0;
             }
             return (short)result[0];
-        }   
+        }
 
+        private void FormSensorButtons_FormClosed(object sender, FormClosedEventArgs e)
+        {
+
+        }
     }
 
 }
