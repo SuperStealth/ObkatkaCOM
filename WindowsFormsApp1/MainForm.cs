@@ -162,9 +162,23 @@ namespace WindowsFormsApp1
 
         private void ОткрытьОбкаткуToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.Filter = "файл бэкапа (*.bkp)|*.bkp";
+                openFileDialog.RestoreDirectory = true;
 
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    //Get the path of specified file
+                    string filePath = openFileDialog.FileName;
+                    FormPrint formSensorButtons = new FormPrint()
+                    {
+                        MdiParent = this
+                    };
+                    formSensorButtons.Show();
+                }
+            }
         }
-
         private void IntervalTextBox_TextChanged(object sender, EventArgs e)
         {
             int interval = Convert.ToInt32(((ToolStripTextBox)sender).Text);
@@ -191,13 +205,13 @@ namespace WindowsFormsApp1
                     {
                         MdiParent = this
                     };
-                formSensorButtons.Show();
+                    formSensorButtons.Show();
+                }
+
             }
-
         }
+
+
     }
+}
 
-
-}
-}
-}

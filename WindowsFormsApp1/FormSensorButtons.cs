@@ -60,6 +60,7 @@ namespace WindowsFormsApp1
         }
         public List<Sensor> GetSensors()
         {
+
             return sensors;
         }
         private int GetButtonNumber(object sender) => Convert.ToInt32(((Button)sender).Name.ToString().Replace("button", ""));

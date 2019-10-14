@@ -7,6 +7,10 @@ namespace WindowsFormsApp1
 {
     class WirelessProtocol : IProtocol
     {
+        public WirelessProtocol()
+        {
+
+        }
         public List<ChartPoint> ReadTemperatures()
         {
             return new List<ChartPoint>();
