@@ -8,18 +8,11 @@ namespace WindowsFormsApp1
 
     public partial class MainForm : Form
     {
-        public static IModbusSerialMaster ModBUS;
-        public SerialPort sp485;
         public MainForm()
         {
             InitializeComponent();
         }
-
-        public bool ModBusOpen()
-        {
-            return sp485.IsOpen;
-        }
-
+        private IProtocol modBUS;
 
         private void GetCheckedSpeed()
         {
@@ -45,7 +38,7 @@ namespace WindowsFormsApp1
             ((ToolStripMenuItem)sender).Checked = true;
             Properties.Settings.Default.type = ((ToolStripMenuItem)sender).Text;
             Properties.Settings.Default.Save();
-            if (sp485.IsOpen) ChangePort(sp485.PortName);
+            if (modBUS != null) ChangePort(modBUS.PortName);
         }
         private void FillDropDownListWithSpeeds()
         {
@@ -75,7 +68,7 @@ namespace WindowsFormsApp1
                         ((ToolStripMenuItem)portNumberList.DropDownItems[portNumberList.DropDownItems.Count - 1]).Checked = true;
                     }
                 }
-                ChangePort(Properties.Settings.Default.port);
+                
             }
         }
 
@@ -94,19 +87,20 @@ namespace WindowsFormsApp1
 
         private void ChangePort(string port)
         {
-            if (sp485.IsOpen)
+            if (modBUS != null)
             {
-                sp485.Close();
-                ModBUS.Dispose();
-            }
-            if (port != "<NULL>")
-            {
-                sp485.PortName = port;
-                foreach (ToolStripMenuItem tt in speedList.DropDownItems)
+                modBUS.Close();
+                modBUS.Dispose();
+                if (port != "<NULL>")
                 {
-                    if (tt.Checked) sp485.BaudRate = Convert.ToInt32(tt.Text);
+                    modBUS.PortName = port;
+                    foreach (ToolStripMenuItem tt in speedList.DropDownItems)
+                    {
+                        if (tt.Checked) modBUS.BaudRate = Convert.ToInt32(tt.Text);
+                    }
                 }
             }
+            
         }
         private void SetBaud_Click(object sender, EventArgs e)
         {
@@ -117,7 +111,7 @@ namespace WindowsFormsApp1
             ((ToolStripMenuItem)sender).Checked = true;
             Properties.Settings.Default.speed = ((ToolStripMenuItem)sender).Text;
             Properties.Settings.Default.Save();
-            if (sp485.IsOpen) ChangePort(sp485.PortName);
+            if (modBUS != null) ChangePort(modBUS.PortName);
         }
         private void SetPort_Click(object sender, EventArgs e)
         {
@@ -133,22 +127,13 @@ namespace WindowsFormsApp1
 
         private IProtocol ActivatePort()
         {
-            if (sp485.IsOpen)
-            {
-                sp485.Close();
-                ModBUS.Dispose();
-            }
-            sp485.Open();
-            sp485.DiscardOutBuffer();
-            sp485.DiscardInBuffer();
-            ModBUS = ModbusSerialMaster.CreateRtu(sp485);
             if (Properties.Settings.Default.type == "Проводной")
             {
-                return new WiredProtocol();
+                return new WiredProtocol(Properties.Settings.Default.port);
             }
             else
             {
-                return new WirelessProtocol();
+                return new WirelessProtocol(Properties.Settings.Default.port);
             }
         }
         private void NewObkatkaMenuItem_Click(object sender, EventArgs e)

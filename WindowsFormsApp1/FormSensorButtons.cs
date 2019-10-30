@@ -12,7 +12,7 @@ namespace WindowsFormsApp1
 {
     public partial class FormSensorButtons : Form
     {
-        private List<Sensor> sensors = new List<Sensor>();
+        
         private Button[] lstBtnCalc;
         public ushort externalTemp = 1;
         private Backup backup;
@@ -24,11 +24,11 @@ namespace WindowsFormsApp1
         }
         public FormSensorButtons(IProtocol iProtocol, List<Sensor> restore)
         {
-            sensors = restore;
+            //sensors = restore;
             temperatureSensor = iProtocol;
             InitializeComponent();           
         }
-        public void Form2_Load(object sender, EventArgs e)
+        public void FormSensorButtons_Load(object sender, EventArgs e)
         {
             lstBtnCalc = new Button[]
             {
@@ -37,16 +37,13 @@ namespace WindowsFormsApp1
                 button17, button18, button19, button20, button21, button22, button23, button24,
                 button25, button26, button27, button28, button29, button30, button31, button32
             };
-
-            sensors.Add(new Sensor(externalTemp, true));
             lstBtnCalc[externalTemp - 1].Visible = false;
 
             for (ushort i = 1; i < 33; i++)
             {
                 lstBtnCalc[i - 1].Enabled = false;
-                if (MODRead(i) != 0)
+                if (temperatureSensor.IsActiveSensor(i))
                 {
-                    sensors.Add(new Sensor(i, false));
                     lstBtnCalc[i - 1].Enabled = true;
                     lstBtnCalc[i - 1].Click += new EventHandler(ShowFormSensorChart);
                 }
@@ -58,68 +55,71 @@ namespace WindowsFormsApp1
             OnCount(sender, e);
             backup = new Backup(this, Properties.Settings.Default.interval);
         }
-        public List<Sensor> GetSensors()
-        {
-
-            return sensors;
-        }
         private int GetButtonNumber(object sender) => Convert.ToInt32(((Button)sender).Name.ToString().Replace("button", ""));
         private void ShowFormSensorChart(object sender, EventArgs e)
         {
             int sensorNumber = GetButtonNumber(sender);
             if (!Application.OpenForms.OfType<FormSensorChart>().Cast<FormSensorChart>().Any(form => form.GetFormNumber() == sensorNumber))
             {
-                FormSensorChart formSensorChart = new FormSensorChart(sensors.Find(s => s.SensorNumber == sensorNumber), sensors.Find(s => s.IsExternal));
+                FormSensorChart formSensorChart = new FormSensorChart(temperatureSensor.GetSensor(sensorNumber), temperatureSensor.GetSensor(externalTemp));
                 formSensorChart.Show();
                 formSensorChart.Text = "Датчик №" + sensorNumber;
             }
         }
         private void OnCount(object sender, EventArgs e)
         {
-
-            foreach (Sensor sensor in sensors)
+            temperatureSensor.UpdateSensors();
+            for (ushort i = 1; i < 33; i++)
             {
-                if (!sensor.IsExternal)
+
+                if (temperatureSensor.IsActiveSensor(i))
                 {
-                    sensor.measurements.Add(new ChartPoint(MODRead(sensor.SensorNumber) / 10.0, DateTime.Now));
-                    lstBtnCalc[sensor.SensorNumber - 1].Text = sensor.SensorNumber.ToString() + ": " + sensor.GetLastMeasurement().ToString() + " C";
+                    if (!lstBtnCalc[i - 1].Enabled)
+                    {
+                        lstBtnCalc[i - 1].Enabled = true;
+                        lstBtnCalc[i - 1].Click += new EventHandler(ShowFormSensorChart);
+                    }
+                    if (!temperatureSensor.GetSensor(i).IsExternal)
+                    {
+                        lstBtnCalc[i - 1].Text = 
+                            temperatureSensor.GetSensor(i).SensorNumber.ToString() + 
+                            ": " + 
+                            temperatureSensor.GetSensor(i).GetLastMeasurement().ToString() + 
+                            " C";
+                    }
+                    else
+                    {
+                        labelExtTemp.Text = 
+                            "Температура окружающей среды: " + 
+                            temperatureSensor.GetSensor(i).GetLastMeasurement().ToString() + 
+                            " C";
+                    }
+                    switch (temperatureSensor.GetSensor(i).state)
+                    {
+                        case State.ObkatkaStarted:
+                            lstBtnCalc[temperatureSensor.GetSensor(i).SensorNumber - 1].BackColor = Color.LightGreen;
+                            break;
+                        case State.ObkatkaEnded:
+                            lstBtnCalc[temperatureSensor.GetSensor(i).SensorNumber - 1].BackColor = Color.Yellow;
+                            break;
+                        case State.WaitingForStart:
+                            lstBtnCalc[temperatureSensor.GetSensor(i).SensorNumber - 1].BackColor = Color.WhiteSmoke;
+                            break;
+                    }
                 }
                 else
                 {
-                    sensor.measurements.Add(new ChartPoint(MODRead(sensor.SensorNumber) / 10.0, DateTime.Now));
-                    labelExtTemp.Text = "Температура окружающей среды: " + sensor.GetLastMeasurement().ToString() + " C";
+                    lstBtnCalc[i - 1].Enabled = false;
                 }
-                switch (sensor.state)
-                {
-                    case State.ObkatkaStarted:
-                        lstBtnCalc[sensor.SensorNumber - 1].BackColor = Color.LightGreen;
-                        break;
-                    case State.ObkatkaEnded:
-                        lstBtnCalc[sensor.SensorNumber - 1].BackColor = Color.Yellow;
-                        break;
-                    case State.WaitingForStart:
-                        lstBtnCalc[sensor.SensorNumber - 1].BackColor = Color.WhiteSmoke;
-                        break;
-                }
+
             }
         }
-        private short MODRead(ushort startAdress)
-        {
-            ushort[] result;
-            try
-            {
-                result = MainForm.ModBUS.ReadHoldingRegisters(1, startAdress, 1);
-            }
-            catch
-            {
-                return 0;
-            }
-            return (short)result[0];
-        }
+        
 
         private void FormSensorButtons_FormClosed(object sender, FormClosedEventArgs e)
         {
-
+            temperatureSensor.Close();
+            temperatureSensor.Dispose();
         }
     }
 

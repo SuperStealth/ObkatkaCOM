@@ -39,7 +39,6 @@
             this.speedList = new System.Windows.Forms.ToolStripMenuItem();
             this.интервалToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripTextBoxInterval = new System.Windows.Forms.ToolStripTextBox();
-            this.sp485 = new System.IO.Ports.SerialPort(this.components);
             this.toolStripMenuItemSensorType = new System.Windows.Forms.ToolStripMenuItem();
             this.открытьРезервнуюКопиюToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MainMenu.SuspendLayout();
@@ -125,13 +124,7 @@
             this.toolStripTextBoxInterval.Name = "toolStripTextBoxInterval";
             this.toolStripTextBoxInterval.Size = new System.Drawing.Size(100, 23);
             this.toolStripTextBoxInterval.TextChanged += new System.EventHandler(this.IntervalTextBox_TextChanged);
-            // 
-            // sp485
-            // 
-            this.sp485.PortName = "COM3";
-            this.sp485.ReadBufferSize = 9600;
-            this.sp485.ReadTimeout = 50;
-            this.sp485.WriteTimeout = 50;
+
             // 
             // toolStripMenuItemSensorType
             // 

@@ -16,7 +16,6 @@ namespace WindowsFormsApp1
         public Backup(FormSensorButtons obkatkaForm, int interval)
         {
             System.Windows.Forms.Timer refreshTimer = new System.Windows.Forms.Timer();
-            _sensors = obkatkaForm.GetSensors();
             refreshTimer.Interval = interval;
             refreshTimer.Tick += new EventHandler(RefreshBackup);
             refreshTimer.Start();
