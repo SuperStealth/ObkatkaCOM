@@ -73,6 +73,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Backup.cs" />
+    <Compile Include="FormIDMatch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormIDMatch.Designer.cs">
+      <DependentUpon>FormIDMatch.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormPrint.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -103,6 +109,9 @@
     <Compile Include="Sensor.cs" />
     <Compile Include="WiredProtocol.cs" />
     <Compile Include="WirelessProtocol.cs" />
+    <EmbeddedResource Include="FormIDMatch.resx">
+      <DependentUpon>FormIDMatch.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>

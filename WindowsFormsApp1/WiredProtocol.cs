@@ -70,7 +70,10 @@ namespace WindowsFormsApp1
         {
             sp485.Close();
         }
-
+        public void Restore(List<Sensor> restoredSensors)
+        {
+            sensors = restoredSensors;
+        }
         public Sensor GetSensor(int sensorNumber)
         {
             return sensors[sensorNumber];

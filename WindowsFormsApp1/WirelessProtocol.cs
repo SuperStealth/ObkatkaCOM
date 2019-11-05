@@ -1,6 +1,7 @@
 ﻿using Modbus.Device;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO.Ports;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,7 @@ namespace WindowsFormsApp1
         private SerialPort sp485 = new SerialPort();
         public static ModbusSerialMaster ModBUS;
         private List<Sensor> sensors = new List<Sensor>();
+        private Backup backup;
 
         public string PortName 
         {
@@ -49,6 +51,7 @@ namespace WindowsFormsApp1
             sp485.DiscardInBuffer();
             ModBUS = ModbusSerialMaster.CreateAscii(sp485);
             sp485.ReadTimeout = 100;
+            backup = new Backup(sensors, Properties.Settings.Default.interval);
         }
         public bool ModBusOpen
         {
@@ -65,7 +68,10 @@ namespace WindowsFormsApp1
         {
             sp485.Close();
         }
-
+        public void Restore(List<Sensor> restoredSensors)
+        {
+            sensors = restoredSensors;
+        }
         public bool IsActiveSensor(int sensorNumber)
         {
             if (sensors.Find(s => s.SensorNumber == sensorNumber) != null)
@@ -75,12 +81,12 @@ namespace WindowsFormsApp1
 
         public List<ChartPoint> ReadTemperatures(int sensorNumber)
         {
-            return sensors[sensorNumber - 1].measurements;
+            return sensors.Find(s => s.SensorNumber == sensorNumber).measurements;
         }
 
         public Sensor GetSensor(int sensorNumber)
         {
-            return sensors[sensorNumber - 1];
+            return sensors.Find(s => s.SensorNumber == sensorNumber);
         }
 
         public void UpdateSensors()
@@ -93,20 +99,19 @@ namespace WindowsFormsApp1
         {
             int id = Convert.ToInt32(str.Substring(str.IndexOf("ID=")+3,8));
             string temperature = str.Substring(str.IndexOf("TEP=") + 4, 5);
-            if (temperature[0] == '+')
-            {
-                temperature = temperature.Substring(1, temperature.Length - 1).Replace('.',',');
-            }
-            double temp = Convert.ToDouble(temperature);
+            var format = new NumberFormatInfo();
+            format.NegativeSign = "-";
+            format.NumberDecimalSeparator = ".";
+            format.PositiveSign = "+";
+            double temp = double.Parse(temperature,format);
             Sensor sensor = sensors.Find(s => s.id == id);
             if (sensor == null)
             {
-                if (sensors.Count == 0)
-                    sensors.Add(new Sensor((ushort)sensors.Count, true));
+                if (id - Properties.Settings.Default.startId == 0)
+                    sensors.Add(new Sensor((ushort)(id - Properties.Settings.Default.startId + 1), true));
                 else
-                    sensors.Add(new Sensor((ushort)sensors.Count, false));
+                    sensors.Add(new Sensor((ushort)(id - Properties.Settings.Default.startId + 1), false));
                 sensors[sensors.Count - 1].id = id;
-                sensors[sensors.Count - 1].SensorNumber = (ushort)sensors.Count;
                 sensors[sensors.Count - 1].measurements.Add(new ChartPoint(temp, DateTime.Now));
             }
             else

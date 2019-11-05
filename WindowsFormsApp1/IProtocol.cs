@@ -15,6 +15,8 @@ namespace WindowsFormsApp1
         bool ModBusOpen { get; }
         void Dispose();
         void Close();
+
+        void Restore(List<Sensor> restoredSensors);
         void UpdateSensors();
     }
 }

@@ -14,5 +14,8 @@
     <Setting Name="type" Type="System.String" Scope="User">
       <Value Profile="(Default)">Проводной</Value>
     </Setting>
+    <Setting Name="startId" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">20190066</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

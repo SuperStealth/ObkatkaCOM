@@ -28,11 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.MainMenu = new System.Windows.Forms.MenuStrip();
             this.файлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.новаяToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.открытьОбкаткуToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.открытьРезервнуюКопиюToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.параметрыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.настройкиМашинToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.portNumberList = new System.Windows.Forms.ToolStripMenuItem();
@@ -40,7 +40,7 @@
             this.интервалToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripTextBoxInterval = new System.Windows.Forms.ToolStripTextBox();
             this.toolStripMenuItemSensorType = new System.Windows.Forms.ToolStripMenuItem();
-            this.открытьРезервнуюКопиюToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.сопоставлениеIDToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MainMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -68,7 +68,7 @@
             // новаяToolStripMenuItem
             // 
             this.новаяToolStripMenuItem.Name = "новаяToolStripMenuItem";
-            this.новаяToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            this.новаяToolStripMenuItem.Size = new System.Drawing.Size(224, 22);
             this.новаяToolStripMenuItem.Text = "Начать работу";
             this.новаяToolStripMenuItem.Click += new System.EventHandler(this.NewObkatkaMenuItem_Click);
             // 
@@ -79,11 +79,19 @@
             this.открытьОбкаткуToolStripMenuItem.Text = "Открыть обкатку (*.txt)";
             this.открытьОбкаткуToolStripMenuItem.Click += new System.EventHandler(this.ОткрытьОбкаткуToolStripMenuItem_Click);
             // 
+            // открытьРезервнуюКопиюToolStripMenuItem
+            // 
+            this.открытьРезервнуюКопиюToolStripMenuItem.Name = "открытьРезервнуюКопиюToolStripMenuItem";
+            this.открытьРезервнуюКопиюToolStripMenuItem.Size = new System.Drawing.Size(224, 22);
+            this.открытьРезервнуюКопиюToolStripMenuItem.Text = "Открыть резервную копию";
+            this.открытьРезервнуюКопиюToolStripMenuItem.Click += new System.EventHandler(this.ОткрытьРезервнуюКопиюToolStripMenuItem_Click);
+            // 
             // параметрыToolStripMenuItem
             // 
             this.параметрыToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.настройкиМашинToolStripMenuItem,
-            this.toolStripMenuItemSensorType});
+            this.toolStripMenuItemSensorType,
+            this.сопоставлениеIDToolStripMenuItem});
             this.параметрыToolStripMenuItem.Name = "параметрыToolStripMenuItem";
             this.параметрыToolStripMenuItem.Size = new System.Drawing.Size(83, 20);
             this.параметрыToolStripMenuItem.Text = "Параметры";
@@ -124,7 +132,6 @@
             this.toolStripTextBoxInterval.Name = "toolStripTextBoxInterval";
             this.toolStripTextBoxInterval.Size = new System.Drawing.Size(100, 23);
             this.toolStripTextBoxInterval.TextChanged += new System.EventHandler(this.IntervalTextBox_TextChanged);
-
             // 
             // toolStripMenuItemSensorType
             // 
@@ -132,12 +139,12 @@
             this.toolStripMenuItemSensorType.Size = new System.Drawing.Size(180, 22);
             this.toolStripMenuItemSensorType.Text = "Тип датчика";
             // 
-            // открытьРезервнуюКопиюToolStripMenuItem
+            // сопоставлениеIDToolStripMenuItem
             // 
-            this.открытьРезервнуюКопиюToolStripMenuItem.Name = "открытьРезервнуюКопиюToolStripMenuItem";
-            this.открытьРезервнуюКопиюToolStripMenuItem.Size = new System.Drawing.Size(224, 22);
-            this.открытьРезервнуюКопиюToolStripMenuItem.Text = "Открыть резервную копию";
-            this.открытьРезервнуюКопиюToolStripMenuItem.Click += new System.EventHandler(this.ОткрытьРезервнуюКопиюToolStripMenuItem_Click);
+            this.сопоставлениеIDToolStripMenuItem.Name = "сопоставлениеIDToolStripMenuItem";
+            this.сопоставлениеIDToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.сопоставлениеIDToolStripMenuItem.Text = "Сопоставление ID";
+            this.сопоставлениеIDToolStripMenuItem.Click += new System.EventHandler(this.сопоставлениеIDToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -171,6 +178,7 @@
         private System.Windows.Forms.ToolStripTextBox toolStripTextBoxInterval;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemSensorType;
         private System.Windows.Forms.ToolStripMenuItem открытьРезервнуюКопиюToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem сопоставлениеIDToolStripMenuItem;
     }
 }
 

@@ -196,7 +196,11 @@ namespace WindowsFormsApp1
             }
         }
 
-
+        private void сопоставлениеIDToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormIDMatch formIDMatch = new FormIDMatch();
+            formIDMatch.Show();
+        }
     }
 }
 

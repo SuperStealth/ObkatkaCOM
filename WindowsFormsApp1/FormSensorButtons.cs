@@ -24,7 +24,7 @@ namespace WindowsFormsApp1
         }
         public FormSensorButtons(IProtocol iProtocol, List<Sensor> restore)
         {
-            //sensors = restore;
+            iProtocol.Restore(restore);
             temperatureSensor = iProtocol;
             InitializeComponent();           
         }
@@ -53,7 +53,6 @@ namespace WindowsFormsApp1
             WindowState = FormWindowState.Maximized;
 
             OnCount(sender, e);
-            backup = new Backup(this, Properties.Settings.Default.interval);
         }
         private int GetButtonNumber(object sender) => Convert.ToInt32(((Button)sender).Name.ToString().Replace("button", ""));
         private void ShowFormSensorChart(object sender, EventArgs e)
@@ -64,6 +63,11 @@ namespace WindowsFormsApp1
                 FormSensorChart formSensorChart = new FormSensorChart(temperatureSensor.GetSensor(sensorNumber), temperatureSensor.GetSensor(externalTemp));
                 formSensorChart.Show();
                 formSensorChart.Text = "Датчик №" + sensorNumber;
+            }
+            else
+            {
+                Application.OpenForms.OfType<FormSensorChart>().Cast<FormSensorChart>().First(form => form.GetFormNumber() == sensorNumber).Activate();
+                Application.OpenForms.OfType<FormSensorChart>().Cast<FormSensorChart>().First(form => form.GetFormNumber() == sensorNumber).Show();
             }
         }
         private void OnCount(object sender, EventArgs e)

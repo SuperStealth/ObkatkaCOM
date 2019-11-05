@@ -13,12 +13,13 @@ namespace WindowsFormsApp1
     {
         
         private List<Sensor> _sensors;
-        public Backup(FormSensorButtons obkatkaForm, int interval)
+        public Backup(List<Sensor> sensors, int interval)
         {
             System.Windows.Forms.Timer refreshTimer = new System.Windows.Forms.Timer();
             refreshTimer.Interval = interval;
             refreshTimer.Tick += new EventHandler(RefreshBackup);
             refreshTimer.Start();
+            _sensors = sensors;
         }
 
         private void RefreshBackup(object myObject,
