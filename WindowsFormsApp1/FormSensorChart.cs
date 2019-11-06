@@ -182,5 +182,15 @@ namespace WindowsFormsApp1
             timePickerFrom.Value = DateTime.Today + _sensor.StartTime.TimeOfDay;
             timePickerTo.Value = DateTime.Today + _sensor.StopTime.TimeOfDay;
         }
+
+        private void buttonPrint_Click(object sender, EventArgs e)
+        {
+            chart1.Titles.FindByName("TitleName").Text = nameTextBox.Text;
+            chart1.Titles.FindByName("TitleSerial").Text = "Серийный номер: " + serialNumberTextBox.Text;
+            chart1.Titles.FindByName("TitleFreon").Text = "Марка фреона: " + comboBoxFreonMark.Text + ", количество: " + freonQuantityTextBox.Text;
+            chart1.Titles.FindByName("TitleAddInfo").Text = "Дополнительная информация: " + addInfoTextBox.Text;
+            chart1.Printing.PageSetup();
+            chart1.Printing.PrintPreview();
+        }
     }
 }

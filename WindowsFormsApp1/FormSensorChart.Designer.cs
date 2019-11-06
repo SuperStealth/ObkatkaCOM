@@ -33,6 +33,9 @@
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.Title title2 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.Title title3 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.Title title4 = new System.Windows.Forms.DataVisualization.Charting.Title();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.tCycle = new System.Windows.Forms.Timer(this.components);
             this.nameLabel = new System.Windows.Forms.Label();
@@ -53,6 +56,7 @@
             this.timePickerTo = new System.Windows.Forms.DateTimePicker();
             this.comboBoxFreonMark = new System.Windows.Forms.ComboBox();
             this.averageTemperatureLabel = new System.Windows.Forms.Label();
+            this.buttonPrint = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -61,6 +65,7 @@
             this.chart1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.chart1.BorderlineColor = System.Drawing.Color.Black;
             chartArea1.AxisX.IsLabelAutoFit = false;
             chartArea1.AxisX.LabelStyle.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             chartArea1.AxisX.TitleFont = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -92,12 +97,24 @@
             series1.Legend = "Legend1";
             series1.Name = "Series1";
             this.chart1.Series.Add(series1);
-            this.chart1.Size = new System.Drawing.Size(872, 337);
+            this.chart1.Size = new System.Drawing.Size(872, 427);
             this.chart1.TabIndex = 0;
             this.chart1.Text = "chart1";
-            title1.Name = "Title1";
-            title1.Text = "Горох";
+            title1.Name = "TitleName";
+            title1.Text = "Наименование изделия";
+            title2.Alignment = System.Drawing.ContentAlignment.MiddleLeft;
+            title2.Name = "TitleSerial";
+            title2.Text = "Серийный номер";
+            title3.Alignment = System.Drawing.ContentAlignment.MiddleLeft;
+            title3.Name = "TitleFreon";
+            title3.Text = "Фреон:";
+            title4.Alignment = System.Drawing.ContentAlignment.MiddleLeft;
+            title4.Name = "TitleAddInfo";
+            title4.Text = "Дополнительная информация:";
             this.chart1.Titles.Add(title1);
+            this.chart1.Titles.Add(title2);
+            this.chart1.Titles.Add(title3);
+            this.chart1.Titles.Add(title4);
             // 
             // tCycle
             // 
@@ -174,7 +191,7 @@
             // buttonSave
             // 
             this.buttonSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonSave.Location = new System.Drawing.Point(770, 492);
+            this.buttonSave.Location = new System.Drawing.Point(770, 582);
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(115, 23);
             this.buttonSave.TabIndex = 9;
@@ -185,7 +202,7 @@
             // buttonStart
             // 
             this.buttonStart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonStart.Location = new System.Drawing.Point(572, 492);
+            this.buttonStart.Location = new System.Drawing.Point(572, 582);
             this.buttonStart.Name = "buttonStart";
             this.buttonStart.Size = new System.Drawing.Size(192, 23);
             this.buttonStart.TabIndex = 10;
@@ -218,7 +235,7 @@
             this.externalTempCheckBox.AutoSize = true;
             this.externalTempCheckBox.Checked = true;
             this.externalTempCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.externalTempCheckBox.Location = new System.Drawing.Point(15, 498);
+            this.externalTempCheckBox.Location = new System.Drawing.Point(15, 588);
             this.externalTempCheckBox.Name = "externalTempCheckBox";
             this.externalTempCheckBox.Size = new System.Drawing.Size(260, 17);
             this.externalTempCheckBox.TabIndex = 13;
@@ -230,7 +247,7 @@
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(13, 467);
+            this.label1.Location = new System.Drawing.Point(13, 557);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(81, 13);
             this.label1.TabIndex = 14;
@@ -240,7 +257,7 @@
             // 
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(306, 467);
+            this.label2.Location = new System.Drawing.Point(306, 557);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(99, 13);
             this.label2.TabIndex = 15;
@@ -250,7 +267,7 @@
             // 
             this.timePickerFrom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.timePickerFrom.CustomFormat = "HH:MM";
-            this.timePickerFrom.Location = new System.Drawing.Point(100, 465);
+            this.timePickerFrom.Location = new System.Drawing.Point(100, 555);
             this.timePickerFrom.Name = "timePickerFrom";
             this.timePickerFrom.Size = new System.Drawing.Size(200, 20);
             this.timePickerFrom.TabIndex = 16;
@@ -260,7 +277,7 @@
             // 
             this.timePickerTo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.timePickerTo.CustomFormat = "HH:MM";
-            this.timePickerTo.Location = new System.Drawing.Point(411, 465);
+            this.timePickerTo.Location = new System.Drawing.Point(411, 555);
             this.timePickerTo.Name = "timePickerTo";
             this.timePickerTo.Size = new System.Drawing.Size(200, 20);
             this.timePickerTo.TabIndex = 17;
@@ -283,17 +300,29 @@
             // 
             this.averageTemperatureLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.averageTemperatureLabel.AutoSize = true;
-            this.averageTemperatureLabel.Location = new System.Drawing.Point(617, 467);
+            this.averageTemperatureLabel.Location = new System.Drawing.Point(617, 557);
             this.averageTemperatureLabel.Name = "averageTemperatureLabel";
             this.averageTemperatureLabel.Size = new System.Drawing.Size(0, 13);
             this.averageTemperatureLabel.TabIndex = 19;
             this.averageTemperatureLabel.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             // 
+            // buttonPrint
+            // 
+            this.buttonPrint.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonPrint.Location = new System.Drawing.Point(490, 582);
+            this.buttonPrint.Name = "buttonPrint";
+            this.buttonPrint.Size = new System.Drawing.Size(76, 23);
+            this.buttonPrint.TabIndex = 20;
+            this.buttonPrint.Text = "Печать";
+            this.buttonPrint.UseVisualStyleBackColor = true;
+            this.buttonPrint.Click += new System.EventHandler(this.buttonPrint_Click);
+            // 
             // FormSensorChart
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(897, 527);
+            this.ClientSize = new System.Drawing.Size(897, 617);
+            this.Controls.Add(this.buttonPrint);
             this.Controls.Add(this.averageTemperatureLabel);
             this.Controls.Add(this.comboBoxFreonMark);
             this.Controls.Add(this.timePickerTo);
@@ -344,5 +373,6 @@
         private System.Windows.Forms.DateTimePicker timePickerTo;
         private System.Windows.Forms.ComboBox comboBoxFreonMark;
         private System.Windows.Forms.Label averageTemperatureLabel;
+        private System.Windows.Forms.Button buttonPrint;
     }
 }
