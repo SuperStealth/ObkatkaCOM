@@ -36,6 +36,7 @@
             System.Windows.Forms.DataVisualization.Charting.Title title2 = new System.Windows.Forms.DataVisualization.Charting.Title();
             System.Windows.Forms.DataVisualization.Charting.Title title3 = new System.Windows.Forms.DataVisualization.Charting.Title();
             System.Windows.Forms.DataVisualization.Charting.Title title4 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.Title title5 = new System.Windows.Forms.DataVisualization.Charting.Title();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.tCycle = new System.Windows.Forms.Timer(this.components);
             this.nameLabel = new System.Windows.Forms.Label();
@@ -111,10 +112,12 @@
             title4.Alignment = System.Drawing.ContentAlignment.MiddleLeft;
             title4.Name = "TitleAddInfo";
             title4.Text = "Дополнительная информация:";
+            title5.Name = "TitleAvgExternalTemp";
             this.chart1.Titles.Add(title1);
             this.chart1.Titles.Add(title2);
             this.chart1.Titles.Add(title3);
             this.chart1.Titles.Add(title4);
+            this.chart1.Titles.Add(title5);
             // 
             // tCycle
             // 

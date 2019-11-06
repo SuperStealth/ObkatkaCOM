@@ -42,7 +42,7 @@ namespace WindowsFormsApp1
             chart1.Series[1].XValueType = ChartValueType.Time;
             chart1.Series[1].ChartType = SeriesChartType.Line;
             chart1.Series[1].BorderWidth = 3;
-
+            Text = "Датчик №" + _sensor.SensorNumber;
             Refresher(sender, e);
 
             chart1.ChartAreas[0].AxisX.LabelStyle.Format = "HH:mm:ss";
@@ -189,6 +189,7 @@ namespace WindowsFormsApp1
             chart1.Titles.FindByName("TitleSerial").Text = "Серийный номер: " + serialNumberTextBox.Text;
             chart1.Titles.FindByName("TitleFreon").Text = "Марка фреона: " + comboBoxFreonMark.Text + ", количество: " + freonQuantityTextBox.Text;
             chart1.Titles.FindByName("TitleAddInfo").Text = "Дополнительная информация: " + addInfoTextBox.Text;
+            chart1.Titles.FindByName("TitleAvgExternalTemp").Text = averageTemperatureLabel.Text;
             chart1.Printing.PageSetup();
             chart1.Printing.PrintPreview();
         }

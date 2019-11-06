@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace WindowsFormsApp1
 {
@@ -11,7 +8,7 @@ namespace WindowsFormsApp1
         string PortName { get; set; }
         int BaudRate { get; set; }
         List<ChartPoint> ReadTemperatures(int sensorNumber);
-        Sensor GetSensor(int sensorNumber);      
+        Sensor GetSensor(int sensorNumber);
         bool ModBusOpen { get; }
         void Dispose();
         void Close();

@@ -15,7 +15,6 @@ namespace WindowsFormsApp1
         
         private Button[] lstBtnCalc;
         public ushort externalTemp = 1;
-        private Backup backup;
         private IProtocol temperatureSensor;
         public FormSensorButtons(IProtocol iProtocol)
         {
