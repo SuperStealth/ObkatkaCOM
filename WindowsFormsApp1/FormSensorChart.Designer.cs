@@ -29,14 +29,14 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
-            System.Windows.Forms.DataVisualization.Charting.Title title2 = new System.Windows.Forms.DataVisualization.Charting.Title();
-            System.Windows.Forms.DataVisualization.Charting.Title title3 = new System.Windows.Forms.DataVisualization.Charting.Title();
-            System.Windows.Forms.DataVisualization.Charting.Title title4 = new System.Windows.Forms.DataVisualization.Charting.Title();
-            System.Windows.Forms.DataVisualization.Charting.Title title5 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title13 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.Title title14 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.Title title15 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.Title title16 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.Title title17 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.Title title18 = new System.Windows.Forms.DataVisualization.Charting.Title();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.tCycle = new System.Windows.Forms.Timer(this.components);
             this.nameLabel = new System.Windows.Forms.Label();
@@ -67,57 +67,62 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.chart1.BorderlineColor = System.Drawing.Color.Black;
-            chartArea1.AxisX.IsLabelAutoFit = false;
-            chartArea1.AxisX.LabelStyle.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            chartArea1.AxisX.TitleFont = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            chartArea1.AxisX2.IsLabelAutoFit = false;
-            chartArea1.AxisX2.LabelStyle.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            chartArea1.AxisX2.TitleFont = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            chartArea1.AxisY.IsLabelAutoFit = false;
-            chartArea1.AxisY.LabelStyle.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            chartArea1.AxisY.TitleFont = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            chartArea1.AxisY2.IsLabelAutoFit = false;
-            chartArea1.AxisY2.LabelStyle.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            chartArea1.AxisY2.TitleFont = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            chartArea1.CursorX.IsUserEnabled = true;
-            chartArea1.CursorX.IsUserSelectionEnabled = true;
-            chartArea1.CursorX.LineWidth = 2;
-            chartArea1.CursorY.IsUserEnabled = true;
-            chartArea1.CursorY.IsUserSelectionEnabled = true;
-            chartArea1.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea1);
+            chartArea3.AxisX.IsLabelAutoFit = false;
+            chartArea3.AxisX.LabelStyle.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            chartArea3.AxisX.TitleFont = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            chartArea3.AxisX2.IsLabelAutoFit = false;
+            chartArea3.AxisX2.LabelStyle.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            chartArea3.AxisX2.TitleFont = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            chartArea3.AxisY.IsLabelAutoFit = false;
+            chartArea3.AxisY.LabelStyle.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            chartArea3.AxisY.TitleFont = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            chartArea3.AxisY2.IsLabelAutoFit = false;
+            chartArea3.AxisY2.LabelStyle.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            chartArea3.AxisY2.TitleFont = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            chartArea3.CursorX.IsUserEnabled = true;
+            chartArea3.CursorX.IsUserSelectionEnabled = true;
+            chartArea3.CursorX.LineWidth = 2;
+            chartArea3.CursorY.IsUserEnabled = true;
+            chartArea3.CursorY.IsUserSelectionEnabled = true;
+            chartArea3.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea3);
             this.chart1.ImeMode = System.Windows.Forms.ImeMode.Hiragana;
-            legend1.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            legend1.IsTextAutoFit = false;
-            legend1.Name = "Legend1";
-            this.chart1.Legends.Add(legend1);
             this.chart1.Location = new System.Drawing.Point(13, 116);
             this.chart1.Name = "chart1";
-            series1.ChartArea = "ChartArea1";
-            series1.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.chart1.Series.Add(series1);
-            this.chart1.Size = new System.Drawing.Size(872, 427);
+            series3.ChartArea = "ChartArea1";
+            series3.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            series3.Name = "Series1";
+            series3.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Time;
+            this.chart1.Series.Add(series3);
+            this.chart1.Size = new System.Drawing.Size(872, 613);
             this.chart1.TabIndex = 0;
             this.chart1.Text = "chart1";
-            title1.Name = "TitleName";
-            title1.Text = "Наименование изделия";
-            title2.Alignment = System.Drawing.ContentAlignment.MiddleLeft;
-            title2.Name = "TitleSerial";
-            title2.Text = "Серийный номер";
-            title3.Alignment = System.Drawing.ContentAlignment.MiddleLeft;
-            title3.Name = "TitleFreon";
-            title3.Text = "Фреон:";
-            title4.Alignment = System.Drawing.ContentAlignment.MiddleLeft;
-            title4.Name = "TitleAddInfo";
-            title4.Text = "Дополнительная информация:";
-            title5.Name = "TitleAvgExternalTemp";
-            this.chart1.Titles.Add(title1);
-            this.chart1.Titles.Add(title2);
-            this.chart1.Titles.Add(title3);
-            this.chart1.Titles.Add(title4);
-            this.chart1.Titles.Add(title5);
+            title13.Alignment = System.Drawing.ContentAlignment.TopRight;
+            title13.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            title13.Name = "TitleDate";
+            title14.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            title14.Name = "TitleName";
+            title14.Text = "Наименование изделия";
+            title15.Alignment = System.Drawing.ContentAlignment.MiddleLeft;
+            title15.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            title15.Name = "TitleSerial";
+            title15.Text = "Серийный номер";
+            title16.Alignment = System.Drawing.ContentAlignment.MiddleLeft;
+            title16.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            title16.Name = "TitleFreon";
+            title16.Text = "Фреон:";
+            title17.Alignment = System.Drawing.ContentAlignment.MiddleLeft;
+            title17.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            title17.Name = "TitleAddInfo";
+            title17.Text = "Дополнительная информация:";
+            title18.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            title18.Name = "TitleAvgExternalTemp";
+            this.chart1.Titles.Add(title13);
+            this.chart1.Titles.Add(title14);
+            this.chart1.Titles.Add(title15);
+            this.chart1.Titles.Add(title16);
+            this.chart1.Titles.Add(title17);
+            this.chart1.Titles.Add(title18);
             // 
             // tCycle
             // 
@@ -142,7 +147,6 @@
             this.nameTextBox.Name = "nameTextBox";
             this.nameTextBox.Size = new System.Drawing.Size(704, 20);
             this.nameTextBox.TabIndex = 2;
-            this.nameTextBox.TextChanged += new System.EventHandler(this.TextBox_TextChanged);
             // 
             // serialNumberTextBox
             // 
@@ -152,7 +156,7 @@
             this.serialNumberTextBox.Name = "serialNumberTextBox";
             this.serialNumberTextBox.Size = new System.Drawing.Size(704, 20);
             this.serialNumberTextBox.TabIndex = 4;
-            this.serialNumberTextBox.TextChanged += new System.EventHandler(this.TextBox_TextChanged);
+
             // 
             // serialNumberLabel
             // 
@@ -171,16 +175,15 @@
             this.addInfoTextBox.Name = "addInfoTextBox";
             this.addInfoTextBox.Size = new System.Drawing.Size(704, 20);
             this.addInfoTextBox.TabIndex = 8;
-            this.addInfoTextBox.TextChanged += new System.EventHandler(this.TextBox_TextChanged);
             // 
             // addInfoLabel
             // 
             this.addInfoLabel.AutoSize = true;
             this.addInfoLabel.Location = new System.Drawing.Point(12, 93);
             this.addInfoLabel.Name = "addInfoLabel";
-            this.addInfoLabel.Size = new System.Drawing.Size(163, 13);
+            this.addInfoLabel.Size = new System.Drawing.Size(114, 13);
             this.addInfoLabel.TabIndex = 7;
-            this.addInfoLabel.Text = "Дополнительная информация:";
+            this.addInfoLabel.Text = "Марка компрессора:";
             // 
             // label4
             // 
@@ -194,7 +197,7 @@
             // buttonSave
             // 
             this.buttonSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonSave.Location = new System.Drawing.Point(770, 582);
+            this.buttonSave.Location = new System.Drawing.Point(770, 768);
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(115, 23);
             this.buttonSave.TabIndex = 9;
@@ -205,7 +208,7 @@
             // buttonStart
             // 
             this.buttonStart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonStart.Location = new System.Drawing.Point(572, 582);
+            this.buttonStart.Location = new System.Drawing.Point(572, 768);
             this.buttonStart.Name = "buttonStart";
             this.buttonStart.Size = new System.Drawing.Size(192, 23);
             this.buttonStart.TabIndex = 10;
@@ -221,7 +224,6 @@
             this.freonQuantityTextBox.Name = "freonQuantityTextBox";
             this.freonQuantityTextBox.Size = new System.Drawing.Size(332, 20);
             this.freonQuantityTextBox.TabIndex = 12;
-            this.freonQuantityTextBox.TextChanged += new System.EventHandler(this.TextBox_TextChanged);
             // 
             // freonQuantityLabel
             // 
@@ -238,7 +240,7 @@
             this.externalTempCheckBox.AutoSize = true;
             this.externalTempCheckBox.Checked = true;
             this.externalTempCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.externalTempCheckBox.Location = new System.Drawing.Point(15, 588);
+            this.externalTempCheckBox.Location = new System.Drawing.Point(15, 774);
             this.externalTempCheckBox.Name = "externalTempCheckBox";
             this.externalTempCheckBox.Size = new System.Drawing.Size(260, 17);
             this.externalTempCheckBox.TabIndex = 13;
@@ -250,7 +252,7 @@
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(13, 557);
+            this.label1.Location = new System.Drawing.Point(13, 743);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(81, 13);
             this.label1.TabIndex = 14;
@@ -260,7 +262,7 @@
             // 
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(306, 557);
+            this.label2.Location = new System.Drawing.Point(306, 743);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(99, 13);
             this.label2.TabIndex = 15;
@@ -270,7 +272,7 @@
             // 
             this.timePickerFrom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.timePickerFrom.CustomFormat = "HH:MM";
-            this.timePickerFrom.Location = new System.Drawing.Point(100, 555);
+            this.timePickerFrom.Location = new System.Drawing.Point(100, 741);
             this.timePickerFrom.Name = "timePickerFrom";
             this.timePickerFrom.Size = new System.Drawing.Size(200, 20);
             this.timePickerFrom.TabIndex = 16;
@@ -280,7 +282,7 @@
             // 
             this.timePickerTo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.timePickerTo.CustomFormat = "HH:MM";
-            this.timePickerTo.Location = new System.Drawing.Point(411, 555);
+            this.timePickerTo.Location = new System.Drawing.Point(411, 741);
             this.timePickerTo.Name = "timePickerTo";
             this.timePickerTo.Size = new System.Drawing.Size(200, 20);
             this.timePickerTo.TabIndex = 17;
@@ -297,13 +299,12 @@
             this.comboBoxFreonMark.Name = "comboBoxFreonMark";
             this.comboBoxFreonMark.Size = new System.Drawing.Size(250, 21);
             this.comboBoxFreonMark.TabIndex = 18;
-            this.comboBoxFreonMark.SelectedIndexChanged += new System.EventHandler(this.TextBox_TextChanged);
             // 
             // averageTemperatureLabel
             // 
             this.averageTemperatureLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.averageTemperatureLabel.AutoSize = true;
-            this.averageTemperatureLabel.Location = new System.Drawing.Point(617, 557);
+            this.averageTemperatureLabel.Location = new System.Drawing.Point(617, 743);
             this.averageTemperatureLabel.Name = "averageTemperatureLabel";
             this.averageTemperatureLabel.Size = new System.Drawing.Size(0, 13);
             this.averageTemperatureLabel.TabIndex = 19;
@@ -312,7 +313,7 @@
             // buttonPrint
             // 
             this.buttonPrint.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonPrint.Location = new System.Drawing.Point(490, 582);
+            this.buttonPrint.Location = new System.Drawing.Point(490, 768);
             this.buttonPrint.Name = "buttonPrint";
             this.buttonPrint.Size = new System.Drawing.Size(76, 23);
             this.buttonPrint.TabIndex = 20;
@@ -324,7 +325,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(897, 617);
+            this.ClientSize = new System.Drawing.Size(897, 803);
             this.Controls.Add(this.buttonPrint);
             this.Controls.Add(this.averageTemperatureLabel);
             this.Controls.Add(this.comboBoxFreonMark);
@@ -345,8 +346,11 @@
             this.Controls.Add(this.nameTextBox);
             this.Controls.Add(this.nameLabel);
             this.Controls.Add(this.chart1);
+            this.MaximumSize = new System.Drawing.Size(913, 842);
+            this.MinimumSize = new System.Drawing.Size(913, 842);
             this.Name = "FormSensorChart";
             this.Text = "Form3";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormSensorChart_FormClosing);
             this.Load += new System.EventHandler(this.Form3_Load);
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             this.ResumeLayout(false);

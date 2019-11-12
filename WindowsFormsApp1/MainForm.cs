@@ -181,7 +181,6 @@ namespace WindowsFormsApp1
             {
                 openFileDialog.Filter = "файл бэкапа (*.bkp)|*.bkp";
                 openFileDialog.RestoreDirectory = true;
-
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
                     //Get the path of specified file
@@ -192,7 +191,6 @@ namespace WindowsFormsApp1
                     };
                     formSensorButtons.Show();
                 }
-
             }
         }
 

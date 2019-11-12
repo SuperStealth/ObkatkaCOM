@@ -16,7 +16,7 @@ namespace WindowsFormsApp1
         public Backup(List<Sensor> sensors, int interval)
         {
             System.Windows.Forms.Timer refreshTimer = new System.Windows.Forms.Timer();
-            refreshTimer.Interval = interval;
+            refreshTimer.Interval = 30000;
             refreshTimer.Tick += new EventHandler(RefreshBackup);
             refreshTimer.Start();
             _sensors = sensors;

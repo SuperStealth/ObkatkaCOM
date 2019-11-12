@@ -32,9 +32,14 @@ namespace WindowsFormsApp1
             timePickerFrom.CustomFormat = "HH:mm";
             timePickerTo.Format = DateTimePickerFormat.Custom;
             timePickerTo.CustomFormat = "HH:mm";
+
             chart1.Series.Clear();
+
+            
+
             chart1.Series.Add("Датчик" + (_sensor.SensorNumber));
             chart1.Series[0].XValueType = ChartValueType.Time;
+            
             chart1.Series[0].ChartType = SeriesChartType.Line;
             chart1.Series[0].BorderWidth = 3;
 
@@ -45,9 +50,22 @@ namespace WindowsFormsApp1
             Text = "Датчик №" + _sensor.SensorNumber;
             Refresher(sender, e);
 
-            chart1.ChartAreas[0].AxisX.LabelStyle.Format = "HH:mm:ss";
+            chart1.ChartAreas[0].AxisX.LabelStyle.Format = "HH:mm";
             
-            tCycle.Interval = Properties.Settings.Default.interval;          
+            tCycle.Interval = Properties.Settings.Default.interval;
+            if (_sensor.state == State.ObkatkaStarted)
+            {
+                buttonStart.Text = "Остановить обкатку";
+            }
+            if (_sensor.state == State.ObkatkaEnded)
+            {
+                buttonStart.Text = "Сбросить обкатку";
+            }
+            nameTextBox.Text = _sensor.Name;
+            serialNumberTextBox.Text = _sensor.SerialNum;
+            comboBoxFreonMark.Text = _sensor.FreonMark;
+            freonQuantityTextBox.Text = _sensor.FreonQuantity;
+            addInfoTextBox.Text = _sensor.AddInfo;
         }
 
 
@@ -166,15 +184,6 @@ namespace WindowsFormsApp1
             }
         }
 
-        private void TextBox_TextChanged(object sender, EventArgs e)
-        {
-            _sensor.Name = nameTextBox.Text;
-            _sensor.SerialNum = serialNumberTextBox.Text;
-            _sensor.FreonMark = comboBoxFreonMark.Text;
-            _sensor.FreonQuantity = freonQuantityTextBox.Text;
-            _sensor.AddInfo = addInfoTextBox.Text;
-        }
-
         private void TimePicker_ValueChanged(object sender, EventArgs e)
         {
             _sensor.StartTime = timePickerFrom.Value;
@@ -185,13 +194,29 @@ namespace WindowsFormsApp1
 
         private void buttonPrint_Click(object sender, EventArgs e)
         {
-            chart1.Titles.FindByName("TitleName").Text = nameTextBox.Text;
-            chart1.Titles.FindByName("TitleSerial").Text = "Серийный номер: " + serialNumberTextBox.Text;
-            chart1.Titles.FindByName("TitleFreon").Text = "Марка фреона: " + comboBoxFreonMark.Text + ", количество: " + freonQuantityTextBox.Text;
-            chart1.Titles.FindByName("TitleAddInfo").Text = "Дополнительная информация: " + addInfoTextBox.Text;
+            if (!(nameTextBox.Text == "")) chart1.Titles.FindByName("TitleName").Text = nameTextBox.Text;
+            else chart1.Titles.FindByName("TitleName").Text = "_______________________________________";
+            if (!(serialNumberTextBox.Text == "")) chart1.Titles.FindByName("TitleSerial").Text = "Серийный номер: " + serialNumberTextBox.Text;
+            else chart1.Titles.FindByName("TitleSerial").Text = "Серийный номер: ____________________";
+            if (!(comboBoxFreonMark.Text == "")) chart1.Titles.FindByName("TitleFreon").Text = "Марка фреона: " + comboBoxFreonMark.Text + ", количество: " + freonQuantityTextBox.Text + "г";
+            else chart1.Titles.FindByName("TitleFreon").Text = "Марка фреона: _______________, количество: _____________г";
+            if (!(addInfoTextBox.Text == "")) chart1.Titles.FindByName("TitleAddInfo").Text = "Марка компрессора: " + addInfoTextBox.Text;
+            else chart1.Titles.FindByName("TitleAddInfo").Text = "Марка компрессора: _____________________";
             chart1.Titles.FindByName("TitleAvgExternalTemp").Text = averageTemperatureLabel.Text;
+            chart1.Titles.FindByName("TitleDate").Text = DateTime.Now.Date.ToLongDateString();
+            chart1.Series[0].BorderWidth = 20;
             chart1.Printing.PageSetup();
             chart1.Printing.PrintPreview();
+            chart1.Series[0].BorderWidth = 3;
+        }
+
+        private void FormSensorChart_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            _sensor.Name = nameTextBox.Text;
+            _sensor.SerialNum = serialNumberTextBox.Text;
+            _sensor.FreonMark = comboBoxFreonMark.Text;
+            _sensor.FreonQuantity = freonQuantityTextBox.Text;
+            _sensor.AddInfo = addInfoTextBox.Text;
         }
     }
 }
