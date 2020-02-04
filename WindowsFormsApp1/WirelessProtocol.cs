@@ -14,6 +14,7 @@ namespace WindowsFormsApp1
         public static ModbusSerialMaster ModBUS;
         private List<Sensor> sensors = new List<Sensor>();
         private Backup backup;
+        private IDStorage idStorage;
 
         public string PortName 
         {
@@ -37,7 +38,7 @@ namespace WindowsFormsApp1
                 sp485.BaudRate = value;
             }
         }
-        public WirelessProtocol(string portName)
+        public WirelessProtocol(string portName, IDStorage iDStorage)
         {
             if (sp485 != null && sp485.IsOpen)
             {
@@ -52,6 +53,7 @@ namespace WindowsFormsApp1
             ModBUS = ModbusSerialMaster.CreateAscii(sp485);
             sp485.ReadTimeout = 100;
             backup = new Backup(sensors, Properties.Settings.Default.interval);
+            idStorage = iDStorage;
         }
         public bool ModBusOpen
         {
@@ -97,26 +99,26 @@ namespace WindowsFormsApp1
 
         private void UpdateTemperature(string str)
         {
-            int id = Convert.ToInt32(str.Substring(str.IndexOf("ID=")+3,8));
+            string id = str.Substring(str.IndexOf("ID=")+3,8);
             string temperature = str.Substring(str.IndexOf("TEP=") + 4, 5);
             var format = new NumberFormatInfo();
             format.NegativeSign = "-";
             format.NumberDecimalSeparator = ".";
             format.PositiveSign = "+";
             double temp = double.Parse(temperature,format);
-            Sensor sensor = sensors.Find(s => s.id == id);
-            if (sensor == null)
+            Sensor sensorToUpdate = sensors.Find(sensor => sensor.id == id);
+            if (sensorToUpdate == null)
             {
-                if (id - Properties.Settings.Default.startId == 0)
-                    sensors.Add(new Sensor((ushort)(id - Properties.Settings.Default.startId + 1), true));
+                if (idStorage.GetSensorNumber(id) == 0)
+                    sensors.Add(new Sensor(1, true));
                 else
-                    sensors.Add(new Sensor((ushort)(id - Properties.Settings.Default.startId + 1), false));
+                    sensors.Add(new Sensor((ushort)(idStorage.GetSensorNumber(id) + 1), false));
                 sensors[sensors.Count - 1].id = id;
                 sensors[sensors.Count - 1].measurements.Add(new ChartPoint(temp, DateTime.Now));
             }
             else
             {
-                sensor.measurements.Add(new ChartPoint(temp, DateTime.Now));
+                sensorToUpdate.measurements.Add(new ChartPoint(temp, DateTime.Now));
             }
         }
     }

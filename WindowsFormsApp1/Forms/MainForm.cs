@@ -13,6 +13,7 @@ namespace WindowsFormsApp1
             InitializeComponent();
         }
         private IProtocol modBUS;
+        private IDStorage idStorage;
 
         private void GetCheckedSpeed()
         {
@@ -83,6 +84,7 @@ namespace WindowsFormsApp1
             FillDropDownListWithPorts();
             FillDropDownTextBoxWithInterval();
             FillDropDownListWithTypes();
+            idStorage = new IDStorage();
         }
 
         private void ChangePort(string port)
@@ -133,7 +135,7 @@ namespace WindowsFormsApp1
             }
             else
             {
-                return new WirelessProtocol(Properties.Settings.Default.port);
+                return new WirelessProtocol(Properties.Settings.Default.port, idStorage);
             }
         }
         private void NewObkatkaMenuItem_Click(object sender, EventArgs e)
@@ -196,7 +198,7 @@ namespace WindowsFormsApp1
 
         private void сопоставлениеIDToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FormIDMatch formIDMatch = new FormIDMatch();
+            FormIDMatch formIDMatch = new FormIDMatch(idStorage);
             formIDMatch.Show();
         }
     }

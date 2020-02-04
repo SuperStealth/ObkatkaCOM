@@ -73,35 +73,36 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Backup.cs" />
-    <Compile Include="FormIDMatch.cs">
+    <Compile Include="Forms\FormIDMatch.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormIDMatch.Designer.cs">
+    <Compile Include="Forms\FormIDMatch.Designer.cs">
       <DependentUpon>FormIDMatch.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormPrint.cs">
+    <Compile Include="Forms\FormPrint.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormPrint.Designer.cs">
+    <Compile Include="Forms\FormPrint.Designer.cs">
       <DependentUpon>FormPrint.cs</DependentUpon>
     </Compile>
+    <Compile Include="IDStorage.cs" />
     <Compile Include="IProtocol.cs" />
-    <Compile Include="MainForm.cs">
+    <Compile Include="Forms\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainForm.Designer.cs">
+    <Compile Include="Forms\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormSensorButtons.cs">
+    <Compile Include="Forms\FormSensorButtons.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormSensorButtons.Designer.cs">
+    <Compile Include="Forms\FormSensorButtons.Designer.cs">
       <DependentUpon>FormSensorButtons.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormSensorChart.cs">
+    <Compile Include="Forms\FormSensorChart.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormSensorChart.Designer.cs">
+    <Compile Include="Forms\FormSensorChart.Designer.cs">
       <DependentUpon>FormSensorChart.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
@@ -109,16 +110,16 @@
     <Compile Include="Sensor.cs" />
     <Compile Include="WiredProtocol.cs" />
     <Compile Include="WirelessProtocol.cs" />
-    <EmbeddedResource Include="FormIDMatch.resx">
+    <EmbeddedResource Include="Forms\FormIDMatch.resx">
       <DependentUpon>FormIDMatch.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainForm.resx">
+    <EmbeddedResource Include="Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormSensorButtons.resx">
+    <EmbeddedResource Include="Forms\FormSensorButtons.resx">
       <DependentUpon>FormSensorButtons.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormSensorChart.resx">
+    <EmbeddedResource Include="Forms\FormSensorChart.resx">
       <DependentUpon>FormSensorChart.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">

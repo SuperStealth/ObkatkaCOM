@@ -38,7 +38,7 @@ namespace WindowsFormsApp1
         public DateTime StartTime { get; set; }
         public DateTime StopTime { get; set; }
         public State state { get; set; }
-        public int id { get; set; }
+        public string id { get; set; }
 
         public Sensor(ushort num, bool isExternal)
         {
