@@ -29,6 +29,9 @@ namespace WindowsFormsApp1
         {
             toolStripMenuItemSensorType.DropDownItems.Add("Проводной", null, SetType_Click);
             toolStripMenuItemSensorType.DropDownItems.Add("Беспроводной", null, SetType_Click);
+#if DEBUG
+            toolStripMenuItemSensorType.DropDownItems.Add("Тестовый", null, SetType_Click);
+#endif
         }
         private void SetType_Click(object sender, EventArgs e)
         {
@@ -133,9 +136,13 @@ namespace WindowsFormsApp1
             {
                 return new WiredProtocol(Properties.Settings.Default.port);
             }
-            else
+            else if (Properties.Settings.Default.type == "Беспроводной")
             {
                 return new WirelessProtocol(Properties.Settings.Default.port, idStorage);
+            }
+            else
+            {
+                return new TestProtocol(Properties.Settings.Default.port, idStorage);
             }
         }
         private void NewObkatkaMenuItem_Click(object sender, EventArgs e)

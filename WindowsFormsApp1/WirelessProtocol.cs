@@ -109,10 +109,10 @@ namespace WindowsFormsApp1
             Sensor sensorToUpdate = sensors.Find(sensor => sensor.id == id);
             if (sensorToUpdate == null)
             {
-                if (idStorage.GetSensorNumber(id) == 0)
+                if (idStorage.GetSensorNumber(id) == 1)
                     sensors.Add(new Sensor(1, true));
                 else
-                    sensors.Add(new Sensor((ushort)(idStorage.GetSensorNumber(id) + 1), false));
+                    sensors.Add(new Sensor((ushort)(idStorage.GetSensorNumber(id)), false));
                 sensors[sensors.Count - 1].id = id;
                 sensors[sensors.Count - 1].measurements.Add(new ChartPoint(temp, DateTime.Now));
             }

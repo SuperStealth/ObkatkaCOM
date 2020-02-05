@@ -52,7 +52,7 @@ namespace WindowsFormsApp1
             if (!_idStorage.IsEmpty())
                 foreach (TextBox item in Controls.OfType<TextBox>())
                 {
-                    item.Text = _idStorage.GetSensorID(Convert.ToInt32(item.Name.Substring(7)) - 1);
+                    item.Text = _idStorage.GetSensorID(Convert.ToInt32(item.Name.Substring(7)));
                 }
         }
     }

@@ -19,7 +19,7 @@ namespace WindowsFormsApp1
 
         public string GetSensorID(int sensorNumber)
         {
-            return sensorMatches[sensorNumber];
+            return sensorMatches[sensorNumber - 1];
         }
 
         public void UpdateSensorsIDs()
