@@ -3,12 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO.Ports;
-using System.Linq;
-using System.Text;
 
 namespace WindowsFormsApp1
 {
-    class WirelessProtocol : IProtocol
+    class LockedWirelessProtocol : IProtocol
     {
         private SerialPort sp485 = new SerialPort();
         public static ModbusSerialMaster ModBUS;
@@ -16,19 +14,20 @@ namespace WindowsFormsApp1
         private Backup backup;
         private IDStorage idStorage;
 
-        public string PortName 
+        public string PortName
         {
             get
             {
                 return sp485.PortName;
             }
-            set 
+            set
             {
                 sp485.PortName = value;
-            } 
+            }
         }
-        public int BaudRate 
-        { 
+
+        public int BaudRate
+        {
             get
             {
                 return sp485.BaudRate;
@@ -38,7 +37,15 @@ namespace WindowsFormsApp1
                 sp485.BaudRate = value;
             }
         }
-        public WirelessProtocol(string portName, IDStorage iDStorage)
+        public bool ModBusOpen
+        {
+            get
+            {
+                return sp485.IsOpen;
+            }
+        }
+
+        public LockedWirelessProtocol(string portName, IDStorage iDStorage)
         {
             if (sp485 != null && sp485.IsOpen)
             {
@@ -55,13 +62,7 @@ namespace WindowsFormsApp1
             backup = new Backup(sensors, Properties.Settings.Default.interval);
             idStorage = iDStorage;
         }
-        public bool ModBusOpen
-        {
-            get
-            {
-                return sp485.IsOpen;
-            }
-        }
+
         public void Dispose()
         {
             ModBUS.Dispose();
@@ -99,13 +100,13 @@ namespace WindowsFormsApp1
 
         private void UpdateTemperature(string str)
         {
-            string id = str.Substring(str.IndexOf("ID=")+3,8);
+            string id = str.Substring(str.IndexOf("ID=") + 3, 8);
             string temperature = str.Substring(str.IndexOf("TEP=") + 4, 5);
             var format = new NumberFormatInfo();
             format.NegativeSign = "-";
             format.NumberDecimalSeparator = ".";
             format.PositiveSign = "+";
-            double temp = double.Parse(temperature,format);
+            double temp = double.Parse(temperature, format);
             Sensor sensorToUpdate = sensors.Find(sensor => sensor.id == id);
             if (sensorToUpdate == null)
             {

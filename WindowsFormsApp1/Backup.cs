@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Text;
 
 namespace WindowsFormsApp1
 {
@@ -17,7 +15,7 @@ namespace WindowsFormsApp1
         {
             System.Windows.Forms.Timer refreshTimer = new System.Windows.Forms.Timer();
             refreshTimer.Interval = 5000;
-            refreshTimer.Tick += new EventHandler(RefreshBackup);
+            refreshTimer.Tick += RefreshBackup;
             refreshTimer.Start();
             _sensors = sensors;
         }

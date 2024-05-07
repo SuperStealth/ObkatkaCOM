@@ -99,10 +99,10 @@ namespace WindowsFormsApp1
                     }
                     switch (temperatureSensor.GetSensor(i).state)
                     {
-                        case State.ObkatkaStarted:
+                        case State.RunInStarted:
                             lstBtnCalc[temperatureSensor.GetSensor(i).SensorNumber - 1].BackColor = Color.LightGreen;
                             break;
-                        case State.ObkatkaEnded:
+                        case State.RunInEnded:
                             lstBtnCalc[temperatureSensor.GetSensor(i).SensorNumber - 1].BackColor = Color.Yellow;
                             break;
                         case State.WaitingForStart:

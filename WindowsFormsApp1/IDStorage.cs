@@ -1,25 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace WindowsFormsApp1
 {
     public class IDStorage
     {
         private List<string> sensorMatches = new List<string>();
+
         public IDStorage()
         {
             UpdateSensorsIDs();
         }
+
         public int GetSensorNumber(string sensorID)
         {
-            return sensorMatches.IndexOf(sensorID) + 1;
+            if (sensorMatches.Contains(sensorID))
+                return sensorMatches.IndexOf(sensorID) + 1;
+            return -1;
         }
 
         public string GetSensorID(int sensorNumber)
         {
-            return sensorMatches[sensorNumber - 1];
+            if (sensorMatches.Count >= sensorNumber)
+                return sensorMatches[sensorNumber - 1];
+            return null;
         }
 
         public void UpdateSensorsIDs()

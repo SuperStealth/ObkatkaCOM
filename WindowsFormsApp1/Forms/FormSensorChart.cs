@@ -53,11 +53,11 @@ namespace WindowsFormsApp1
             chart1.ChartAreas[0].AxisX.LabelStyle.Format = "HH:mm";
             
             tCycle.Interval = Properties.Settings.Default.interval;
-            if (_sensor.state == State.ObkatkaStarted)
+            if (_sensor.state == State.RunInStarted)
             {
                 buttonStart.Text = "Остановить обкатку";
             }
-            if (_sensor.state == State.ObkatkaEnded)
+            if (_sensor.state == State.RunInEnded)
             {
                 buttonStart.Text = "Сбросить обкатку";
             }
@@ -76,15 +76,16 @@ namespace WindowsFormsApp1
             var temperatures = _sensor.GetTempArray();
             chart1.Series[0].Points.DataBindXY(times, temperatures);
 
-            var externalTimes = _externalSensor.GetTimeArray(_sensor.StartTime, _sensor.StopTime);
-            var externalTemps = _externalSensor.GetTempArray(_sensor.StartTime, _sensor.StopTime);
-            chart1.Series[1].Points.DataBindXY(externalTimes, externalTemps);
-
-
-            StringBuilder avgTemperatureString = new StringBuilder("Средняя температура окружающей среды: ");
-            if (externalTemps.Length > 0) avgTemperatureString.Append(externalTemps.Average().ToString("0.##"));
-            avgTemperatureString.Append("C");
-            averageTemperatureLabel.Text = avgTemperatureString.ToString();
+            if (_externalSensor != null)
+            {
+                var externalTimes = _externalSensor.GetTimeArray(_sensor.StartTime, _sensor.StopTime);
+                var externalTemps = _externalSensor.GetTempArray(_sensor.StartTime, _sensor.StopTime);
+                chart1.Series[1].Points.DataBindXY(externalTimes, externalTemps);
+                StringBuilder avgTemperatureString = new StringBuilder("Средняя температура окружающей среды: ");
+                avgTemperatureString.Append(externalTemps.Length > 0 ? externalTemps.Average().ToString("0.##") : "?");
+                avgTemperatureString.Append("C");
+                averageTemperatureLabel.Text = avgTemperatureString.ToString();
+            }
         }
 
         public void SaveAsBitmap(Control control, string fileName)
@@ -149,14 +150,14 @@ namespace WindowsFormsApp1
                 timePickerFrom.Value = DateTime.Now;
                 timePickerTo.Value = DateTime.Now.AddHours(3);
                 buttonStart.Text = "Остановить обкатку";
-                _sensor.state = State.ObkatkaStarted;
+                _sensor.state = State.RunInStarted;
             }
             else if (buttonStart.Text == "Остановить обкатку")
             {
                 _sensor.StopTime = DateTime.Now;
                 timePickerTo.Value = DateTime.Now;
                 buttonStart.Text = "Сбросить обкатку";
-                _sensor.state = State.ObkatkaEnded;
+                _sensor.state = State.RunInEnded;
             }
             else
             {

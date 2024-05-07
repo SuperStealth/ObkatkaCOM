@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace WindowsFormsApp1
 {
     public enum State
     {
         WaitingForStart,
-        ObkatkaStarted,
-        ObkatkaEnded
+        RunInStarted,
+        RunInEnded
     }
+
     [Serializable]
     public struct ChartPoint
     {
@@ -51,25 +51,35 @@ namespace WindowsFormsApp1
 
         public DateTime[] GetTimeArray()
         {
-            return measurements.FindAll(s => (s.time > StartTime) && (s.time < StopTime)).Select(item => item.time).ToArray();
+            if (measurements.Count > 0)
+                return measurements.FindAll(s => (s.time > StartTime) && (s.time < StopTime)).Select(item => item.time).ToArray();
+            return null;
         }
         public double[] GetTempArray()
         {
-            return measurements.FindAll(s => (s.time > StartTime) && (s.time < StopTime)).Select(item => item.temp).ToArray();
+            if (measurements.Count > 0)
+                return measurements.FindAll(s => (s.time > StartTime) && (s.time < StopTime)).Select(item => item.temp).ToArray();
+            return null;
         }
 
         public DateTime[] GetTimeArray(DateTime startTime, DateTime stopTime)
         {
-            return measurements.FindAll(s => (s.time > startTime) && (s.time < stopTime)).Select(item => item.time).ToArray();
+            if (measurements.Count > 0)
+                return measurements.FindAll(s => (s.time > startTime) && (s.time < stopTime)).Select(item => item.time).ToArray();
+            return null;
         }
         public double[] GetTempArray(DateTime startTime, DateTime stopTime)
         {
-            return measurements.FindAll(s => (s.time > startTime) && (s.time < stopTime)).Select(item => item.temp).ToArray();
+            if (measurements.Count > 0)
+                return measurements.FindAll(s => (s.time > startTime) && (s.time < stopTime)).Select(item => item.temp).ToArray();
+            return null;
         }
 
         public double GetLastMeasurement()
         {
-            return measurements.Last().temp;
+            if (measurements.Count > 0)
+                return measurements.Last().temp;
+            return -1;
         }
     }
 }
