@@ -70,21 +70,21 @@
             this.новаяToolStripMenuItem.Name = "новаяToolStripMenuItem";
             this.новаяToolStripMenuItem.Size = new System.Drawing.Size(224, 22);
             this.новаяToolStripMenuItem.Text = "Начать работу";
-            this.новаяToolStripMenuItem.Click += new System.EventHandler(this.NewObkatkaMenuItem_Click);
+            this.новаяToolStripMenuItem.Click += new System.EventHandler(this.NewRunInMenuItem_Click);
             // 
             // открытьОбкаткуToolStripMenuItem
             // 
             this.открытьОбкаткуToolStripMenuItem.Name = "открытьОбкаткуToolStripMenuItem";
             this.открытьОбкаткуToolStripMenuItem.Size = new System.Drawing.Size(224, 22);
             this.открытьОбкаткуToolStripMenuItem.Text = "Открыть обкатку (*.txt)";
-            this.открытьОбкаткуToolStripMenuItem.Click += new System.EventHandler(this.ОткрытьОбкаткуToolStripMenuItem_Click);
+            this.открытьОбкаткуToolStripMenuItem.Click += new System.EventHandler(this.OpenRunInToolStripMenuItem_Click);
             // 
             // открытьРезервнуюКопиюToolStripMenuItem
             // 
             this.открытьРезервнуюКопиюToolStripMenuItem.Name = "открытьРезервнуюКопиюToolStripMenuItem";
             this.открытьРезервнуюКопиюToolStripMenuItem.Size = new System.Drawing.Size(224, 22);
             this.открытьРезервнуюКопиюToolStripMenuItem.Text = "Открыть резервную копию";
-            this.открытьРезервнуюКопиюToolStripMenuItem.Click += new System.EventHandler(this.ОткрытьРезервнуюКопиюToolStripMenuItem_Click);
+            this.открытьРезервнуюКопиюToolStripMenuItem.Click += new System.EventHandler(this.OpenReserveCopyToolStripMenuItem_Click);
             // 
             // параметрыToolStripMenuItem
             // 
@@ -144,7 +144,7 @@
             this.сопоставлениеIDToolStripMenuItem.Name = "сопоставлениеIDToolStripMenuItem";
             this.сопоставлениеIDToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.сопоставлениеIDToolStripMenuItem.Text = "Сопоставление ID";
-            this.сопоставлениеIDToolStripMenuItem.Click += new System.EventHandler(this.сопоставлениеIDToolStripMenuItem_Click);
+            this.сопоставлениеIDToolStripMenuItem.Click += new System.EventHandler(this.MatchIDToolStripMenuItem_Click);
             // 
             // MainForm
             // 

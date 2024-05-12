@@ -29,6 +29,7 @@ namespace WindowsFormsApp1
         {
             toolStripMenuItemSensorType.DropDownItems.Add("Проводной", null, SetType_Click);
             toolStripMenuItemSensorType.DropDownItems.Add("Беспроводной", null, SetType_Click);
+            toolStripMenuItemSensorType.DropDownItems.Add("Беспроводной(новый)", null, SetType_Click);
 #if DEBUG
             toolStripMenuItemSensorType.DropDownItems.Add("Тестовый", null, SetType_Click);
 #endif
@@ -140,12 +141,16 @@ namespace WindowsFormsApp1
             {
                 return new WirelessProtocol(Properties.Settings.Default.port, idStorage);
             }
+            else if (Properties.Settings.Default.type == "Беспроводной(новый)")
+            {
+                return new LockedWirelessProtocol(Properties.Settings.Default.port, idStorage);
+            }
             else
             {
                 return new TestProtocol(Properties.Settings.Default.port, idStorage);
             }
         }
-        private void NewObkatkaMenuItem_Click(object sender, EventArgs e)
+        private void NewRunInMenuItem_Click(object sender, EventArgs e)
         {
             FormSensorButtons formSensorButtons = new FormSensorButtons(ActivatePort())
             {
@@ -154,7 +159,7 @@ namespace WindowsFormsApp1
             formSensorButtons.Show();
         }
 
-        private void ОткрытьОбкаткуToolStripMenuItem_Click(object sender, EventArgs e)
+        private void OpenRunInToolStripMenuItem_Click(object sender, EventArgs e)
         {
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
@@ -181,10 +186,9 @@ namespace WindowsFormsApp1
                 Properties.Settings.Default.interval = interval;
                 Properties.Settings.Default.Save();
             }
-
         }
 
-        private void ОткрытьРезервнуюКопиюToolStripMenuItem_Click(object sender, EventArgs e)
+        private void OpenReserveCopyToolStripMenuItem_Click(object sender, EventArgs e)
         {
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
@@ -203,7 +207,7 @@ namespace WindowsFormsApp1
             }
         }
 
-        private void сопоставлениеIDToolStripMenuItem_Click(object sender, EventArgs e)
+        private void MatchIDToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FormIDMatch formIDMatch = new FormIDMatch(idStorage);
             formIDMatch.Show();
