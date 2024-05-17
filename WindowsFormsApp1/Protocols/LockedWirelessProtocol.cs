@@ -2,13 +2,16 @@
 using System;
 using System.Collections.Generic;
 using System.IO.Ports;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace WindowsFormsApp1
 {
     class LockedWirelessProtocol : IProtocol
     {
-        private SerialPort sp485 = new SerialPort();
+        private SerialPort serialPort = new SerialPort();
         private List<Sensor> sensors = new List<Sensor>();
         private IDStorage idStorage;
         private byte _id;
@@ -16,11 +19,11 @@ namespace WindowsFormsApp1
         {
             get
             {
-                return sp485.PortName;
+                return serialPort.PortName;
             }
             set
             {
-                sp485.PortName = value;
+                serialPort.PortName = value;
             }
         }
 
@@ -28,41 +31,43 @@ namespace WindowsFormsApp1
         {
             get
             {
-                return sp485.BaudRate;
+                return serialPort.BaudRate;
             }
             set
             {
-                sp485.BaudRate = value;
+                serialPort.BaudRate = value;
             }
         }
         public bool ModBusOpen
         {
             get
             {
-                return sp485.IsOpen;
+                return serialPort.IsOpen;
             }
         }
 
         public LockedWirelessProtocol(string portName, IDStorage iDStorage)
         {
-            if (sp485 != null && sp485.IsOpen)
+            if (serialPort != null && serialPort.IsOpen)
             {
-                sp485.Close();
+                serialPort.Close();
             }
-            sp485.PortName = portName;
-            sp485.BaudRate = 9600;
-            sp485.Handshake = Handshake.None;
-            sp485.Parity = Parity.None;
-            sp485.DataBits = 8;
-            sp485.StopBits = StopBits.One;
-            sp485.Open();
-            sp485.DiscardOutBuffer();
-            sp485.DiscardInBuffer();
-            sp485.ReadTimeout = 100;
+            serialPort.PortName = portName;
+            serialPort.BaudRate = 9600;
+            serialPort.Handshake = Handshake.None;
+            serialPort.Parity = Parity.None;
+            serialPort.DataBits = 8;
+            serialPort.StopBits = StopBits.One;
+            serialPort.Open();
+            serialPort.DiscardOutBuffer();
+            serialPort.DiscardInBuffer();
+            serialPort.ReadTimeout = 1000;
             var _ = new Backup(sensors, Properties.Settings.Default.interval);
             idStorage = iDStorage;
-            //SetIDs();
+            SetIDs();
             MatchIDs(idStorage);
+            SetIDs();
+            GetIDs();
         }
 
         public void Dispose()
@@ -72,7 +77,7 @@ namespace WindowsFormsApp1
 
         public void Close()
         {
-            sp485.Close();
+            serialPort.Close();
         }
 
         public void Restore(List<Sensor> restoredSensors)
@@ -99,6 +104,7 @@ namespace WindowsFormsApp1
 
         public void UpdateSensors()
         {
+            SetIDs();
             byte[] info = new byte[8];
             info[0] = 0x01;
             info[1] = 0x03;
@@ -107,47 +113,109 @@ namespace WindowsFormsApp1
             info[4] = 0x00;
             info[5] = 0x50;
             info = AddCRC(info, 6);
-            sp485.Write(info, 0, 8);
-            Task.Run(ReadValues);
+            byte[] response = SendCommand(info, 8, 165);
+            if (response[0] == 0x01 && response[1] == 0x03)
+            {
+                for (int i = 0; i < 20; i++)
+                {
+                    if (response[3 + i * 8] != 0xFF)
+                    {
+                        short temperature = (short)(response[3 + i * 8] << 8 | response[4 + i * 8]);
+                        UpdateTemperature(idStorage.GetSensorID(i + 1), temperature / 10.0);
+                    }
+                }
+            }
         }
+
+        private void GetIDs()
+        {
+            byte[] info = new byte[5];
+            byte[] response = new byte[125];
+            info[0] = 0x01;
+            info[1] = 0x0A;
+            info[2] = 0x00;
+            info = AddCRC(info, 3);
+            var result = SendCommand(info, 5, 125);
+        }
+
 
         private void SetIDs()
         {
             byte[] info = new byte[5];
-            byte[] response = new byte[5];
             info[0] = 0xFF;
             info[1] = 0x06;
             info[2] = 0x01;
             info = AddCRC(info, 3);
-            sp485.Write(info, 0, 5);
-            sp485.Read(response, 0, sp485.BytesToRead);
+            SendCommand(info, 5, 5);
         }
 
         private void MatchIDs(IDStorage storage)
         {
-            byte[] info = new byte[128];
+            byte[] info = new byte[25];
+            info[0] = 0x01;
+            info[1] = 0x09;
+            info[2] = 0x14;
+            for (byte i = 0; i < 20; i++)
+            {
+                info[i + 3] = (byte)(i + 1);
+            }
+            info = AddCRC(info, 23);
+            SendCommand(info, 25, 5);
+
+            info = new byte[105];
             info[0] = 0x01;
             info[1] = 0x08;
-            info[2] = 3 * 5;
-            for (byte i = 0; i < 3; i++)
+            info[2] = 100;
+            for (byte i = 1; i < 21; i++)
             {
-                var id = storage.GetSensorID(i + 1);
-
-                var idNumber = i + 1;
+                var id = storage.GetSensorID(i);
                 if (id != string.Empty)
-                    idNumber = Convert.ToInt32(id);
-                    
-                info[3 + i * 5] = ConvertToHexBytes(idNumber / 1000000);
-                info[4 + i * 5] = ConvertToHexBytes(idNumber / 10000 % 100);
-                info[5 + i * 5] = ConvertToHexBytes(idNumber / 100 % 100);
-                info[6 + i * 5] = ConvertToHexBytes(idNumber % 100);
-                info[7 + i * 5] = (byte)(i + 1);
+                {
+                    var idNumber = Convert.ToInt32(id);
+                    info[3 + (i - 1) * 5] = ConvertToHexBytes(idNumber / 1000000);
+                    info[4 + (i - 1) * 5] = ConvertToHexBytes(idNumber / 10000 % 100);
+                    info[5 + (i - 1) * 5] = ConvertToHexBytes(idNumber / 100 % 100);
+                    info[6 + (i - 1) * 5] = ConvertToHexBytes(idNumber % 100);
+                }
+                info[7 + (i - 1) * 5] = i;
+            }
+            info = AddCRC(info, 103);
+            SendCommand(info, 105, 5);
+        }
+
+        private byte[] SendCommand(byte[] data, int length, int expectedOutputLength)
+        {
+            serialPort.Write(data, 0, length);
+            byte[] response = new byte[expectedOutputLength];
+            var x = 3;
+
+            while (!WaitForBytes(expectedOutputLength) && x > 0)
+            {
+                x--;
+                serialPort.Write(data, 0, length);
             }
 
-            info = AddCRC(info, 18);
-            sp485.Write(info, 0, 20);
-            byte[] response = new byte[5];
-            var _ = sp485.Read(response, 0, sp485.BytesToRead);
+            if (x > 0 || WaitForBytes(expectedOutputLength))
+            {
+                serialPort.Read(response, 0, serialPort.BytesToRead);
+                return response;
+            }
+            return null;
+        }
+
+        private bool WaitForBytes(int bytesCount)
+        {
+            int x = 100;
+            while (serialPort.BytesToRead < bytesCount && x > 0)
+            {
+                x--;
+                Thread.Sleep(10);
+            }
+            if (x == 0)
+            {
+                return false;
+            }
+            return true;
         }
 
         private byte ConvertToHexBytes(int number)
@@ -171,26 +239,6 @@ namespace WindowsFormsApp1
             {
                 sensorToUpdate.measurements.Add(new ChartPoint(temp, DateTime.Now));
             }
-        }
-
-        private Task ReadValues()
-        {
-
-            Task.Delay(100);
-            byte[] response = new byte[330];
-            var _ = sp485.Read(response, 0, sp485.BytesToRead);
-            if (response[0] == 0x01 && response[1] == 0x03)
-            {
-                for (int i = 0; i < 20; i++)
-                {
-                    if (response[3 + i * 8] != 0xFF)
-                    {
-                        short temperature = (short)(response[3 + i * 8] << 8 | response[4 + i * 8]);
-                        UpdateTemperature(idStorage.GetSensorID(i + 1), temperature / 10.0);
-                    }
-                }
-            }
-            return Task.CompletedTask;
         }
 
         private byte[] AddCRC(byte[] data, int len)
