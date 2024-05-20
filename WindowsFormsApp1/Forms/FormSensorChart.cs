@@ -6,7 +6,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 
-namespace WindowsFormsApp1
+namespace ObkatkaCom
 {
     public partial class FormSensorChart : Form
     {

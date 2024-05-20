@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO.Ports;
 
-namespace WindowsFormsApp1
+namespace ObkatkaCom
 {
     class WiredProtocol : IProtocol
     {

@@ -3,7 +3,7 @@ using System.Windows.Forms;
 using System.IO.Ports;
 using Modbus.Device;
 
-namespace WindowsFormsApp1
+namespace ObkatkaCom
 {
 
     public partial class MainForm : Form

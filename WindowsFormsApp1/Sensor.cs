@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace WindowsFormsApp1
+namespace ObkatkaCom
 {
     public enum State
     {

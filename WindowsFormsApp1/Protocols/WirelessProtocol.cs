@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO.Ports;
 
-namespace WindowsFormsApp1
+namespace ObkatkaCom
 {
     class WirelessProtocol : IProtocol
     {

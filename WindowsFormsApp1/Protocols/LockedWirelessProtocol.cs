@@ -1,20 +1,16 @@
-﻿using Modbus.Device;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO.Ports;
 using System.Threading;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Windows.Forms.DataVisualization.Charting;
 
-namespace WindowsFormsApp1
+namespace ObkatkaCom
 {
     class LockedWirelessProtocol : IProtocol
     {
         private SerialPort serialPort = new SerialPort();
         private List<Sensor> sensors = new List<Sensor>();
         private IDStorage idStorage;
-        private byte _id;
+
         public string PortName
         {
             get
@@ -162,25 +158,31 @@ namespace WindowsFormsApp1
             info = AddCRC(info, 23);
             SendCommand(info, 25, 5);
 
-            info = new byte[105];
-            info[0] = 0x01;
-            info[1] = 0x08;
-            info[2] = 100;
+
             for (byte i = 1; i < 21; i++)
             {
+                info = new byte[15];
+                info[0] = 0x01;
+                info[1] = 0x08;
+                info[2] = 100;
                 var id = storage.GetSensorID(i);
                 if (id != string.Empty)
                 {
                     var idNumber = Convert.ToInt32(id);
-                    info[3 + (i - 1) * 5] = ConvertToHexBytes(idNumber / 1000000);
-                    info[4 + (i - 1) * 5] = ConvertToHexBytes(idNumber / 10000 % 100);
-                    info[5 + (i - 1) * 5] = ConvertToHexBytes(idNumber / 100 % 100);
-                    info[6 + (i - 1) * 5] = ConvertToHexBytes(idNumber % 100);
+                    info[3] = ConvertToHexBytes(idNumber / 1000000);
+                    info[4] = ConvertToHexBytes(idNumber / 10000 % 100);
+                    info[5] = ConvertToHexBytes(idNumber / 100 % 100);
+                    info[6] = ConvertToHexBytes(idNumber % 100);
                 }
-                info[7 + (i - 1) * 5] = i;
+                info[7] = i;
+                for (int j = 0; j < 5; j++)
+                {
+                    info[8 + j] = info[3 + j];
+                }
+                info = AddCRC(info, 13);
+                SendCommand(info, 15, 5);
             }
-            info = AddCRC(info, 103);
-            SendCommand(info, 105, 5);
+
         }
 
         private byte[] SendCommand(byte[] data, int length, int expectedOutputLength)

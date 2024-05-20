@@ -1,4 +1,4 @@
-﻿namespace WindowsFormsApp1
+﻿namespace ObkatkaCom
 {
     partial class FormIDMatch
     {
