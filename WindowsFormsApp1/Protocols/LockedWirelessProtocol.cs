@@ -147,40 +147,39 @@ namespace ObkatkaCom
 
         private void MatchIDs(IDStorage storage)
         {
-            byte[] info = new byte[25];
-            info[0] = 0x01;
-            info[1] = 0x09;
-            info[2] = 0x14;
-            for (byte i = 0; i < 20; i++)
-            {
-                info[i + 3] = (byte)(i + 1);
-            }
-            info = AddCRC(info, 23);
-            SendCommand(info, 25, 5);
-
-
             for (byte i = 1; i < 21; i++)
             {
-                info = new byte[15];
-                info[0] = 0x01;
-                info[1] = 0x08;
-                info[2] = 100;
                 var id = storage.GetSensorID(i);
                 if (id != string.Empty)
                 {
+                    byte[] info = new byte[15];
+                    info[0] = 0x01;
+                    info[1] = 0x08;
+                    info[2] = 10;
                     var idNumber = Convert.ToInt32(id);
                     info[3] = ConvertToHexBytes(idNumber / 1000000);
                     info[4] = ConvertToHexBytes(idNumber / 10000 % 100);
                     info[5] = ConvertToHexBytes(idNumber / 100 % 100);
                     info[6] = ConvertToHexBytes(idNumber % 100);
+                    info[7] = i;
+                    for (int j = 0; j < 5; j++)
+                    {
+                        info[8 + j] = info[3 + j];
+                    }
+                    info = AddCRC(info, 13);
+                    SendCommand(info, 15, 5);
                 }
-                info[7] = i;
-                for (int j = 0; j < 5; j++)
+                else
                 {
-                    info[8 + j] = info[3 + j];
+                    byte[] info = new byte[6];
+                    info[0] = 0x01;
+                    info[1] = 0x09;
+                    info[2] = 0x01;
+                    info[3] = (byte)(i + 1);
+                    info = AddCRC(info, 4);
+                    SendCommand(info, 6, 5);
                 }
-                info = AddCRC(info, 13);
-                SendCommand(info, 15, 5);
+                Thread.Sleep(100);
             }
 
         }
