@@ -61,14 +61,17 @@ namespace ObkatkaCom
             var _ = new Backup(sensors, Properties.Settings.Default.interval);
             idStorage = iDStorage;
             SetIDs();
-            MatchIDs(idStorage);
-            SetIDs();
-            GetIDs();
         }
 
         public void Dispose()
         {
+            serialPort.Close();
+        }
 
+        public void UpdateIDs()
+        {
+            SetIDs();
+            MatchIDs(idStorage);
         }
 
         public void Close()

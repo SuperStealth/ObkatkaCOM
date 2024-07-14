@@ -212,5 +212,16 @@ namespace ObkatkaCom
             FormIDMatch formIDMatch = new FormIDMatch(idStorage);
             formIDMatch.Show();
         }
+
+        private void RenameIDToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            var message = "Идет запись портов, дождитесь завершения";
+            MessageBox.Show(message);
+            var protocol = new LockedWirelessProtocol(Properties.Settings.Default.port, idStorage);
+            protocol.UpdateIDs();
+            protocol.Dispose();
+            MessageBox.Show("Запись завершена");
+        }
     }
 }

@@ -41,6 +41,7 @@
             this.toolStripTextBoxInterval = new System.Windows.Forms.ToolStripTextBox();
             this.toolStripMenuItemSensorType = new System.Windows.Forms.ToolStripMenuItem();
             this.сопоставлениеIDToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.применитьIDToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MainMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -91,7 +92,8 @@
             this.параметрыToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.настройкиМашинToolStripMenuItem,
             this.toolStripMenuItemSensorType,
-            this.сопоставлениеIDToolStripMenuItem});
+            this.сопоставлениеIDToolStripMenuItem,
+            this.применитьIDToolStripMenuItem});
             this.параметрыToolStripMenuItem.Name = "параметрыToolStripMenuItem";
             this.параметрыToolStripMenuItem.Size = new System.Drawing.Size(83, 20);
             this.параметрыToolStripMenuItem.Text = "Параметры";
@@ -128,7 +130,6 @@
             // 
             // toolStripTextBoxInterval
             // 
-            this.toolStripTextBoxInterval.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.toolStripTextBoxInterval.Name = "toolStripTextBoxInterval";
             this.toolStripTextBoxInterval.Size = new System.Drawing.Size(100, 23);
             this.toolStripTextBoxInterval.TextChanged += new System.EventHandler(this.IntervalTextBox_TextChanged);
@@ -145,6 +146,13 @@
             this.сопоставлениеIDToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.сопоставлениеIDToolStripMenuItem.Text = "Сопоставление ID";
             this.сопоставлениеIDToolStripMenuItem.Click += new System.EventHandler(this.MatchIDToolStripMenuItem_Click);
+            // 
+            // применитьIDToolStripMenuItem
+            // 
+            this.применитьIDToolStripMenuItem.Name = "применитьIDToolStripMenuItem";
+            this.применитьIDToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.применитьIDToolStripMenuItem.Text = "Применить ID";
+            this.применитьIDToolStripMenuItem.Click += new System.EventHandler(this.RenameIDToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -179,6 +187,7 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemSensorType;
         private System.Windows.Forms.ToolStripMenuItem открытьРезервнуюКопиюToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem сопоставлениеIDToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem применитьIDToolStripMenuItem;
     }
 }
 
