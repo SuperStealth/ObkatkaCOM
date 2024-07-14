@@ -27,15 +27,7 @@ namespace ObkatkaCom
 
         private void Form3_Load(object sender, EventArgs e)
         {
-
-            timePickerFrom.Format = DateTimePickerFormat.Custom;
-            timePickerFrom.CustomFormat = "HH:mm";
-            timePickerTo.Format = DateTimePickerFormat.Custom;
-            timePickerTo.CustomFormat = "HH:mm";
-
             chart1.Series.Clear();
-
-            
 
             chart1.Series.Add("Датчик" + (_sensor.SensorNumber));
             chart1.Series[0].XValueType = ChartValueType.Time;
@@ -189,8 +181,8 @@ namespace ObkatkaCom
         {
             _sensor.StartTime = timePickerFrom.Value;
             _sensor.StopTime = timePickerTo.Value;
-            timePickerFrom.Value = DateTime.Today + _sensor.StartTime.TimeOfDay;
-            timePickerTo.Value = DateTime.Today + _sensor.StopTime.TimeOfDay;
+            timePickerFrom.Value = _sensor.StartTime;
+            timePickerTo.Value = _sensor.StopTime;
         }
 
         private void buttonPrint_Click(object sender, EventArgs e)

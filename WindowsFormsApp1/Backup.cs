@@ -14,7 +14,7 @@ namespace ObkatkaCom
         public Backup(List<Sensor> sensors, int interval)
         {
             System.Windows.Forms.Timer refreshTimer = new System.Windows.Forms.Timer();
-            refreshTimer.Interval = 5000;
+            refreshTimer.Interval = interval;
             refreshTimer.Tick += RefreshBackup;
             refreshTimer.Start();
             _sensors = sensors;

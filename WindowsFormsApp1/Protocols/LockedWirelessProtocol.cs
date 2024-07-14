@@ -184,7 +184,6 @@ namespace ObkatkaCom
                 }
                 Thread.Sleep(100);
             }
-
         }
 
         private byte[] SendCommand(byte[] data, int length, int expectedOutputLength)
