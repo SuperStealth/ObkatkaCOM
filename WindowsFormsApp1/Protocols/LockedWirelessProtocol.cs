@@ -10,6 +10,7 @@ namespace ObkatkaCom
         private SerialPort serialPort = new SerialPort();
         private List<Sensor> sensors = new List<Sensor>();
         private IDStorage idStorage;
+        public float Voltage;
 
         public string PortName
         {
@@ -103,7 +104,6 @@ namespace ObkatkaCom
 
         public void UpdateSensors()
         {
-            SetIDs();
             byte[] info = new byte[8];
             info[0] = 0x01;
             info[1] = 0x03;
@@ -120,10 +120,13 @@ namespace ObkatkaCom
                     if (response[3 + i * 8] != 0xFF)
                     {
                         short temperature = (short)(response[3 + i * 8] << 8 | response[4 + i * 8]);
-                        UpdateTemperature(idStorage.GetSensorID(i + 1), temperature / 10.0);
+                        short voltage = (short)(response[7 + i * 8] << 8 | response[8 + i * 8]);
+                        float voltageInVolts = voltage / 100.0f;
+                        UpdateTemperature(idStorage.GetSensorID(i + 1), temperature / 10.0, voltageInVolts);
                     }
                 }
             }
+            info = new byte[8];
         }
 
         private void GetIDs()
@@ -226,7 +229,7 @@ namespace ObkatkaCom
             return (byte)(number % 10 + number / 10 * 16);
         }
 
-        private void UpdateTemperature(string id, double temp)
+        private void UpdateTemperature(string id, double temp, float voltage = 0)
         {
             Sensor sensorToUpdate = sensors.Find(sensor => sensor.id == id);
             if (sensorToUpdate == null)
@@ -237,6 +240,7 @@ namespace ObkatkaCom
                     sensors.Add(new Sensor((ushort)(idStorage.GetSensorNumber(id)), false));
                 sensors[sensors.Count - 1].id = id;
                 sensors[sensors.Count - 1].measurements.Add(new ChartPoint(temp, DateTime.Now));
+                sensors[sensors.Count - 1].Voltage = voltage;
             }
             else
             {

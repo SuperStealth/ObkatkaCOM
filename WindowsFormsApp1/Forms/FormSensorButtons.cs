@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ObkatkaCom
@@ -15,16 +12,17 @@ namespace ObkatkaCom
         
         private Button[] lstBtnCalc;
         public ushort externalTemp = 1;
-        private IProtocol temperatureSensor;
+        private IProtocol sensorProtocol;
+
         public FormSensorButtons(IProtocol iProtocol)
         {
-            temperatureSensor = iProtocol;
+            sensorProtocol = iProtocol;
             InitializeComponent();           
         }
         public FormSensorButtons(IProtocol iProtocol, List<Sensor> restore)
         {
             iProtocol.Restore(restore);
-            temperatureSensor = iProtocol;
+            sensorProtocol = iProtocol;
             InitializeComponent();           
         }
         public void FormSensorButtons_Load(object sender, EventArgs e)
@@ -41,7 +39,7 @@ namespace ObkatkaCom
             for (ushort i = 1; i < 33; i++)
             {
                 lstBtnCalc[i - 1].Enabled = false;
-                if (temperatureSensor.IsActiveSensor(i))
+                if (sensorProtocol.IsActiveSensor(i))
                 {
                     lstBtnCalc[i - 1].Enabled = true;
                     lstBtnCalc[i - 1].Click += new EventHandler(ShowFormSensorChart);
@@ -54,12 +52,13 @@ namespace ObkatkaCom
             OnCount(sender, e);
         }
         private int GetButtonNumber(object sender) => Convert.ToInt32(((Button)sender).Name.ToString().Replace("button", ""));
+
         private void ShowFormSensorChart(object sender, EventArgs e)
         {
             int sensorNumber = GetButtonNumber(sender);
             if (!Application.OpenForms.OfType<FormSensorChart>().Cast<FormSensorChart>().Any(form => form.GetFormNumber() == sensorNumber))
             {
-                FormSensorChart formSensorChart = new FormSensorChart(temperatureSensor.GetSensor(sensorNumber), temperatureSensor.GetSensor(externalTemp));
+                FormSensorChart formSensorChart = new FormSensorChart(sensorProtocol.GetSensor(sensorNumber), sensorProtocol.GetSensor(externalTemp));
                 formSensorChart.Show();
                 formSensorChart.Text = "Датчик №" + sensorNumber;
             }
@@ -71,42 +70,45 @@ namespace ObkatkaCom
         }
         private void OnCount(object sender, EventArgs e)
         {
-            temperatureSensor.UpdateSensors();
+            sensorProtocol.UpdateSensors();
             for (ushort i = 1; i < 33; i++)
             {
 
-                if (temperatureSensor.IsActiveSensor(i))
+                if (sensorProtocol.IsActiveSensor(i))
                 {
                     if (!lstBtnCalc[i - 1].Enabled)
                     {
                         lstBtnCalc[i - 1].Enabled = true;
                         lstBtnCalc[i - 1].Click += new EventHandler(ShowFormSensorChart);
                     }
-                    if (!temperatureSensor.GetSensor(i).IsExternal)
+                    string voltage = "";
+                    if (sensorProtocol is LockedWirelessProtocol)
                     {
-                        lstBtnCalc[i - 1].Text = 
-                            temperatureSensor.GetSensor(i).SensorNumber.ToString() + 
-                            ": " + 
-                            temperatureSensor.GetSensor(i).GetLastMeasurement().ToString() + 
-                            " C";
+                        voltage = $"({sensorProtocol.GetSensor(i).Voltage}V)";
+                    }
+
+                    if (!sensorProtocol.GetSensor(i).IsExternal)
+                    {
+                        var text = $"{sensorProtocol.GetSensor(i).SensorNumber}: {sensorProtocol.GetSensor(i).GetLastMeasurement()}C{voltage}";
+                        lstBtnCalc[i - 1].Text = text;
                     }
                     else
                     {
                         labelExtTemp.Text = 
                             "Температура окружающей среды: " + 
-                            temperatureSensor.GetSensor(i).GetLastMeasurement().ToString() + 
-                            " C";
+                            sensorProtocol.GetSensor(i).GetLastMeasurement().ToString() +
+                            " C" + voltage;
                     }
-                    switch (temperatureSensor.GetSensor(i).state)
+                    switch (sensorProtocol.GetSensor(i).state)
                     {
                         case State.RunInStarted:
-                            lstBtnCalc[temperatureSensor.GetSensor(i).SensorNumber - 1].BackColor = Color.LightGreen;
+                            lstBtnCalc[sensorProtocol.GetSensor(i).SensorNumber - 1].BackColor = Color.LightGreen;
                             break;
                         case State.RunInEnded:
-                            lstBtnCalc[temperatureSensor.GetSensor(i).SensorNumber - 1].BackColor = Color.Yellow;
+                            lstBtnCalc[sensorProtocol.GetSensor(i).SensorNumber - 1].BackColor = Color.Yellow;
                             break;
                         case State.WaitingForStart:
-                            lstBtnCalc[temperatureSensor.GetSensor(i).SensorNumber - 1].BackColor = Color.WhiteSmoke;
+                            lstBtnCalc[sensorProtocol.GetSensor(i).SensorNumber - 1].BackColor = Color.WhiteSmoke;
                             break;
                     }
                 }
@@ -121,8 +123,8 @@ namespace ObkatkaCom
 
         private void FormSensorButtons_FormClosed(object sender, FormClosedEventArgs e)
         {
-            temperatureSensor.Close();
-            temperatureSensor.Dispose();
+            sensorProtocol.Close();
+            sensorProtocol.Dispose();
         }
     }
 

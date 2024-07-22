@@ -40,6 +40,8 @@ namespace ObkatkaCom
         public State state { get; set; }
         public string id { get; set; }
 
+        public float Voltage { get; set; }
+
         public Sensor(ushort num, bool isExternal)
         {
             measurements = new List<ChartPoint>();
@@ -47,6 +49,7 @@ namespace ObkatkaCom
             IsExternal = isExternal;
             StartTime = DateTime.MinValue;
             StopTime = DateTime.MaxValue;
+            Voltage = 0;
         }
 
         public DateTime[] GetTimeArray()

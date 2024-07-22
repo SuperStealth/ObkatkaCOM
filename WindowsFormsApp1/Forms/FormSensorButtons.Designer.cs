@@ -123,7 +123,7 @@ namespace ObkatkaCom
             // 
             // button1
             // 
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F);
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button1.Location = new System.Drawing.Point(12, 39);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(200, 50);
@@ -132,7 +132,7 @@ namespace ObkatkaCom
             // 
             // button2
             // 
-            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F);
+            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button2.Location = new System.Drawing.Point(218, 39);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(200, 50);
@@ -141,7 +141,7 @@ namespace ObkatkaCom
             // 
             // button3
             // 
-            this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F);
+            this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button3.Location = new System.Drawing.Point(424, 39);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(200, 50);
@@ -150,7 +150,7 @@ namespace ObkatkaCom
             // 
             // button4
             // 
-            this.button4.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F);
+            this.button4.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button4.Location = new System.Drawing.Point(630, 39);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(200, 50);
@@ -159,7 +159,7 @@ namespace ObkatkaCom
             // 
             // button5
             // 
-            this.button5.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F);
+            this.button5.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button5.Location = new System.Drawing.Point(12, 95);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(200, 50);
@@ -168,7 +168,7 @@ namespace ObkatkaCom
             // 
             // button6
             // 
-            this.button6.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F);
+            this.button6.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button6.Location = new System.Drawing.Point(218, 95);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(200, 50);
@@ -177,7 +177,7 @@ namespace ObkatkaCom
             // 
             // button7
             // 
-            this.button7.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F);
+            this.button7.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button7.Location = new System.Drawing.Point(424, 95);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(200, 50);
@@ -186,7 +186,7 @@ namespace ObkatkaCom
             // 
             // button8
             // 
-            this.button8.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F);
+            this.button8.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button8.Location = new System.Drawing.Point(630, 95);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(200, 50);
@@ -201,7 +201,7 @@ namespace ObkatkaCom
             // 
             // button9
             // 
-            this.button9.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F);
+            this.button9.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button9.Location = new System.Drawing.Point(12, 151);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(200, 50);
@@ -210,7 +210,7 @@ namespace ObkatkaCom
             // 
             // button10
             // 
-            this.button10.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F);
+            this.button10.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button10.Location = new System.Drawing.Point(218, 151);
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(200, 50);
@@ -219,7 +219,7 @@ namespace ObkatkaCom
             // 
             // button11
             // 
-            this.button11.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F);
+            this.button11.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button11.Location = new System.Drawing.Point(424, 151);
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(200, 50);
@@ -228,7 +228,7 @@ namespace ObkatkaCom
             // 
             // button12
             // 
-            this.button12.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F);
+            this.button12.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button12.Location = new System.Drawing.Point(630, 151);
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(200, 50);
@@ -237,7 +237,7 @@ namespace ObkatkaCom
             // 
             // button13
             // 
-            this.button13.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F);
+            this.button13.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button13.Location = new System.Drawing.Point(12, 207);
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(200, 50);
@@ -246,7 +246,7 @@ namespace ObkatkaCom
             // 
             // button14
             // 
-            this.button14.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F);
+            this.button14.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button14.Location = new System.Drawing.Point(218, 207);
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(200, 50);
@@ -255,7 +255,7 @@ namespace ObkatkaCom
             // 
             // button15
             // 
-            this.button15.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F);
+            this.button15.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button15.Location = new System.Drawing.Point(424, 207);
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(200, 50);
@@ -264,7 +264,7 @@ namespace ObkatkaCom
             // 
             // button16
             // 
-            this.button16.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F);
+            this.button16.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button16.Location = new System.Drawing.Point(630, 207);
             this.button16.Name = "button16";
             this.button16.Size = new System.Drawing.Size(200, 50);
@@ -273,7 +273,7 @@ namespace ObkatkaCom
             // 
             // button17
             // 
-            this.button17.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F);
+            this.button17.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button17.Location = new System.Drawing.Point(12, 263);
             this.button17.Name = "button17";
             this.button17.Size = new System.Drawing.Size(200, 50);
@@ -282,7 +282,7 @@ namespace ObkatkaCom
             // 
             // button18
             // 
-            this.button18.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F);
+            this.button18.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button18.Location = new System.Drawing.Point(218, 263);
             this.button18.Name = "button18";
             this.button18.Size = new System.Drawing.Size(200, 50);
@@ -291,7 +291,7 @@ namespace ObkatkaCom
             // 
             // button19
             // 
-            this.button19.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F);
+            this.button19.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button19.Location = new System.Drawing.Point(424, 263);
             this.button19.Name = "button19";
             this.button19.Size = new System.Drawing.Size(200, 50);
@@ -300,7 +300,7 @@ namespace ObkatkaCom
             // 
             // button20
             // 
-            this.button20.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F);
+            this.button20.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button20.Location = new System.Drawing.Point(630, 263);
             this.button20.Name = "button20";
             this.button20.Size = new System.Drawing.Size(200, 50);
@@ -309,7 +309,7 @@ namespace ObkatkaCom
             // 
             // button21
             // 
-            this.button21.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F);
+            this.button21.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button21.Location = new System.Drawing.Point(12, 319);
             this.button21.Name = "button21";
             this.button21.Size = new System.Drawing.Size(200, 50);
@@ -318,7 +318,7 @@ namespace ObkatkaCom
             // 
             // button22
             // 
-            this.button22.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F);
+            this.button22.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button22.Location = new System.Drawing.Point(218, 319);
             this.button22.Name = "button22";
             this.button22.Size = new System.Drawing.Size(200, 50);
@@ -327,7 +327,7 @@ namespace ObkatkaCom
             // 
             // button23
             // 
-            this.button23.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F);
+            this.button23.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button23.Location = new System.Drawing.Point(424, 319);
             this.button23.Name = "button23";
             this.button23.Size = new System.Drawing.Size(200, 50);
@@ -336,7 +336,7 @@ namespace ObkatkaCom
             // 
             // button24
             // 
-            this.button24.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F);
+            this.button24.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button24.Location = new System.Drawing.Point(630, 319);
             this.button24.Name = "button24";
             this.button24.Size = new System.Drawing.Size(200, 50);
@@ -345,7 +345,7 @@ namespace ObkatkaCom
             // 
             // button25
             // 
-            this.button25.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F);
+            this.button25.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button25.Location = new System.Drawing.Point(12, 375);
             this.button25.Name = "button25";
             this.button25.Size = new System.Drawing.Size(200, 50);
@@ -354,7 +354,7 @@ namespace ObkatkaCom
             // 
             // button26
             // 
-            this.button26.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F);
+            this.button26.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button26.Location = new System.Drawing.Point(218, 375);
             this.button26.Name = "button26";
             this.button26.Size = new System.Drawing.Size(200, 50);
@@ -363,7 +363,7 @@ namespace ObkatkaCom
             // 
             // button27
             // 
-            this.button27.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F);
+            this.button27.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button27.Location = new System.Drawing.Point(424, 375);
             this.button27.Name = "button27";
             this.button27.Size = new System.Drawing.Size(200, 50);
@@ -372,7 +372,7 @@ namespace ObkatkaCom
             // 
             // button28
             // 
-            this.button28.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F);
+            this.button28.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button28.Location = new System.Drawing.Point(630, 375);
             this.button28.Name = "button28";
             this.button28.Size = new System.Drawing.Size(200, 50);
@@ -381,7 +381,7 @@ namespace ObkatkaCom
             // 
             // button29
             // 
-            this.button29.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F);
+            this.button29.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button29.Location = new System.Drawing.Point(12, 431);
             this.button29.Name = "button29";
             this.button29.Size = new System.Drawing.Size(200, 50);
@@ -390,7 +390,7 @@ namespace ObkatkaCom
             // 
             // button30
             // 
-            this.button30.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F);
+            this.button30.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button30.Location = new System.Drawing.Point(218, 431);
             this.button30.Name = "button30";
             this.button30.Size = new System.Drawing.Size(200, 50);
@@ -399,7 +399,7 @@ namespace ObkatkaCom
             // 
             // button31
             // 
-            this.button31.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F);
+            this.button31.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button31.Location = new System.Drawing.Point(424, 431);
             this.button31.Name = "button31";
             this.button31.Size = new System.Drawing.Size(200, 50);
@@ -408,7 +408,7 @@ namespace ObkatkaCom
             // 
             // button32
             // 
-            this.button32.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F);
+            this.button32.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button32.Location = new System.Drawing.Point(630, 431);
             this.button32.Name = "button32";
             this.button32.Size = new System.Drawing.Size(200, 50);
