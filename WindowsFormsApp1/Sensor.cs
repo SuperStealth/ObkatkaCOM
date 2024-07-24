@@ -55,26 +55,26 @@ namespace ObkatkaCom
         public DateTime[] GetTimeArray()
         {
             if (measurements.Count > 0)
-                return measurements.FindAll(s => (s.time > StartTime) && (s.time < StopTime)).Select(item => item.time).ToArray();
+                return measurements.FindAll(s => (s.time >= StartTime) && (s.time <= StopTime)).Select(item => item.time).ToArray();
             return null;
         }
         public double[] GetTempArray()
         {
             if (measurements.Count > 0)
-                return measurements.FindAll(s => (s.time > StartTime) && (s.time < StopTime)).Select(item => item.temp).ToArray();
+                return measurements.FindAll(s => (s.time >= StartTime) && (s.time <= StopTime)).Select(item => item.temp).ToArray();
             return null;
         }
 
         public DateTime[] GetTimeArray(DateTime startTime, DateTime stopTime)
         {
             if (measurements.Count > 0)
-                return measurements.FindAll(s => (s.time > startTime) && (s.time < stopTime)).Select(item => item.time).ToArray();
+                return measurements.FindAll(s => (s.time >= startTime) && (s.time <= stopTime)).Select(item => item.time).ToArray();
             return null;
         }
         public double[] GetTempArray(DateTime startTime, DateTime stopTime)
         {
             if (measurements.Count > 0)
-                return measurements.FindAll(s => (s.time > startTime) && (s.time < stopTime)).Select(item => item.temp).ToArray();
+                return measurements.FindAll(s => (s.time >= startTime) && (s.time <= stopTime)).Select(item => item.temp).ToArray();
             return null;
         }
 

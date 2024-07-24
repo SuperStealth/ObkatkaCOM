@@ -14,22 +14,15 @@ namespace ObkatkaCom
         }
         private IProtocol modBUS;
         private IDStorage idStorage;
-
-        private void GetCheckedSpeed()
-        {
-            foreach (ToolStripMenuItem toolStripMenuItem in speedList.DropDownItems)
-            {
-                if (toolStripMenuItem.Text == Properties.Settings.Default.speed)
-                {
-                    toolStripMenuItem.Checked = true;
-                }
-            }
-        }
         private void FillDropDownListWithTypes()
         {
             toolStripMenuItemSensorType.DropDownItems.Add("Проводной", null, SetType_Click);
             toolStripMenuItemSensorType.DropDownItems.Add("Беспроводной", null, SetType_Click);
             toolStripMenuItemSensorType.DropDownItems.Add("Беспроводной(новый)", null, SetType_Click);
+            foreach (ToolStripMenuItem tt in toolStripMenuItemSensorType.DropDownItems)
+            {
+                tt.Checked = tt.Text == Properties.Settings.Default.type;
+            }
 #if DEBUG
             toolStripMenuItemSensorType.DropDownItems.Add("Тестовый", null, SetType_Click);
 #endif
@@ -44,16 +37,6 @@ namespace ObkatkaCom
             Properties.Settings.Default.type = ((ToolStripMenuItem)sender).Text;
             Properties.Settings.Default.Save();
             if (modBUS != null) ChangePort(modBUS.PortName);
-        }
-        private void FillDropDownListWithSpeeds()
-        {
-            speedList.DropDownItems.Add("9600", null, SetBaud_Click);
-            speedList.DropDownItems.Add("14400", null, SetBaud_Click);
-            speedList.DropDownItems.Add("19200", null, SetBaud_Click);
-            speedList.DropDownItems.Add("38400", null, SetBaud_Click);
-            speedList.DropDownItems.Add("57600", null, SetBaud_Click);
-            speedList.DropDownItems.Add("115200", null, SetBaud_Click);
-            GetCheckedSpeed();
         }
 
         private void FillDropDownListWithPorts()
@@ -77,16 +60,9 @@ namespace ObkatkaCom
             }
         }
 
-        private void FillDropDownTextBoxWithInterval()
-        {
-            toolStripTextBoxInterval.Text = Properties.Settings.Default.interval.ToString();
-        }
-
         private void Form1_Load(object sender, EventArgs e)
         {
-            FillDropDownListWithSpeeds();
             FillDropDownListWithPorts();
-            FillDropDownTextBoxWithInterval();
             FillDropDownListWithTypes();
             idStorage = new IDStorage();
         }
@@ -100,25 +76,11 @@ namespace ObkatkaCom
                 if (port != "<NULL>")
                 {
                     modBUS.PortName = port;
-                    foreach (ToolStripMenuItem tt in speedList.DropDownItems)
-                    {
-                        if (tt.Checked) modBUS.BaudRate = Convert.ToInt32(tt.Text);
-                    }
                 }
             }
             
         }
-        private void SetBaud_Click(object sender, EventArgs e)
-        {
-            foreach (ToolStripMenuItem tt in speedList.DropDownItems)
-            {
-                tt.Checked = false;
-            }
-            ((ToolStripMenuItem)sender).Checked = true;
-            Properties.Settings.Default.speed = ((ToolStripMenuItem)sender).Text;
-            Properties.Settings.Default.Save();
-            if (modBUS != null) ChangePort(modBUS.PortName);
-        }
+
         private void SetPort_Click(object sender, EventArgs e)
         {
             foreach (ToolStripMenuItem tt in portNumberList.DropDownItems)
@@ -215,7 +177,6 @@ namespace ObkatkaCom
 
         private void RenameIDToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
             var message = "Идет запись портов, дождитесь завершения";
             MessageBox.Show(message);
             var protocol = new LockedWirelessProtocol(Properties.Settings.Default.port, idStorage);

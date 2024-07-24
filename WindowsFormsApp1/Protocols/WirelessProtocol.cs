@@ -101,6 +101,7 @@ namespace ObkatkaCom
         {
             string id = str.Substring(str.IndexOf("ID=")+3,8);
             string temperature = str.Substring(str.IndexOf("TEP=") + 4, 5);
+            string voltage = str.Substring(str.IndexOf("V=") + 2, 4);
             var format = new NumberFormatInfo();
             format.NegativeSign = "-";
             format.NumberDecimalSeparator = ".";
@@ -115,6 +116,7 @@ namespace ObkatkaCom
                     sensors.Add(new Sensor((ushort)(idStorage.GetSensorNumber(id)), false));
                 sensors[sensors.Count - 1].id = id;
                 sensors[sensors.Count - 1].measurements.Add(new ChartPoint(temp, DateTime.Now));
+                sensors[sensors.Count - 1].Voltage = float.Parse(voltage);
             }
             else
             {

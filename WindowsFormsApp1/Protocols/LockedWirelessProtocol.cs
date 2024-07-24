@@ -10,7 +10,6 @@ namespace ObkatkaCom
         private SerialPort serialPort = new SerialPort();
         private List<Sensor> sensors = new List<Sensor>();
         private IDStorage idStorage;
-        public float Voltage;
 
         public string PortName
         {
@@ -117,7 +116,7 @@ namespace ObkatkaCom
             {
                 for (int i = 0; i < 20; i++)
                 {
-                    if (response[3 + i * 8] != 0xFF)
+                    if (response[5 + i * 8] != 0xFF)
                     {
                         short temperature = (short)(response[3 + i * 8] << 8 | response[4 + i * 8]);
                         short voltage = (short)(response[7 + i * 8] << 8 | response[8 + i * 8]);
@@ -161,19 +160,16 @@ namespace ObkatkaCom
                     byte[] info = new byte[15];
                     info[0] = 0x01;
                     info[1] = 0x08;
-                    info[2] = 10;
+                    info[2] = 0x06;
                     var idNumber = Convert.ToInt32(id);
                     info[3] = ConvertToHexBytes(idNumber / 1000000);
                     info[4] = ConvertToHexBytes(idNumber / 10000 % 100);
                     info[5] = ConvertToHexBytes(idNumber / 100 % 100);
                     info[6] = ConvertToHexBytes(idNumber % 100);
                     info[7] = i;
-                    for (int j = 0; j < 5; j++)
-                    {
-                        info[8 + j] = info[3 + j];
-                    }
-                    info = AddCRC(info, 13);
-                    SendCommand(info, 15, 5);
+                    info[8] = 0x01;
+                    info = AddCRC(info, 9);
+                    SendCommand(info, 11, 5);
                 }
                 else
                 {

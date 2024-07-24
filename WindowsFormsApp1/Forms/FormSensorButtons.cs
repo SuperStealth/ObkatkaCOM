@@ -11,6 +11,7 @@ namespace ObkatkaCom
     {
         
         private Button[] lstBtnCalc;
+        private Label[] listVoltageLabels;
         public ushort externalTemp = 1;
         private IProtocol sensorProtocol;
 
@@ -34,7 +35,13 @@ namespace ObkatkaCom
                 button17, button18, button19, button20, button21, button22, button23, button24,
                 button25, button26, button27, button28, button29, button30, button31, button32
             };
-            lstBtnCalc[externalTemp - 1].Visible = false;
+            listVoltageLabels = new Label[]
+            {
+                label1, label2, label3, label4, label5, label6, label7, label8, label9, label10,
+                label11, label12, label13, label14, label15, label16, label17, label18, label19, label20,
+                label21, label22, label23, label24, label25, label26, label27, label28, label29, label30,
+                label31, label32 
+            };
 
             for (ushort i = 1; i < 33; i++)
             {
@@ -42,6 +49,8 @@ namespace ObkatkaCom
                 if (sensorProtocol.IsActiveSensor(i))
                 {
                     lstBtnCalc[i - 1].Enabled = true;
+                    listVoltageLabels[i - 1].Enabled = true;
+                    listVoltageLabels[i - 1].Visible = true;
                     lstBtnCalc[i - 1].Click += new EventHandler(ShowFormSensorChart);
                 }
 
@@ -79,25 +88,32 @@ namespace ObkatkaCom
                     if (!lstBtnCalc[i - 1].Enabled)
                     {
                         lstBtnCalc[i - 1].Enabled = true;
+                        listVoltageLabels[i - 1].Enabled = true;
+                        listVoltageLabels[i - 1].Visible = true;
                         lstBtnCalc[i - 1].Click += new EventHandler(ShowFormSensorChart);
                     }
                     string voltage = "";
-                    if (sensorProtocol is LockedWirelessProtocol)
+                    if (sensorProtocol is LockedWirelessProtocol || sensorProtocol is WirelessProtocol)
                     {
-                        voltage = $"({sensorProtocol.GetSensor(i).Voltage}V)";
+                        voltage = $"{sensorProtocol.GetSensor(i).Voltage} v";
                     }
 
                     if (!sensorProtocol.GetSensor(i).IsExternal)
                     {
-                        var text = $"{sensorProtocol.GetSensor(i).SensorNumber}: {sensorProtocol.GetSensor(i).GetLastMeasurement()}C{voltage}";
+                        var text = $"{sensorProtocol.GetSensor(i).SensorNumber}:   {sensorProtocol.GetSensor(i).GetLastMeasurement()} ˚С";
                         lstBtnCalc[i - 1].Text = text;
+                        
+                        listVoltageLabels[i - 1].Text = voltage;
                     }
                     else
                     {
+                        lstBtnCalc[i - 1].Enabled = false;
                         labelExtTemp.Text = 
                             "Температура окружающей среды: " + 
                             sensorProtocol.GetSensor(i).GetLastMeasurement().ToString() +
-                            " C" + voltage;
+                            " C";
+                        label1.Text = voltage;
+                        lstBtnCalc[0].Text = $"{sensorProtocol.GetSensor(i).SensorNumber}: {sensorProtocol.GetSensor(i).GetLastMeasurement()}C";
                     }
                     switch (sensorProtocol.GetSensor(i).state)
                     {
@@ -125,6 +141,31 @@ namespace ObkatkaCom
         {
             sensorProtocol.Close();
             sensorProtocol.Dispose();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void contextMenuStrip1_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 
